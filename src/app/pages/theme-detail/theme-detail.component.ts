@@ -17,6 +17,7 @@ export class ThemeDetailComponent {
 
   protected readonly theme = computed(() => this.vocab.getTheme(this.id() as ThemeId));
   protected readonly words = computed(() => this.vocab.getWordsByTheme(this.id() as ThemeId));
+  protected readonly phrases = computed(() => this.vocab.getPhrasesByTheme(this.id() as ThemeId));
   protected readonly known = computed(() => {
     const k = this.progress.state().knownWordIds;
     return this.words().filter((w) => (k[w.id] ?? 0) > 0).length;

@@ -25,6 +25,13 @@ export interface VocabWord {
   theme: ThemeId;
 }
 
+export interface Phrase {
+  id: string;
+  theme: ThemeId;
+  romaji: string;
+  french: string;
+}
+
 export const THEMES: Theme[] = [
   {
     id: 'greetings',

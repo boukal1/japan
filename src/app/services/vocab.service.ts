@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
-import { THEMES, Theme, ThemeId, VocabWord } from '../models/word.model';
+import { THEMES, Theme, ThemeId, VocabWord, Phrase } from '../models/word.model';
 import { WORDS } from '../data/words';
+import { PHRASES } from '../data/phrases';
 
 @Injectable({ providedIn: 'root' })
 export class VocabService {
   readonly themes: Theme[] = THEMES;
   readonly words: VocabWord[] = WORDS;
+  readonly phrases: Phrase[] = PHRASES;
+
+  getPhrasesByTheme(id: ThemeId | 'all'): Phrase[] {
+    if (id === 'all') return this.phrases;
+    return this.phrases.filter((p) => p.theme === id);
+  }
 
   getTheme(id: ThemeId): Theme | undefined {
     return this.themes.find((t) => t.id === id);
