@@ -1,0 +1,64 @@
+@if (theme(); as t) {
+  <div class="space-y-6">
+    <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br {{ t.color }} text-white shadow-lg">
+      <a routerLink="/" class="inline-flex items-center text-white/80 hover:text-white text-sm font-medium mb-4">
+        ← Tous les thèmes
+      </a>
+      <div class="flex items-start gap-4">
+        <span class="text-5xl sm:text-6xl">{{ t.emoji }}</span>
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold">{{ t.name }}</h1>
+          <p class="text-white/90 mt-1">{{ t.description }}</p>
+          <p class="text-sm mt-3 text-white/80">
+            {{ known() }} / {{ words().length }} mots maîtrisés
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <a [routerLink]="['/flashcards', t.id]"
+         class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+        <div class="text-3xl mb-2">🃏</div>
+        <h3 class="font-semibold">Flashcards</h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400">Carte par carte, à ton rythme</p>
+      </a>
+      <a [routerLink]="['/quiz', t.id]"
+         class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+        <div class="text-3xl mb-2">🎯</div>
+        <h3 class="font-semibold">Quiz</h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400">10 questions à choix multiples</p>
+      </a>
+      <a [routerLink]="['/memory', t.id]"
+         class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+        <div class="text-3xl mb-2">🧠</div>
+        <h3 class="font-semibold">Memory</h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400">Associe mot et traduction</p>
+      </a>
+    </div>
+
+    <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+      <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+        <h2 class="font-semibold">Liste complète ({{ words().length }})</h2>
+        <span class="text-xs text-zinc-500">✓ = déjà appris</span>
+      </div>
+      <ul class="divide-y divide-zinc-100 dark:divide-zinc-800 max-h-[480px] overflow-y-auto">
+        @for (w of words(); track w.id) {
+          <li class="flex items-center justify-between gap-4 px-5 py-2.5 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+            <div class="flex items-center gap-3 min-w-0">
+              @if (progress.isKnown(w.id)) {
+                <span class="text-emerald-500 text-sm">✓</span>
+              } @else {
+                <span class="w-3.5"></span>
+              }
+              <span class="font-jp font-semibold text-rose-600 dark:text-rose-400 truncate">{{ w.romaji }}</span>
+            </div>
+            <span class="text-zinc-700 dark:text-zinc-300 text-right truncate">{{ w.french }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+} @else {
+  <p class="text-zinc-500">Thème introuvable. <a routerLink="/" class="text-rose-600 underline">Retour</a></p>
+}

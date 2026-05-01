@@ -1,0 +1,79 @@
+<div class="space-y-6 max-w-2xl mx-auto">
+  <div class="flex items-center justify-between">
+    <a [routerLink]="themeInfo() ? ['/theme', themeInfo()!.id] : ['/']"
+       class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600">
+      ← Retour
+    </a>
+    <h1 class="text-lg sm:text-xl font-semibold">
+      🎯 Quiz
+      @if (themeInfo(); as t) {
+        <span class="text-zinc-500">· {{ t.name }}</span>
+      } @else {
+        <span class="text-zinc-500">· Tous les thèmes</span>
+      }
+    </h1>
+    <span class="text-sm font-mono text-zinc-500">{{ score() }} / {{ questions().length }}</span>
+  </div>
+
+  @if (!finished() && currentQuestion(); as q) {
+    <div class="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+      <div class="h-full bg-gradient-to-r from-rose-500 to-red-700 transition-all duration-300"
+           [style.width.%]="progressPercent()"></div>
+    </div>
+
+    <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 sm:p-10 text-center shadow-sm">
+      <p class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Que signifie</p>
+      <p class="font-jp text-4xl sm:text-5xl font-bold text-rose-600 dark:text-rose-400 mb-2">{{ q.word.romaji }}</p>
+      <p class="text-sm text-zinc-500">Question {{ current() + 1 }} sur {{ questions().length }}</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      @for (opt of q.options; track opt.id) {
+        <button (click)="pick(opt)"
+                [disabled]="selected() !== null"
+                [class.border-emerald-500]="selected() !== null && isCorrect(opt)"
+                [class.bg-emerald-50]="selected() !== null && isCorrect(opt)"
+                [class.dark:bg-emerald-950]="selected() !== null && isCorrect(opt)"
+                [class.border-rose-500]="isWrongPick(opt)"
+                [class.bg-rose-50]="isWrongPick(opt)"
+                [class.dark:bg-rose-950]="isWrongPick(opt)"
+                [class.opacity-60]="selected() !== null && !isCorrect(opt) && !isWrongPick(opt)"
+                class="rounded-xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-rose-400 px-4 py-4 text-left font-medium transition-all disabled:cursor-not-allowed">
+          {{ opt.french }}
+        </button>
+      }
+    </div>
+
+    @if (selected() !== null) {
+      <button (click)="nextQuestion()"
+              class="w-full rounded-xl bg-rose-600 hover:bg-rose-700 text-white px-4 py-3 font-semibold transition-colors">
+        @if (current() + 1 < questions().length) { Question suivante → } @else { Voir le résultat }
+      </button>
+    }
+  } @else if (finished()) {
+    <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 text-center space-y-4">
+      <div class="text-6xl">
+        @if (score() === questions().length) { 🏆 }
+        @else if (score() >= questions().length * 0.7) { 🎉 }
+        @else if (score() >= questions().length * 0.4) { 👍 }
+        @else { 💪 }
+      </div>
+      <h2 class="text-2xl font-bold">{{ score() }} / {{ questions().length }}</h2>
+      <p class="text-zinc-600 dark:text-zinc-400">
+        @if (score() === questions().length) { Parfait ! Tu maîtrises ce thème. }
+        @else if (score() >= questions().length * 0.7) { Excellent travail ! }
+        @else if (score() >= questions().length * 0.4) { Pas mal, continue ! }
+        @else { Persévère, ça va venir ! }
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+        <button (click)="start()"
+                class="rounded-xl bg-rose-600 hover:bg-rose-700 text-white px-6 py-3 font-semibold transition-colors">
+          🔁 Rejouer
+        </button>
+        <a routerLink="/" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-6 py-3 font-semibold transition-colors">
+          Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,49 @@
+<div class="space-y-6 max-w-2xl mx-auto">
+  <div class="flex items-center justify-between">
+    <a [routerLink]="themeInfo() ? ['/theme', themeInfo()!.id] : ['/']"
+       class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600">
+      ← Retour
+    </a>
+    <h1 class="text-lg sm:text-xl font-semibold">
+      🃏 Flashcards
+      @if (themeInfo(); as t) {
+        <span class="text-zinc-500">· {{ t.name }}</span>
+      } @else {
+        <span class="text-zinc-500">· Tous les thèmes</span>
+      }
+    </h1>
+    <span class="text-sm font-mono text-zinc-500">{{ index() + 1 }} / {{ deck().length }}</span>
+  </div>
+
+  <div class="flip-card aspect-[4/3] sm:aspect-[5/3] cursor-pointer select-none" (click)="flip()">
+    <div class="flip-inner relative w-full h-full" [class.flipped]="flipped()">
+      <div class="flip-face absolute inset-0 rounded-3xl shadow-xl bg-gradient-to-br from-rose-500 to-red-700 text-white flex flex-col items-center justify-center p-6">
+        <span class="text-xs uppercase tracking-widest text-white/70 mb-3">Romaji</span>
+        <p class="font-jp text-4xl sm:text-6xl font-bold text-center break-words">{{ current().romaji }}</p>
+        <span class="absolute bottom-4 text-xs text-white/70">Clique pour retourner</span>
+      </div>
+      <div class="flip-face flip-back absolute inset-0 rounded-3xl shadow-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col items-center justify-center p-6">
+        <span class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Français</span>
+        <p class="text-2xl sm:text-4xl font-semibold text-center break-words">{{ current().french }}</p>
+        <span class="absolute bottom-4 text-xs text-zinc-400">{{ current().romaji }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-3">
+    <button (click)="markUnknown()"
+            class="rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 px-4 py-3 font-semibold text-zinc-700 dark:text-zinc-200 transition-colors">
+      ↻ À revoir
+    </button>
+    <button (click)="markKnown()"
+            class="rounded-xl border-2 border-emerald-400 bg-emerald-500 hover:bg-emerald-600 px-4 py-3 font-semibold text-white transition-colors">
+      ✓ Je connais
+    </button>
+  </div>
+
+  <div class="grid grid-cols-3 gap-3">
+    <button (click)="prev()" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-2 font-medium transition-colors">← Précédent</button>
+    <button (click)="flip()" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-2 font-medium transition-colors">Retourner</button>
+    <button (click)="next()" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-2 font-medium transition-colors">Suivant →</button>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+  --jp-red: #bc002d;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(180deg, #fafafa 0%, #f4f4f5 100%);
+  color: #18181b;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(180deg, #09090b 0%, #18181b 100%);
+    color: #fafafa;
+  }
+}
+
+.font-jp {
+  font-family: 'Noto Sans JP', 'Inter', sans-serif;
+}
+
+.flip-card {
+  perspective: 1200px;
+}
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
