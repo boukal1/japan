@@ -4,17 +4,17 @@ import {
   Situation,
   SituationId,
   VocabWord,
-  Phrase,
+  Dialog,
   LearningItem,
 } from '../models/word.model';
 import { WORDS } from '../data/words';
-import { PHRASES } from '../data/phrases';
+import { DIALOGS } from '../data/dialogs';
 
 @Injectable({ providedIn: 'root' })
 export class VocabService {
   readonly situations: Situation[] = SITUATIONS;
   readonly words: VocabWord[] = WORDS;
-  readonly phrases: Phrase[] = PHRASES;
+  readonly dialogs: Dialog[] = DIALOGS;
 
   getSituation(id: SituationId): Situation | undefined {
     return this.situations.find((s) => s.id === id);
@@ -24,15 +24,25 @@ export class VocabService {
     return this.words.filter((w) => w.situation === id);
   }
 
-  getPhrasesBySituation(id: SituationId): Phrase[] {
-    return this.phrases.filter((p) => p.situation === id);
+  getDialogsBySituation(id: SituationId): Dialog[] {
+    return this.dialogs.filter((d) => d.situation === id);
   }
 
-  /** Mots + phrases unifiés pour les jeux. */
+  /** Mots + dialogues unifiés pour les jeux. */
   getItemsBySituation(id: SituationId): LearningItem[] {
     const ws = this.getWordsBySituation(id).map((w) => ({ ...w, kind: 'word' as const }));
-    const ps = this.getPhrasesBySituation(id).map((p) => ({ ...p, kind: 'phrase' as const }));
-    return [...ws, ...ps];
+    const ds = this.getDialogsBySituation(id).map((d) => ({ ...d, kind: 'dialog' as const }));
+    return [...ws, ...ds];
+  }
+
+  /** Texte affiché côté "question" pour un item (romaji). */
+  promptRomaji(item: LearningItem): string {
+    return item.kind === 'word' ? item.romaji : item.heard.romaji;
+  }
+
+  /** Traduction française attendue côté "réponse". */
+  promptFrench(item: LearningItem): string {
+    return item.kind === 'word' ? item.french : item.heard.french;
   }
 
   /** Fisher-Yates shuffle (returns a new array). */

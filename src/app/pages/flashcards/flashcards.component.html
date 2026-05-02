@@ -18,33 +18,33 @@
     <div class="flip-inner relative w-full h-full" [class.flipped]="flipped()">
       <div class="flip-face absolute inset-0 rounded-3xl shadow-xl bg-gradient-to-br from-rose-500 to-red-700 text-white flex flex-col items-center justify-center p-6">
         <div class="absolute top-4 left-4 text-xs uppercase tracking-widest text-white/70">
-          @if (cur.kind === 'word') {
-            Mot
-          } @else if (cur.direction === 'listen') {
-            👂 À comprendre
-          } @else {
-            💬 À dire
-          }
+          @if (cur.kind === 'word') { Mot } @else { 👂 On vous dit }
         </div>
-        <p class="font-jp font-bold text-center break-words"
-           [class.text-4xl]="cur.kind === 'word'"
-           [class.sm:text-6xl]="cur.kind === 'word'"
-           [class.text-xl]="cur.kind === 'phrase'"
-           [class.sm:text-3xl]="cur.kind === 'phrase'">
-          {{ cur.romaji }}
-        </p>
+        @if (cur.kind === 'word') {
+          <p class="font-jp text-4xl sm:text-6xl font-bold text-center break-words">{{ cur.romaji }}</p>
+        } @else {
+          <p class="font-jp text-xl sm:text-3xl font-bold text-center break-words">{{ cur.heard.romaji }}</p>
+        }
         <span class="absolute bottom-4 text-xs text-white/70">Clique pour retourner</span>
       </div>
-      <div class="flip-face flip-back absolute inset-0 rounded-3xl shadow-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col items-center justify-center p-6">
-        <span class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Français</span>
-        <p class="font-semibold text-center break-words"
-           [class.text-2xl]="cur.kind === 'word'"
-           [class.sm:text-4xl]="cur.kind === 'word'"
-           [class.text-lg]="cur.kind === 'phrase'"
-           [class.sm:text-2xl]="cur.kind === 'phrase'">
-          {{ cur.french }}
-        </p>
-        <span class="absolute bottom-4 text-xs text-zinc-400 max-w-full px-6 truncate">{{ cur.romaji }}</span>
+      <div class="flip-face flip-back absolute inset-0 rounded-3xl shadow-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col items-center justify-center p-5 sm:p-6 overflow-y-auto">
+        @if (cur.kind === 'word') {
+          <span class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Français</span>
+          <p class="text-2xl sm:text-4xl font-semibold text-center break-words">{{ cur.french }}</p>
+          <span class="absolute bottom-4 text-xs text-zinc-400 px-6 truncate">{{ cur.romaji }}</span>
+        } @else {
+          <div class="w-full space-y-4">
+            <div class="text-center">
+              <span class="text-xs uppercase tracking-widest text-amber-600 dark:text-amber-400">👂 Signifie</span>
+              <p class="text-lg sm:text-xl font-semibold mt-1 break-words">{{ cur.heard.french }}</p>
+            </div>
+            <div class="border-t border-zinc-200 dark:border-zinc-800 pt-3 text-center">
+              <span class="text-xs uppercase tracking-widest text-rose-600 dark:text-rose-400">💬 Réponse possible</span>
+              <p class="font-jp font-semibold text-rose-600 dark:text-rose-400 mt-1 break-words">{{ cur.reply.romaji }}</p>
+              <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ cur.reply.french }}</p>
+            </div>
+          </div>
+        }
       </div>
     </div>
   </div>

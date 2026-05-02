@@ -16,21 +16,23 @@ export interface VocabWord {
   situation: SituationId;
 }
 
-export type PhraseDirection = 'speak' | 'listen';
-
-export interface Phrase {
-  id: string;
-  situation: SituationId;
+export interface DialogPart {
   romaji: string;
   french: string;
-  /** 'speak' = phrase à dire (par défaut), 'listen' = phrase qu'on peut vous dire. */
-  direction?: PhraseDirection;
 }
 
-/** Unified type so games can mix words and phrases. */
+/** Une interaction : ce qu'on entend (heard) + une réponse possible (reply). */
+export interface Dialog {
+  id: string;
+  situation: SituationId;
+  heard: DialogPart;
+  reply: DialogPart;
+}
+
+/** Type unifié pour les jeux. */
 export type LearningItem =
   | (VocabWord & { kind: 'word' })
-  | (Phrase & { kind: 'phrase' });
+  | (Dialog & { kind: 'dialog' });
 
 export const SITUATIONS: Situation[] = [
   {

@@ -26,7 +26,7 @@ export class HomeComponent {
         learned,
         percent: Math.round((learned / Math.max(1, total)) * 100),
         wordsCount: this.vocab.getWordsBySituation(s.id).length,
-        phrasesCount: this.vocab.getPhrasesBySituation(s.id).length,
+        dialogsCount: this.vocab.getDialogsBySituation(s.id).length,
       };
     });
   });

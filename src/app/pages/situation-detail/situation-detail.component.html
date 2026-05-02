@@ -10,7 +10,7 @@
           <h1 class="text-2xl sm:text-3xl font-bold">{{ s.name }}</h1>
           <p class="text-white/90 mt-1">{{ s.description }}</p>
           <p class="text-sm mt-3 text-white/80">
-            {{ knownCount() }} / {{ totalCount() }} maîtrisés · {{ words().length }} mots · {{ phrases().length }} phrases
+            {{ knownCount() }} / {{ totalCount() }} maîtrisés · {{ words().length }} mots · {{ dialogs().length }} dialogues
           </p>
         </div>
       </div>
@@ -21,7 +21,7 @@
          class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
         <div class="text-3xl mb-2">🃏</div>
         <h3 class="font-semibold">Flashcards</h3>
-        <p class="text-sm text-zinc-600 dark:text-zinc-400">Mots et phrases, à ton rythme</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400">Mots et dialogues, à ton rythme</p>
       </a>
       <a [routerLink]="['/quiz', s.id]"
          class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
@@ -59,48 +59,34 @@
       </ul>
     </div>
 
-    @if (speakPhrases().length > 0) {
+    @if (dialogs().length > 0) {
       <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
         <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-          <h2 class="font-semibold">💬 Phrases à dire ({{ speakPhrases().length }})</h2>
-          <span class="text-xs text-zinc-500">Ce que vous direz</span>
+          <h2 class="font-semibold">💬 Dialogues — ce qu'on vous dit & comment répondre ({{ dialogs().length }})</h2>
         </div>
         <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
-          @for (p of speakPhrases(); track p.id; let i = $index) {
-            <li class="flex items-start gap-3 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
-              <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
-              <div class="flex-1 min-w-0 flex items-start gap-2">
-                @if (progress.isKnown(p.id)) {
-                  <span class="text-emerald-500 text-sm pt-0.5">✓</span>
-                }
-                <div class="flex-1 min-w-0">
-                  <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ p.romaji }}</p>
-                  <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
-                </div>
-              </div>
-            </li>
-          }
-        </ul>
-      </div>
-    }
-
-    @if (listenPhrases().length > 0) {
-      <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-        <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-amber-50/50 dark:bg-amber-950/20">
-          <h2 class="font-semibold">👂 Phrases à comprendre ({{ listenPhrases().length }})</h2>
-          <span class="text-xs text-zinc-500">Ce qu'on peut vous dire</span>
-        </div>
-        <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
-          @for (p of listenPhrases(); track p.id; let i = $index) {
-            <li class="flex items-start gap-3 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
-              <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
-              <div class="flex-1 min-w-0 flex items-start gap-2">
-                @if (progress.isKnown(p.id)) {
-                  <span class="text-emerald-500 text-sm pt-0.5">✓</span>
-                }
-                <div class="flex-1 min-w-0">
-                  <p class="font-jp font-medium text-amber-600 dark:text-amber-400 break-words">{{ p.romaji }}</p>
-                  <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
+          @for (d of dialogs(); track d.id; let i = $index) {
+            <li class="px-5 py-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+              <div class="flex items-start gap-3">
+                <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
+                <div class="flex-1 min-w-0 space-y-2">
+                  <div class="flex items-start gap-2">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400 shrink-0 mt-0.5">👂 Entendu</span>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-jp font-medium text-amber-700 dark:text-amber-300 break-words">{{ d.heard.romaji }}</p>
+                      <p class="text-sm text-zinc-700 dark:text-zinc-300 break-words">{{ d.heard.french }}</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-2 pl-3 border-l-2 border-rose-200 dark:border-rose-900">
+                    <span class="text-xs font-semibold uppercase tracking-wide text-rose-600 dark:text-rose-400 shrink-0 mt-0.5">💬 Réponse</span>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ d.reply.romaji }}</p>
+                      <p class="text-sm text-zinc-700 dark:text-zinc-300 break-words">{{ d.reply.french }}</p>
+                    </div>
+                    @if (progress.isKnown(d.id)) {
+                      <span class="text-emerald-500 text-sm shrink-0">✓</span>
+                    }
+                  </div>
                 </div>
               </div>
             </li>

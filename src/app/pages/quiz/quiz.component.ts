@@ -32,6 +32,9 @@ export class QuizComponent {
   protected readonly selected = signal<string | null>(null);
   protected readonly finished = signal(false);
 
+  promptRomaji = (item: LearningItem) => this.vocab.promptRomaji(item);
+  promptFrench = (item: LearningItem) => this.vocab.promptFrench(item);
+
   constructor() {
     queueMicrotask(() => this.start());
   }

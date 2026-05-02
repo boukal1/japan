@@ -22,20 +22,14 @@
 
     <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 sm:p-10 text-center shadow-sm">
       <p class="text-xs uppercase tracking-widest text-zinc-500 mb-3">
-        @if (item.kind === 'word') {
-          Que signifie ce mot
-        } @else if (item.direction === 'listen') {
-          👂 Que vous dit-on
-        } @else {
-          💬 Que signifie cette phrase
-        }
+        @if (item.kind === 'word') { Que signifie ce mot } @else { 👂 Que vous dit-on }
       </p>
       <p class="font-jp font-bold text-rose-600 dark:text-rose-400 mb-2 break-words"
-         [class.text-4xl]="q.item.kind === 'word'"
-         [class.sm:text-5xl]="q.item.kind === 'word'"
-         [class.text-xl]="q.item.kind === 'phrase'"
-         [class.sm:text-2xl]="q.item.kind === 'phrase'">
-        {{ q.item.romaji }}
+         [class.text-4xl]="item.kind === 'word'"
+         [class.sm:text-5xl]="item.kind === 'word'"
+         [class.text-xl]="item.kind === 'dialog'"
+         [class.sm:text-2xl]="item.kind === 'dialog'">
+        {{ promptRomaji(item) }}
       </p>
       <p class="text-sm text-zinc-500 mt-3">Question {{ current() + 1 }} sur {{ questions().length }}</p>
     </div>
@@ -52,10 +46,18 @@
                 [class.dark:bg-rose-950]="isWrongPick(opt)"
                 [class.opacity-60]="selected() !== null && !isCorrect(opt) && !isWrongPick(opt)"
                 class="rounded-xl border-2 border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-rose-400 px-4 py-4 text-left font-medium transition-all disabled:cursor-not-allowed">
-          {{ opt.french }}
+          {{ promptFrench(opt) }}
         </button>
       }
     </div>
+
+    @if (selected() !== null && item.kind === 'dialog') {
+      <div class="rounded-xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900 px-4 py-3">
+        <p class="text-xs uppercase tracking-wide text-rose-700 dark:text-rose-300 mb-1">💬 Réponse possible</p>
+        <p class="font-jp font-semibold text-rose-700 dark:text-rose-300">{{ item.reply.romaji }}</p>
+        <p class="text-sm text-zinc-700 dark:text-zinc-300">{{ item.reply.french }}</p>
+      </div>
+    }
 
     @if (selected() !== null) {
       <button (click)="nextQuestion()"
