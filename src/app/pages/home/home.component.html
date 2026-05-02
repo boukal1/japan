@@ -1,40 +1,58 @@
-<section class="space-y-2 mb-8 sm:mb-10">
-  <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
-    Apprends le japonais en <span class="text-rose-600">situation</span>
+<section class="relative mb-10 sm:mb-14">
+  <div class="absolute -top-6 -right-2 sm:-right-6 text-7xl sm:text-9xl select-none opacity-20 dark:opacity-15 rotate-12 pointer-events-none font-display text-rose-600">桜</div>
+  <p class="text-xs uppercase tracking-[0.25em] text-rose-600 dark:text-rose-400 font-semibold mb-3">Nihongo</p>
+  <h1 class="font-display text-4xl sm:text-6xl leading-[1.05] mb-4">
+    Le japonais qui se parle,<br />
+    <span class="text-gradient-rose">en vraie situation.</span>
   </h1>
-  <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl">
-    Pas de listes scolaires : des mots et des phrases utiles dans des situations réelles. Choisis une situation, mémorise le vocabulaire, et joue avec les flashcards, quiz ou memory.
+  <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl text-base sm:text-lg">
+    Pas de listes scolaires : du vocabulaire concret et des dialogues entendus dans la rue, au restaurant ou à la caisse — avec une réponse possible pour chaque phrase.
   </p>
+
+  <div class="flex flex-wrap gap-2 mt-6 text-xs">
+    <span class="px-3 py-1.5 rounded-full surface-solid font-medium text-zinc-700 dark:text-zinc-300">
+      ✨ {{ progress.totalKnown() }} maîtrisés
+    </span>
+    <span class="px-3 py-1.5 rounded-full surface-solid font-medium text-zinc-700 dark:text-zinc-300">
+      🗂️ {{ situations.length }} situations
+    </span>
+  </div>
 </section>
 
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
   @for (s of stats(); track s.situation.id) {
     @if (s.situation.available) {
       <a [routerLink]="['/situation', s.situation.id]"
-         class="group relative overflow-hidden rounded-2xl border border-zinc-200/70 dark:border-zinc-800/70 bg-white dark:bg-zinc-900 p-6 transition-all hover:-translate-y-0.5 hover:shadow-xl shadow-sm">
-        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r {{ s.situation.color }}"></div>
-        <div class="flex items-start justify-between gap-3 mb-3">
-          <span class="text-4xl">{{ s.situation.emoji }}</span>
-          <div class="flex flex-col gap-1 items-end">
-            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+         class="group relative overflow-hidden rounded-3xl surface lift p-6 sm:p-7">
+        <!-- Halo de couleur de la situation -->
+        <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-30 dark:opacity-25 blur-2xl bg-gradient-to-br {{ s.situation.color }} pointer-events-none transition-opacity group-hover:opacity-50"></div>
+        <!-- Emoji watermark géant -->
+        <div class="absolute right-2 bottom-0 text-[7rem] sm:text-[9rem] leading-none opacity-10 dark:opacity-15 select-none pointer-events-none">{{ s.situation.emoji }}</div>
+
+        <div class="relative flex items-start justify-between gap-3 mb-4">
+          <div class="text-4xl">{{ s.situation.emoji }}</div>
+          <div class="flex flex-col gap-1.5 items-end text-[11px]">
+            <span class="px-2.5 py-0.5 rounded-full bg-zinc-100/80 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 font-semibold backdrop-blur">
               {{ s.wordsCount }} mots
             </span>
-            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+            <span class="px-2.5 py-0.5 rounded-full bg-zinc-100/80 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 font-semibold backdrop-blur">
               {{ s.dialogsCount }} dialogues
             </span>
           </div>
         </div>
-        <h3 class="text-xl font-semibold mb-1 group-hover:text-rose-600 transition-colors">
+
+        <h3 class="relative font-display text-xl sm:text-2xl mb-2 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
           {{ s.situation.name }}
         </h3>
-        <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4">{{ s.situation.description }}</p>
-        <div class="space-y-1">
+        <p class="relative text-sm text-zinc-600 dark:text-zinc-400 mb-5 max-w-md">{{ s.situation.description }}</p>
+
+        <div class="relative space-y-1.5">
           <div class="flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-400">
             <span>{{ s.learned }} / {{ s.total }} maîtrisés</span>
-            <span class="font-semibold">{{ s.percent }}%</span>
+            <span class="font-bold tabular-nums">{{ s.percent }}%</span>
           </div>
-          <div class="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-            <div class="h-full bg-gradient-to-r {{ s.situation.color }} transition-all duration-500"
+          <div class="h-1.5 rounded-full bg-zinc-200/70 dark:bg-zinc-800/70 overflow-hidden">
+            <div class="h-full bg-gradient-to-r {{ s.situation.color }} transition-all duration-700 ease-out"
                  [style.width.%]="s.percent"></div>
           </div>
         </div>
@@ -42,9 +60,9 @@
     }
   }
 
-  <div class="rounded-2xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 p-6 flex flex-col items-center justify-center text-center min-h-48">
-    <span class="text-3xl mb-2">🚧</span>
+  <div class="rounded-3xl border border-dashed border-zinc-300/80 dark:border-zinc-700/80 p-6 flex flex-col items-center justify-center text-center min-h-52 surface">
+    <span class="text-3xl mb-2 grayscale opacity-70">✨</span>
     <h3 class="font-semibold text-zinc-700 dark:text-zinc-300">D'autres situations bientôt</h3>
-    <p class="text-sm text-zinc-500 mt-1">Au restaurant, en voyage, au travail…</p>
+    <p class="text-sm text-zinc-500 mt-1">En voyage, à l'hôtel, au travail…</p>
   </div>
 </section>

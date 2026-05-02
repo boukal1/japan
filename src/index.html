@@ -2,14 +2,27 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Nihongo - Apprendre le japonais courant</title>
+  <title>Nihongo · Apprendre le japonais en situation</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Application ludique pour apprendre les 500 mots japonais les plus courants, classés par thèmes.">
+  <meta name="description" content="Application ludique pour apprendre le japonais en situation : vocabulaire et dialogues du quotidien.">
+  <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;600;700&family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    // Applique le thème AVANT le rendu Angular pour éviter le flash.
+    (function () {
+      try {
+        var stored = localStorage.getItem('nihongo-theme') || 'system';
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = stored === 'dark' || (stored === 'system' && prefersDark);
+        if (isDark) document.documentElement.classList.add('dark');
+      } catch (_) { /* ignore */ }
+    })();
+  </script>
 </head>
 <body class="antialiased">
   <app-root></app-root>

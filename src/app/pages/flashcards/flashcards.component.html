@@ -1,47 +1,53 @@
 <div class="space-y-6 max-w-2xl mx-auto">
   <div class="flex items-center justify-between">
     <a [routerLink]="situationInfo() ? ['/situation', situationInfo()!.id] : ['/']"
-       class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600">
+       class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600 transition-colors">
       ← Retour
     </a>
-    <h1 class="text-lg sm:text-xl font-semibold">
-      🃏 Flashcards
-      @if (situationInfo(); as s) {
-        <span class="hidden sm:inline text-zinc-500">· {{ s.name }}</span>
-      }
+    <h1 class="font-display text-lg sm:text-xl flex items-center gap-2">
+      <span>🃏</span> Flashcards
     </h1>
-    <span class="text-sm font-mono text-zinc-500">{{ index() + 1 }} / {{ deck().length }}</span>
+    <span class="text-sm font-mono text-zinc-500 tabular-nums">{{ index() + 1 }} / {{ deck().length }}</span>
   </div>
+
+  @if (situationInfo(); as s) {
+    <p class="text-center text-xs uppercase tracking-widest text-zinc-500">{{ s.name }}</p>
+  }
 
   @let cur = current();
   <div class="flip-card aspect-[4/3] sm:aspect-[5/3] cursor-pointer select-none" (click)="flip()">
     <div class="flip-inner relative w-full h-full" [class.flipped]="flipped()">
-      <div class="flip-face absolute inset-0 rounded-3xl shadow-xl bg-gradient-to-br from-rose-500 to-red-700 text-white flex flex-col items-center justify-center p-6">
-        <div class="absolute top-4 left-4 text-xs uppercase tracking-widest text-white/70">
+      <!-- Face avant -->
+      <div class="flip-face absolute inset-0 rounded-[2rem] shadow-[0_30px_60px_-20px_rgba(190,18,60,0.5)] bg-gradient-to-br from-rose-500 via-rose-600 to-red-700 text-white flex flex-col items-center justify-center p-6 overflow-hidden">
+        <div class="absolute top-4 left-5 text-[11px] uppercase tracking-[0.2em] text-white/75 font-semibold">
           @if (cur.kind === 'word') { Mot } @else { 👂 On vous dit }
         </div>
+        <!-- Watermark décoratif -->
+        <div class="absolute -bottom-8 -right-4 text-[10rem] font-display text-white/10 select-none leading-none">日</div>
         @if (cur.kind === 'word') {
-          <p class="font-jp text-4xl sm:text-6xl font-bold text-center break-words">{{ cur.romaji }}</p>
+          <p class="relative font-jp text-4xl sm:text-6xl font-bold text-center break-words">{{ cur.romaji }}</p>
         } @else {
-          <p class="font-jp text-xl sm:text-3xl font-bold text-center break-words">{{ cur.heard.romaji }}</p>
+          <p class="relative font-jp text-xl sm:text-3xl font-bold text-center break-words leading-snug">{{ cur.heard.romaji }}</p>
         }
         <span class="absolute bottom-4 text-xs text-white/70">Clique pour retourner</span>
       </div>
-      <div class="flip-face flip-back absolute inset-0 rounded-3xl shadow-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col items-center justify-center p-5 sm:p-6 overflow-y-auto">
+
+      <!-- Face arrière -->
+      <div class="flip-face flip-back absolute inset-0 rounded-[2rem] shadow-xl surface-solid flex flex-col items-center justify-center p-6 sm:p-8 overflow-y-auto">
         @if (cur.kind === 'word') {
-          <span class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Français</span>
-          <p class="text-2xl sm:text-4xl font-semibold text-center break-words">{{ cur.french }}</p>
-          <span class="absolute bottom-4 text-xs text-zinc-400 px-6 truncate">{{ cur.romaji }}</span>
+          <span class="text-[11px] uppercase tracking-[0.2em] text-zinc-500 font-semibold mb-3">Français</span>
+          <p class="text-2xl sm:text-4xl font-display text-center break-words">{{ cur.french }}</p>
+          <span class="absolute bottom-4 text-xs text-zinc-400 px-6 truncate font-jp">{{ cur.romaji }}</span>
         } @else {
-          <div class="w-full space-y-4">
+          <div class="w-full space-y-5">
             <div class="text-center">
-              <span class="text-xs uppercase tracking-widest text-amber-600 dark:text-amber-400">👂 Signifie</span>
-              <p class="text-lg sm:text-xl font-semibold mt-1 break-words">{{ cur.heard.french }}</p>
+              <span class="text-[11px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400 font-semibold">👂 Signifie</span>
+              <p class="text-lg sm:text-2xl font-display mt-1.5 break-words leading-snug">{{ cur.heard.french }}</p>
             </div>
-            <div class="border-t border-zinc-200 dark:border-zinc-800 pt-3 text-center">
-              <span class="text-xs uppercase tracking-widest text-rose-600 dark:text-rose-400">💬 Réponse possible</span>
-              <p class="font-jp font-semibold text-rose-600 dark:text-rose-400 mt-1 break-words">{{ cur.reply.romaji }}</p>
-              <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ cur.reply.french }}</p>
+            <div class="border-t border-zinc-200/60 dark:border-zinc-800/60 pt-4 text-center">
+              <span class="text-[11px] uppercase tracking-[0.2em] text-rose-600 dark:text-rose-400 font-semibold">💬 Réponse possible</span>
+              <p class="font-jp font-bold text-rose-600 dark:text-rose-400 mt-1.5 break-words">{{ cur.reply.romaji }}</p>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1 break-words">{{ cur.reply.french }}</p>
             </div>
           </div>
         }
@@ -51,18 +57,18 @@
 
   <div class="grid grid-cols-2 gap-3">
     <button (click)="markUnknown()"
-            class="rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 px-4 py-3 font-semibold text-zinc-700 dark:text-zinc-200 transition-colors">
+            class="rounded-xl border-2 border-zinc-300 dark:border-zinc-700 bg-white/70 dark:bg-zinc-900/70 hover:border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 px-4 py-3 font-semibold text-zinc-700 dark:text-zinc-200 transition-all">
       ↻ À revoir
     </button>
     <button (click)="markKnown()"
-            class="rounded-xl border-2 border-emerald-400 bg-emerald-500 hover:bg-emerald-600 px-4 py-3 font-semibold text-white transition-colors">
+            class="rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 px-4 py-3 font-semibold text-white shadow-[0_8px_20px_-8px_rgba(16,185,129,0.6)] transition-all">
       ✓ Je connais
     </button>
   </div>
 
   <div class="grid grid-cols-3 gap-3">
-    <button (click)="prev()" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-2 font-medium transition-colors">← Précédent</button>
-    <button (click)="flip()" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-2 font-medium transition-colors">Retourner</button>
-    <button (click)="next()" class="rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 px-4 py-2 font-medium transition-colors">Suivant →</button>
+    <button (click)="prev()" class="btn-ghost">← Précédent</button>
+    <button (click)="flip()" class="btn-ghost">Retourner</button>
+    <button (click)="next()" class="btn-ghost">Suivant →</button>
   </div>
 </div>

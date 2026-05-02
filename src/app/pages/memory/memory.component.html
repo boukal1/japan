@@ -1,31 +1,29 @@
 <div class="space-y-6 max-w-3xl mx-auto">
   <div class="flex items-center justify-between">
     <a [routerLink]="situationInfo() ? ['/situation', situationInfo()!.id] : ['/']"
-       class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600">
+       class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600 transition-colors">
       ← Retour
     </a>
-    <h1 class="text-lg sm:text-xl font-semibold">
-      🧠 Memory
-      @if (situationInfo(); as s) {
-        <span class="hidden sm:inline text-zinc-500">· {{ s.name }}</span>
-      }
+    <h1 class="font-display text-lg sm:text-xl flex items-center gap-2">
+      <span>🧠</span> Memory
     </h1>
-    <button (click)="start()"
-            class="text-sm font-medium px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700">
-      🔁 Nouvelle partie
-    </button>
+    <button (click)="start()" class="btn-ghost text-sm">🔁 Nouvelle partie</button>
   </div>
 
-  <div class="flex items-center gap-4 text-sm">
-    <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 font-medium">
-      Coups : {{ moves() }}
+  @if (situationInfo(); as s) {
+    <p class="text-center text-xs uppercase tracking-widest text-zinc-500">{{ s.name }}</p>
+  }
+
+  <div class="flex items-center justify-center gap-3 text-sm flex-wrap">
+    <span class="px-3 py-1.5 rounded-full surface-solid font-semibold tabular-nums">
+      Coups · {{ moves() }}
     </span>
-    <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 font-mono">
+    <span class="px-3 py-1.5 rounded-full surface-solid font-mono tabular-nums">
       ⏱ {{ formatTime(seconds()) }}
     </span>
     @if (best(); as b) {
-      <span class="px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-medium">
-        🏅 Record : {{ b.moves }} coups · {{ formatTime(b.seconds) }}
+      <span class="px-3 py-1.5 rounded-full bg-amber-100/70 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-semibold border border-amber-200/60 dark:border-amber-900/60">
+        🏅 {{ b.moves }} coups · {{ formatTime(b.seconds) }}
       </span>
     }
   </div>
@@ -34,44 +32,41 @@
     @for (card of cards(); track card.key) {
       <button (click)="pick(card)"
               [disabled]="card.matched || finished()"
-              class="aspect-[3/4] rounded-2xl shadow-sm select-none transition-all duration-300 flex items-center justify-center p-2 text-center font-medium"
+              class="aspect-[3/4] rounded-2xl select-none transition-all duration-300 flex items-center justify-center p-2.5 text-center font-medium overflow-hidden"
               [class.bg-gradient-to-br]="!card.flipped && !card.matched"
               [class.from-rose-500]="!card.flipped && !card.matched"
+              [class.via-rose-600]="!card.flipped && !card.matched"
               [class.to-red-700]="!card.flipped && !card.matched"
               [class.text-white]="!card.flipped && !card.matched"
+              [class.shadow-[0_8px_20px_-8px_rgba(190,18,60,0.5)]]="!card.flipped && !card.matched"
               [class.hover:scale-105]="!card.flipped && !card.matched"
-              [class.bg-white]="card.flipped && !card.matched"
-              [class.dark:bg-zinc-900]="card.flipped && !card.matched"
-              [class.border-2]="card.flipped"
+              [class.surface-solid]="card.flipped && !card.matched"
               [class.border-rose-400]="card.flipped && !card.matched"
               [class.bg-emerald-100]="card.matched"
-              [class.dark:bg-emerald-950]="card.matched"
-              [class.border-emerald-400]="card.matched"
-              [class.opacity-70]="card.matched">
+              [class.dark:bg-emerald-950/50]="card.matched"
+              [class.opacity-70]="card.matched"
+              [class.scale-95]="card.matched">
         @if (card.flipped || card.matched) {
           @if (card.side === 'romaji') {
-            <span class="font-jp font-semibold text-rose-600 dark:text-rose-400 text-sm sm:text-base break-words">{{ card.text }}</span>
+            <span class="font-jp font-bold text-rose-700 dark:text-rose-300 text-sm sm:text-base break-words">{{ card.text }}</span>
           } @else {
-            <span class="text-zinc-700 dark:text-zinc-200 text-sm sm:text-base break-words">{{ card.text }}</span>
+            <span class="text-zinc-800 dark:text-zinc-100 text-sm sm:text-base break-words">{{ card.text }}</span>
           }
         } @else {
-          <span class="font-jp text-2xl sm:text-3xl">日</span>
+          <span class="font-display text-3xl sm:text-4xl text-white/80">日</span>
         }
       </button>
     }
   </div>
 
   @if (finished()) {
-    <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 text-center space-y-3">
+    <div class="surface rounded-3xl p-7 text-center space-y-3 animate-fade-up">
       <div class="text-5xl">🎉</div>
-      <h2 class="text-xl font-bold">Bien joué !</h2>
-      <p class="text-zinc-600 dark:text-zinc-400">
+      <h2 class="font-display text-2xl">Bien joué !</h2>
+      <p class="text-zinc-600 dark:text-zinc-400 tabular-nums">
         {{ moves() }} coups en {{ formatTime(seconds()) }}
       </p>
-      <button (click)="start()"
-              class="rounded-xl bg-rose-600 hover:bg-rose-700 text-white px-6 py-3 font-semibold transition-colors">
-        🔁 Rejouer
-      </button>
+      <button (click)="start()" class="btn-primary">🔁 Rejouer</button>
     </div>
   }
 </div>

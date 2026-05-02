@@ -1,33 +1,34 @@
-<div class="space-y-8">
+<div class="space-y-10">
   <header class="flex flex-wrap items-end justify-between gap-3">
     <div>
-      <h1 class="text-3xl font-bold tracking-tight">Ma progression</h1>
-      <p class="text-zinc-600 dark:text-zinc-400 mt-1">
-        {{ progress.totalKnown() }} / {{ totalItems() }} mots et phrases maîtrisés
+      <p class="text-xs uppercase tracking-[0.25em] text-rose-600 dark:text-rose-400 font-semibold mb-2">Tableau de bord</p>
+      <h1 class="font-display text-3xl sm:text-4xl">Ma progression</h1>
+      <p class="text-zinc-600 dark:text-zinc-400 mt-2 tabular-nums">
+        {{ progress.totalKnown() }} / {{ totalItems() }} mots et dialogues maîtrisés
       </p>
     </div>
     <button (click)="reset()"
-            class="text-sm font-medium px-4 py-2 rounded-lg border border-rose-300 text-rose-700 hover:bg-rose-50 dark:border-rose-800 dark:text-rose-400 dark:hover:bg-rose-950/40 transition-colors">
+            class="text-sm font-medium px-4 py-2 rounded-xl border border-rose-300/70 text-rose-700 hover:bg-rose-50 dark:border-rose-800/70 dark:text-rose-400 dark:hover:bg-rose-950/40 transition-colors">
       🗑 Réinitialiser
     </button>
   </header>
 
   <section>
-    <h2 class="text-xl font-semibold mb-4">Par situation</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <h2 class="font-display text-xl mb-4">Par situation</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       @for (s of stats(); track s.situation.id) {
         <a [routerLink]="['/situation', s.situation.id]"
-           class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 hover:shadow-md transition-shadow">
-          <div class="flex items-center gap-3 mb-3">
+           class="surface lift rounded-2xl p-5">
+          <div class="flex items-center gap-3 mb-4">
             <span class="text-2xl">{{ s.situation.emoji }}</span>
             <div class="flex-1 min-w-0">
               <p class="font-semibold truncate">{{ s.situation.name }}</p>
-              <p class="text-xs text-zinc-500">{{ s.learned }} / {{ s.total }} maîtrisés</p>
+              <p class="text-xs text-zinc-500 tabular-nums">{{ s.learned }} / {{ s.total }} maîtrisés</p>
             </div>
-            <span class="font-bold text-lg">{{ s.percent }}%</span>
+            <span class="font-display text-2xl tabular-nums">{{ s.percent }}%</span>
           </div>
-          <div class="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-            <div class="h-full bg-gradient-to-r {{ s.situation.color }} transition-all duration-500"
+          <div class="h-2 rounded-full bg-zinc-200/60 dark:bg-zinc-800/60 overflow-hidden">
+            <div class="h-full bg-gradient-to-r {{ s.situation.color }} transition-all duration-700 ease-out"
                  [style.width.%]="s.percent"></div>
           </div>
         </a>
@@ -37,16 +38,16 @@
 
   @if (recentQuizzes().length > 0) {
     <section>
-      <h2 class="text-xl font-semibold mb-4">Historique des quiz</h2>
-      <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-        <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
+      <h2 class="font-display text-xl mb-4">Historique des quiz</h2>
+      <div class="surface rounded-2xl overflow-hidden">
+        <ul class="divide-y divide-zinc-200/40 dark:divide-zinc-800/40">
           @for (q of recentQuizzes(); track q.date) {
-            <li class="flex items-center justify-between px-5 py-3">
+            <li class="flex items-center justify-between px-5 py-3.5 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 transition-colors">
               <div>
                 <p class="font-medium">{{ situationName(q.situation) }}</p>
                 <p class="text-xs text-zinc-500">{{ formatDate(q.date) }}</p>
               </div>
-              <span class="font-mono font-semibold"
+              <span class="font-mono font-bold tabular-nums"
                     [class.text-emerald-600]="q.score / q.total >= 0.7"
                     [class.text-amber-600]="q.score / q.total >= 0.4 && q.score / q.total < 0.7"
                     [class.text-rose-600]="q.score / q.total < 0.4">
@@ -61,14 +62,14 @@
 
   @if (memoryRecords().length > 0) {
     <section>
-      <h2 class="text-xl font-semibold mb-4">Records Memory</h2>
+      <h2 class="font-display text-xl mb-4">Records Memory</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         @for (m of memoryRecords(); track m.key) {
-          <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 flex items-center justify-between">
+          <div class="surface rounded-2xl p-4 flex items-center justify-between">
             <p class="font-medium">🏅 {{ m.name }}</p>
             <div class="text-right text-sm">
-              <p class="font-semibold">{{ m.moves }} coups</p>
-              <p class="text-zinc-500 font-mono">{{ formatTime(m.seconds) }}</p>
+              <p class="font-bold tabular-nums">{{ m.moves }} coups</p>
+              <p class="text-zinc-500 font-mono tabular-nums">{{ formatTime(m.seconds) }}</p>
             </div>
           </div>
         }
@@ -77,11 +78,9 @@
   }
 
   @if (progress.totalKnown() === 0 && recentQuizzes().length === 0) {
-    <section class="rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 p-10 text-center">
-      <p class="text-zinc-500 mb-4">Tu n'as pas encore commencé !</p>
-      <a routerLink="/" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold">
-        Choisir une situation
-      </a>
+    <section class="rounded-3xl border border-dashed border-zinc-300/70 dark:border-zinc-700/70 p-12 text-center surface">
+      <p class="text-zinc-500 mb-5">Tu n'as pas encore commencé !</p>
+      <a routerLink="/" class="btn-primary inline-flex">Choisir une situation</a>
     </section>
   }
 </div>

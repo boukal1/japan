@@ -1,87 +1,95 @@
 @if (situation(); as s) {
-  <div class="space-y-6">
-    <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br {{ s.color }} text-white shadow-lg">
-      <a routerLink="/" class="inline-flex items-center text-white/80 hover:text-white text-sm font-medium mb-4">
-        ← Toutes les situations
+  <div class="space-y-8">
+    <!-- Hero de la situation -->
+    <div class="relative overflow-hidden rounded-3xl p-7 sm:p-10 bg-gradient-to-br {{ s.color }} text-white shadow-[0_20px_60px_-20px_rgba(190,18,60,0.5)]">
+      <div class="absolute right-0 bottom-0 text-[12rem] sm:text-[16rem] leading-none opacity-15 select-none pointer-events-none -mr-6 -mb-12">{{ s.emoji }}</div>
+      <a routerLink="/" class="relative inline-flex items-center gap-1.5 text-white/85 hover:text-white text-sm font-medium mb-5 transition-colors">
+        <span aria-hidden>←</span> Toutes les situations
       </a>
-      <div class="flex items-start gap-4">
-        <span class="text-5xl sm:text-6xl">{{ s.emoji }}</span>
+      <div class="relative flex items-start gap-5">
+        <span class="text-5xl sm:text-7xl drop-shadow-md">{{ s.emoji }}</span>
         <div>
-          <h1 class="text-2xl sm:text-3xl font-bold">{{ s.name }}</h1>
-          <p class="text-white/90 mt-1">{{ s.description }}</p>
-          <p class="text-sm mt-3 text-white/80">
-            {{ knownCount() }} / {{ totalCount() }} maîtrisés · {{ words().length }} mots · {{ dialogs().length }} dialogues
-          </p>
+          <h1 class="font-display text-2xl sm:text-4xl leading-tight">{{ s.name }}</h1>
+          <p class="text-white/90 mt-2 max-w-xl">{{ s.description }}</p>
+          <div class="flex flex-wrap gap-2 mt-4 text-xs">
+            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm font-semibold">{{ knownCount() }} / {{ totalCount() }} maîtrisés</span>
+            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm font-semibold">📚 {{ words().length }} mots</span>
+            <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm font-semibold">💬 {{ dialogs().length }} dialogues</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+    <!-- Modes de jeu -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <a [routerLink]="['/flashcards', s.id]"
-         class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-        <div class="text-3xl mb-2">🃏</div>
+         class="surface lift rounded-2xl p-5 group">
+        <div class="text-3xl mb-2 transition-transform group-hover:scale-110">🃏</div>
         <h3 class="font-semibold">Flashcards</h3>
         <p class="text-sm text-zinc-600 dark:text-zinc-400">Mots et dialogues, à ton rythme</p>
       </a>
       <a [routerLink]="['/quiz', s.id]"
-         class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-        <div class="text-3xl mb-2">🎯</div>
+         class="surface lift rounded-2xl p-5 group">
+        <div class="text-3xl mb-2 transition-transform group-hover:scale-110">🎯</div>
         <h3 class="font-semibold">Quiz</h3>
         <p class="text-sm text-zinc-600 dark:text-zinc-400">10 questions à choix multiples</p>
       </a>
       <a [routerLink]="['/memory', s.id]"
-         class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-        <div class="text-3xl mb-2">🧠</div>
+         class="surface lift rounded-2xl p-5 group">
+        <div class="text-3xl mb-2 transition-transform group-hover:scale-110">🧠</div>
         <h3 class="font-semibold">Memory</h3>
         <p class="text-sm text-zinc-600 dark:text-zinc-400">Associe mot et traduction</p>
       </a>
     </div>
 
-    <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-      <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-        <h2 class="font-semibold">📚 Vocabulaire ({{ words().length }})</h2>
+    <!-- Vocabulaire -->
+    <div class="surface rounded-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-zinc-200/50 dark:border-zinc-800/50 flex items-center justify-between">
+        <h2 class="font-display text-lg">📚 Vocabulaire <span class="text-zinc-400 font-normal text-sm">({{ words().length }})</span></h2>
         <span class="text-xs text-zinc-500">✓ = appris</span>
       </div>
-      <ul class="divide-y divide-zinc-100 dark:divide-zinc-800 max-h-[480px] overflow-y-auto">
+      <ul class="divide-y divide-zinc-200/40 dark:divide-zinc-800/40 max-h-[480px] overflow-y-auto">
         @for (w of words(); track w.id) {
-          <li class="flex items-center justify-between gap-4 px-5 py-2.5 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+          <li class="flex items-center justify-between gap-4 px-6 py-2.5 hover:bg-rose-50/50 dark:hover:bg-rose-950/20 transition-colors">
             <div class="flex items-center gap-3 min-w-0">
               @if (progress.isKnown(w.id)) {
-                <span class="text-emerald-500 text-sm">✓</span>
+                <span class="text-emerald-500 text-sm shrink-0">✓</span>
               } @else {
-                <span class="w-3.5"></span>
+                <span class="w-3.5 shrink-0"></span>
               }
               <span class="font-jp font-semibold text-rose-600 dark:text-rose-400 truncate">{{ w.romaji }}</span>
             </div>
-            <span class="text-zinc-700 dark:text-zinc-300 text-right truncate">{{ w.french }}</span>
+            <span class="text-zinc-700 dark:text-zinc-300 text-right truncate text-sm">{{ w.french }}</span>
           </li>
         }
       </ul>
     </div>
 
+    <!-- Dialogues -->
     @if (dialogs().length > 0) {
-      <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-        <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-          <h2 class="font-semibold">💬 Dialogues — ce qu'on vous dit & comment répondre ({{ dialogs().length }})</h2>
+      <div class="surface rounded-2xl overflow-hidden">
+        <div class="px-6 py-4 border-b border-zinc-200/50 dark:border-zinc-800/50">
+          <h2 class="font-display text-lg">💬 Dialogues <span class="text-zinc-400 font-normal text-sm">({{ dialogs().length }})</span></h2>
+          <p class="text-xs text-zinc-500 mt-0.5">Ce qu'on peut vous dire — et comment répondre</p>
         </div>
-        <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
+        <ul class="divide-y divide-zinc-200/40 dark:divide-zinc-800/40">
           @for (d of dialogs(); track d.id; let i = $index) {
-            <li class="px-5 py-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
-              <div class="flex items-start gap-3">
-                <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
-                <div class="flex-1 min-w-0 space-y-2">
-                  <div class="flex items-start gap-2">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-amber-600 dark:text-amber-400 shrink-0 mt-0.5">👂 Entendu</span>
+            <li class="px-6 py-4 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 transition-colors">
+              <div class="flex items-start gap-4">
+                <span class="text-xs font-mono text-zinc-400 pt-1 w-6 shrink-0 tabular-nums">{{ i + 1 }}.</span>
+                <div class="flex-1 min-w-0 space-y-3">
+                  <div class="flex items-start gap-3">
+                    <span class="mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 text-xs shrink-0">👂</span>
                     <div class="flex-1 min-w-0">
-                      <p class="font-jp font-medium text-amber-700 dark:text-amber-300 break-words">{{ d.heard.romaji }}</p>
-                      <p class="text-sm text-zinc-700 dark:text-zinc-300 break-words">{{ d.heard.french }}</p>
+                      <p class="font-jp font-semibold text-amber-700 dark:text-amber-300 break-words">{{ d.heard.romaji }}</p>
+                      <p class="text-sm text-zinc-600 dark:text-zinc-400 break-words">{{ d.heard.french }}</p>
                     </div>
                   </div>
-                  <div class="flex items-start gap-2 pl-3 border-l-2 border-rose-200 dark:border-rose-900">
-                    <span class="text-xs font-semibold uppercase tracking-wide text-rose-600 dark:text-rose-400 shrink-0 mt-0.5">💬 Réponse</span>
+                  <div class="flex items-start gap-3 pl-3 border-l-2 border-rose-300/60 dark:border-rose-900/60 ml-2.5">
+                    <span class="mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-100 dark:bg-rose-950/50 text-rose-700 dark:text-rose-400 text-xs shrink-0">💬</span>
                     <div class="flex-1 min-w-0">
-                      <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ d.reply.romaji }}</p>
-                      <p class="text-sm text-zinc-700 dark:text-zinc-300 break-words">{{ d.reply.french }}</p>
+                      <p class="font-jp font-semibold text-rose-600 dark:text-rose-400 break-words">{{ d.reply.romaji }}</p>
+                      <p class="text-sm text-zinc-600 dark:text-zinc-400 break-words">{{ d.reply.french }}</p>
                     </div>
                     @if (progress.isKnown(d.id)) {
                       <span class="text-emerald-500 text-sm shrink-0">✓</span>
