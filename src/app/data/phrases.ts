@@ -31,4 +31,47 @@ export const PHRASES: Phrase[] = [
   { id: 'sd-p-28', situation: 'salutations-demandes', romaji: 'ki o tsukete kudasai.', french: 'Faites attention / prenez soin de vous.' },
   { id: 'sd-p-29', situation: 'salutations-demandes', romaji: 'ogenki desu ka?', french: 'Comment allez-vous ?' },
   { id: 'sd-p-30', situation: 'salutations-demandes', romaji: 'okagesama de, genki desu.', french: 'Grâce à vous, je vais bien.' },
+
+  // === Au restaurant (30) ===
+  // Réserver (5)
+  { id: 're-p-01', situation: 'restaurant', romaji: 'yoyaku o onegaishimasu.', french: 'Je voudrais faire une réservation.' },
+  { id: 're-p-02', situation: 'restaurant', romaji: 'konban shichi-ji ni futari desu.', french: 'Ce soir à 19h pour deux personnes.' },
+  { id: 're-p-03', situation: 'restaurant', romaji: 'mado-gawa no seki wa arimasu ka?', french: 'Avez-vous une place côté fenêtre ?' },
+  { id: 're-p-04', situation: 'restaurant', romaji: 'yoyaku o henkou shitai desu.', french: 'Je voudrais modifier ma réservation.' },
+  { id: 're-p-05', situation: 'restaurant', romaji: 'yoyaku o kyanseru shitai desu.', french: 'Je voudrais annuler ma réservation.' },
+
+  // À l'arrivée (3)
+  { id: 're-p-06', situation: 'restaurant', romaji: 'ohitorisama desu ka?', french: 'C\'est pour une personne ?' },
+  { id: 're-p-07', situation: 'restaurant', romaji: 'ninzuu wa futari desu.', french: 'Nous sommes deux.' },
+  { id: 're-p-08', situation: 'restaurant', romaji: 'yoyaku shiteimasu, namae wa Pierre desu.', french: 'J\'ai réservé au nom de Pierre.' },
+
+  // Demander conseil (5)
+  { id: 're-p-09', situation: 'restaurant', romaji: 'osusume wa nan desu ka?', french: 'Quelle est votre recommandation ?' },
+  { id: 're-p-10', situation: 'restaurant', romaji: 'kono mise no meibutsu wa nan desu ka?', french: 'Quelle est la spécialité du restaurant ?' },
+  { id: 're-p-11', situation: 'restaurant', romaji: 'nani ga ichiban ninki desu ka?', french: 'Qu\'est-ce qui est le plus populaire ?' },
+  { id: 're-p-12', situation: 'restaurant', romaji: 'shefu no osusume wa arimasu ka?', french: 'Y a-t-il une suggestion du chef ?' },
+  { id: 're-p-13', situation: 'restaurant', romaji: 'chiiki no tokusan-ryouri ga tabetai desu.', french: 'Je voudrais goûter une spécialité régionale.' },
+
+  // Commander (8)
+  { id: 're-p-14', situation: 'restaurant', romaji: 'menyuu o misete kudasai.', french: 'Montrez-moi le menu svp.' },
+  { id: 're-p-15', situation: 'restaurant', romaji: 'eigo no menyuu wa arimasu ka?', french: 'Avez-vous un menu en anglais ?' },
+  { id: 're-p-16', situation: 'restaurant', romaji: 'kore o kudasai.', french: 'Je prends ceci svp.' },
+  { id: 're-p-17', situation: 'restaurant', romaji: 'chuumon o onegaishimasu.', french: 'Je voudrais commander svp.' },
+  { id: 're-p-18', situation: 'restaurant', romaji: 'kore wa nan desu ka?', french: 'Qu\'est-ce que c\'est ?' },
+  { id: 're-p-19', situation: 'restaurant', romaji: 'niku wa tabemasen, bejitarian desu.', french: 'Je ne mange pas de viande, je suis végétarien.' },
+  { id: 're-p-20', situation: 'restaurant', romaji: 'arerugii ga arimasu, kani ga taberaremasen.', french: 'J\'ai une allergie, je ne peux pas manger de crabe.' },
+  { id: 're-p-21', situation: 'restaurant', romaji: 'atsui ocha o ippai onegaishimasu.', french: 'Un thé chaud svp.' },
+
+  // Pendant le repas (4)
+  { id: 're-p-22', situation: 'restaurant', romaji: 'totemo oishii desu!', french: 'C\'est très bon !' },
+  { id: 're-p-23', situation: 'restaurant', romaji: 'mou sukoshi mizu o kudasai.', french: 'Encore un peu d\'eau svp.' },
+  { id: 're-p-24', situation: 'restaurant', romaji: 'kanpai!', french: 'Santé !' },
+  { id: 're-p-25', situation: 'restaurant', romaji: 'gochisousama deshita.', french: 'Merci pour le repas (en partant).' },
+
+  // Payer (5)
+  { id: 're-p-26', situation: 'restaurant', romaji: 'okanjou o onegaishimasu.', french: 'L\'addition svp.' },
+  { id: 're-p-27', situation: 'restaurant', romaji: 'kaado de haraemasu ka?', french: 'Puis-je payer par carte ?' },
+  { id: 're-p-28', situation: 'restaurant', romaji: 'genkin de haraimasu.', french: 'Je paie en espèces.' },
+  { id: 're-p-29', situation: 'restaurant', romaji: 'reshiito o kudasai.', french: 'Un reçu svp.' },
+  { id: 're-p-30', situation: 'restaurant', romaji: 'betsubetsu ni onegaishimasu.', french: 'Séparément svp (chacun paie sa part).' },
 ];
