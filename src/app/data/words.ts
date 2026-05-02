@@ -121,4 +121,50 @@ export const WORDS: VocabWord[] = [
   { id: 're-w-48', situation: 'restaurant', romaji: 'zei', french: 'taxe' },
   { id: 're-w-49', situation: 'restaurant', romaji: 'okane', french: 'argent' },
   { id: 're-w-50', situation: 'restaurant', romaji: 'gochisousama', french: 'merci pour le repas' },
+
+  // === À la caisse (35) ===
+  // Lieu & personnes (5)
+  { id: 'ca-w-01', situation: 'caisse', romaji: 'reji', french: 'caisse' },
+  { id: 'ca-w-02', situation: 'caisse', romaji: 'ten\'in', french: 'employé / caissier' },
+  { id: 'ca-w-03', situation: 'caisse', romaji: 'okyakusan', french: 'client' },
+  { id: 'ca-w-04', situation: 'caisse', romaji: 'mise', french: 'magasin' },
+  { id: 'ca-w-05', situation: 'caisse', romaji: 'konbini', french: 'supérette' },
+
+  // Argent & paiement (12)
+  { id: 'ca-w-06', situation: 'caisse', romaji: 'okane', french: 'argent' },
+  { id: 'ca-w-07', situation: 'caisse', romaji: 'genkin', french: 'espèces' },
+  { id: 'ca-w-08', situation: 'caisse', romaji: 'kaado', french: 'carte (bancaire)' },
+  { id: 'ca-w-09', situation: 'caisse', romaji: 'kurejitto-kaado', french: 'carte de crédit' },
+  { id: 'ca-w-10', situation: 'caisse', romaji: 'denshi-manee', french: 'monnaie électronique' },
+  { id: 'ca-w-11', situation: 'caisse', romaji: 'otsuri', french: 'monnaie rendue' },
+  { id: 'ca-w-12', situation: 'caisse', romaji: 'en', french: 'yen' },
+  { id: 'ca-w-13', situation: 'caisse', romaji: 'nedan', french: 'prix' },
+  { id: 'ca-w-14', situation: 'caisse', romaji: 'soukei', french: 'total' },
+  { id: 'ca-w-15', situation: 'caisse', romaji: 'zei', french: 'taxe' },
+  { id: 'ca-w-16', situation: 'caisse', romaji: 'shouhizei', french: 'TVA / taxe à la conso' },
+  { id: 'ca-w-17', situation: 'caisse', romaji: 'zeikomi', french: 'TTC (taxe incluse)' },
+
+  // Réductions & fidélité (4)
+  { id: 'ca-w-18', situation: 'caisse', romaji: 'waribiki', french: 'réduction' },
+  { id: 'ca-w-19', situation: 'caisse', romaji: 'seeru', french: 'solde' },
+  { id: 'ca-w-20', situation: 'caisse', romaji: 'kuupon', french: 'coupon' },
+  { id: 'ca-w-21', situation: 'caisse', romaji: 'pointo', french: 'points (fidélité)' },
+
+  // Articles & emballage (8)
+  { id: 'ca-w-22', situation: 'caisse', romaji: 'shouhin', french: 'article / produit' },
+  { id: 'ca-w-23', situation: 'caisse', romaji: 'fukuro', french: 'sac' },
+  { id: 'ca-w-24', situation: 'caisse', romaji: 'rejibukuro', french: 'sac plastique (caisse)' },
+  { id: 'ca-w-25', situation: 'caisse', romaji: 'maibaggu', french: 'sac réutilisable (apporté)' },
+  { id: 'ca-w-26', situation: 'caisse', romaji: 'baakoodo', french: 'code-barres' },
+  { id: 'ca-w-27', situation: 'caisse', romaji: 'reshiito', french: 'reçu' },
+  { id: 'ca-w-28', situation: 'caisse', romaji: 'ryoushuusho', french: 'facture officielle' },
+  { id: 'ca-w-29', situation: 'caisse', romaji: 'mochikaeri', french: 'à emporter' },
+
+  // Konbini & PIN (6)
+  { id: 'ca-w-30', situation: 'caisse', romaji: 'atatame', french: 'chauffer (micro-ondes)' },
+  { id: 'ca-w-31', situation: 'caisse', romaji: 'ohashi', french: 'baguettes' },
+  { id: 'ca-w-32', situation: 'caisse', romaji: 'supuun', french: 'cuillère' },
+  { id: 'ca-w-33', situation: 'caisse', romaji: 'fooku', french: 'fourchette' },
+  { id: 'ca-w-34', situation: 'caisse', romaji: 'ohitotsu', french: 'un (poli, comptage)' },
+  { id: 'ca-w-35', situation: 'caisse', romaji: 'anshou-bangou', french: 'code PIN' },
 ];

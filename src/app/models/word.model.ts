@@ -1,4 +1,4 @@
-export type SituationId = 'salutations-demandes' | 'restaurant';
+export type SituationId = 'salutations-demandes' | 'restaurant' | 'caisse';
 
 export interface Situation {
   id: SituationId;
@@ -47,6 +47,14 @@ export const SITUATIONS: Situation[] = [
     emoji: '🍣',
     description: 'Réserver, commander, demander la spécialité, payer et remercier',
     color: 'from-amber-500 to-orange-600',
+    available: true,
+  },
+  {
+    id: 'caisse',
+    name: 'À la caisse (konbini, magasin)',
+    emoji: '🛒',
+    description: 'Payer, sac ou pas, micro-ondes, carte de fidélité, sur place ou à emporter',
+    color: 'from-emerald-500 to-teal-600',
     available: true,
   },
 ];
