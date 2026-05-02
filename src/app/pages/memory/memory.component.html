@@ -1,15 +1,13 @@
 <div class="space-y-6 max-w-3xl mx-auto">
   <div class="flex items-center justify-between">
-    <a [routerLink]="themeInfo() ? ['/theme', themeInfo()!.id] : ['/']"
+    <a [routerLink]="situationInfo() ? ['/situation', situationInfo()!.id] : ['/']"
        class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600">
       ← Retour
     </a>
     <h1 class="text-lg sm:text-xl font-semibold">
       🧠 Memory
-      @if (themeInfo(); as t) {
-        <span class="text-zinc-500">· {{ t.name }}</span>
-      } @else {
-        <span class="text-zinc-500">· Tous les thèmes</span>
+      @if (situationInfo(); as s) {
+        <span class="hidden sm:inline text-zinc-500">· {{ s.name }}</span>
       }
     </h1>
     <button (click)="start()"

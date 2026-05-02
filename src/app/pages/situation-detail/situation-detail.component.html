@@ -1,35 +1,35 @@
-@if (theme(); as t) {
+@if (situation(); as s) {
   <div class="space-y-6">
-    <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br {{ t.color }} text-white shadow-lg">
+    <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br {{ s.color }} text-white shadow-lg">
       <a routerLink="/" class="inline-flex items-center text-white/80 hover:text-white text-sm font-medium mb-4">
-        ← Tous les thèmes
+        ← Toutes les situations
       </a>
       <div class="flex items-start gap-4">
-        <span class="text-5xl sm:text-6xl">{{ t.emoji }}</span>
+        <span class="text-5xl sm:text-6xl">{{ s.emoji }}</span>
         <div>
-          <h1 class="text-2xl sm:text-3xl font-bold">{{ t.name }}</h1>
-          <p class="text-white/90 mt-1">{{ t.description }}</p>
+          <h1 class="text-2xl sm:text-3xl font-bold">{{ s.name }}</h1>
+          <p class="text-white/90 mt-1">{{ s.description }}</p>
           <p class="text-sm mt-3 text-white/80">
-            {{ known() }} / {{ words().length }} mots maîtrisés
+            {{ knownCount() }} / {{ totalCount() }} maîtrisés · {{ words().length }} mots · {{ phrases().length }} phrases
           </p>
         </div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <a [routerLink]="['/flashcards', t.id]"
+      <a [routerLink]="['/flashcards', s.id]"
          class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
         <div class="text-3xl mb-2">🃏</div>
         <h3 class="font-semibold">Flashcards</h3>
-        <p class="text-sm text-zinc-600 dark:text-zinc-400">Carte par carte, à ton rythme</p>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400">Mots et phrases, à ton rythme</p>
       </a>
-      <a [routerLink]="['/quiz', t.id]"
+      <a [routerLink]="['/quiz', s.id]"
          class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
         <div class="text-3xl mb-2">🎯</div>
         <h3 class="font-semibold">Quiz</h3>
         <p class="text-sm text-zinc-600 dark:text-zinc-400">10 questions à choix multiples</p>
       </a>
-      <a [routerLink]="['/memory', t.id]"
+      <a [routerLink]="['/memory', s.id]"
          class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all">
         <div class="text-3xl mb-2">🧠</div>
         <h3 class="font-semibold">Memory</h3>
@@ -39,8 +39,8 @@
 
     <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
       <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-        <h2 class="font-semibold">Liste complète ({{ words().length }})</h2>
-        <span class="text-xs text-zinc-500">✓ = déjà appris</span>
+        <h2 class="font-semibold">📚 Vocabulaire ({{ words().length }})</h2>
+        <span class="text-xs text-zinc-500">✓ = appris</span>
       </div>
       <ul class="divide-y divide-zinc-100 dark:divide-zinc-800 max-h-[480px] overflow-y-auto">
         @for (w of words(); track w.id) {
@@ -59,28 +59,29 @@
       </ul>
     </div>
 
-    @if (phrases().length > 0) {
-      <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-        <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-          <h2 class="font-semibold">💬 Phrases courantes ({{ phrases().length }})</h2>
-          <span class="text-xs text-zinc-500">Mises en situation du quotidien</span>
-        </div>
-        <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
-          @for (p of phrases(); track p.id; let i = $index) {
-            <li class="px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
-              <div class="flex items-start gap-3">
-                <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
-                <div class="flex-1 min-w-0">
-                  <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ p.romaji }}</p>
-                  <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
-                </div>
-              </div>
-            </li>
-          }
-        </ul>
+    <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+      <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+        <h2 class="font-semibold">💬 Phrases utiles ({{ phrases().length }})</h2>
+        <span class="text-xs text-zinc-500">À utiliser au quotidien</span>
       </div>
-    }
+      <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
+        @for (p of phrases(); track p.id; let i = $index) {
+          <li class="flex items-start gap-3 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+            <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
+            <div class="flex-1 min-w-0 flex items-start gap-2">
+              @if (progress.isKnown(p.id)) {
+                <span class="text-emerald-500 text-sm pt-0.5">✓</span>
+              }
+              <div class="flex-1 min-w-0">
+                <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ p.romaji }}</p>
+                <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
   </div>
 } @else {
-  <p class="text-zinc-500">Thème introuvable. <a routerLink="/" class="text-rose-600 underline">Retour</a></p>
+  <p class="text-zinc-500">Situation introuvable. <a routerLink="/" class="text-rose-600 underline">Retour</a></p>
 }

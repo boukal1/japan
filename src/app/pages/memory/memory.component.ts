@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, computed, inject, input, signal } from '@
 import { RouterLink } from '@angular/router';
 import { VocabService } from '../../services/vocab.service';
 import { ProgressService } from '../../services/progress.service';
-import { ThemeId, VocabWord } from '../../models/word.model';
+import { SituationId } from '../../models/word.model';
 
 interface MemoryCard {
   key: string;
@@ -24,19 +24,18 @@ export class MemoryComponent implements OnInit, OnDestroy {
   private readonly vocab = inject(VocabService);
   private readonly progress = inject(ProgressService);
 
-  readonly theme = input.required<string>();
+  readonly situation = input.required<string>();
 
-  protected readonly themeInfo = computed(() => {
-    const id = this.theme();
-    return id === 'all' ? null : this.vocab.getTheme(id as ThemeId);
-  });
+  protected readonly situationInfo = computed(() =>
+    this.vocab.getSituation(this.situation() as SituationId),
+  );
 
   protected readonly cards = signal<MemoryCard[]>([]);
   protected readonly moves = signal(0);
   protected readonly seconds = signal(0);
   protected readonly finished = signal(false);
   protected readonly best = computed(
-    () => this.progress.state().memoryBest[this.theme() as ThemeId | 'all'],
+    () => this.progress.state().memoryBest[this.situation() as SituationId],
   );
 
   private firstPick: MemoryCard | null = null;
@@ -53,10 +52,8 @@ export class MemoryComponent implements OnInit, OnDestroy {
 
   start() {
     this.stopTimer();
-    const themeKey = this.theme() as ThemeId | 'all';
-    const pairs = this.vocab
-      .shuffle(this.vocab.getWordsByTheme(themeKey))
-      .slice(0, PAIR_COUNT);
+    const id = this.situation() as SituationId;
+    const pairs = this.vocab.shuffle(this.vocab.getWordsBySituation(id)).slice(0, PAIR_COUNT);
     const cards: MemoryCard[] = pairs.flatMap((w) => [
       { key: w.id + '-r', pairId: w.id, text: w.romaji, side: 'romaji' as const, flipped: false, matched: false },
       { key: w.id + '-f', pairId: w.id, text: w.french, side: 'french' as const, flipped: false, matched: false },
@@ -118,7 +115,7 @@ export class MemoryComponent implements OnInit, OnDestroy {
   private win() {
     this.stopTimer();
     this.finished.set(true);
-    this.progress.recordMemory(this.theme() as ThemeId | 'all', this.moves(), this.seconds());
+    this.progress.recordMemory(this.situation() as SituationId, this.moves(), this.seconds());
   }
 
   formatTime(s: number): string {

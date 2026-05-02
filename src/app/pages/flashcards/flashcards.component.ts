@@ -2,7 +2,7 @@ import { Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { VocabService } from '../../services/vocab.service';
 import { ProgressService } from '../../services/progress.service';
-import { ThemeId } from '../../models/word.model';
+import { SituationId } from '../../models/word.model';
 
 @Component({
   selector: 'app-flashcards',
@@ -13,17 +13,15 @@ export class FlashcardsComponent {
   private readonly vocab = inject(VocabService);
   protected readonly progress = inject(ProgressService);
 
-  readonly theme = input.required<string>();
+  readonly situation = input.required<string>();
 
-  protected readonly themeInfo = computed(() => {
-    const id = this.theme();
-    return id === 'all' ? null : this.vocab.getTheme(id as ThemeId);
-  });
+  protected readonly situationInfo = computed(() =>
+    this.vocab.getSituation(this.situation() as SituationId),
+  );
 
-  protected readonly deck = computed(() => {
-    const t = this.theme() as ThemeId | 'all';
-    return this.vocab.shuffle(this.vocab.getWordsByTheme(t));
-  });
+  protected readonly deck = computed(() =>
+    this.vocab.shuffle(this.vocab.getItemsBySituation(this.situation() as SituationId)),
+  );
 
   protected readonly index = signal(0);
   protected readonly flipped = signal(false);

@@ -1,51 +1,50 @@
 <section class="space-y-2 mb-8 sm:mb-10">
   <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">
-    Apprends le japonais courant <span class="font-jp text-rose-600">楽しく</span>
+    Apprends le japonais en <span class="text-rose-600">situation</span>
   </h1>
   <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl">
-    {{ totalWords }} mots essentiels classés en {{ themes.length }} thèmes. Choisis un thème puis ton mode de jeu favori : flashcards, quiz, ou memory.
+    Pas de listes scolaires : des mots et des phrases utiles dans des situations réelles. Choisis une situation, mémorise le vocabulaire, et joue avec les flashcards, quiz ou memory.
   </p>
-  <div class="flex flex-wrap gap-2 pt-2 text-sm">
-    <span class="px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 font-medium">
-      {{ progress.totalKnown() }} / {{ totalWords }} mots maîtrisés
-    </span>
-    <a routerLink="/quiz/all" class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors font-medium">
-      🎯 Quiz tous thèmes
-    </a>
-    <a routerLink="/flashcards/all" class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors font-medium">
-      🃏 Flashcards
-    </a>
-    <a routerLink="/memory/all" class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors font-medium">
-      🧠 Memory
-    </a>
-  </div>
 </section>
 
-<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-  @for (stat of themeStats(); track stat.theme.id) {
-    <a [routerLink]="['/theme', stat.theme.id]"
-       class="group relative overflow-hidden rounded-2xl border border-zinc-200/70 dark:border-zinc-800/70 bg-white dark:bg-zinc-900 p-5 transition-all hover:-translate-y-0.5 hover:shadow-xl shadow-sm">
-      <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r {{ stat.theme.color }}"></div>
-      <div class="flex items-start justify-between gap-3 mb-3">
-        <span class="text-3xl">{{ stat.theme.emoji }}</span>
-        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
-          {{ stat.total }} mots
-        </span>
-      </div>
-      <h3 class="text-lg font-semibold mb-1 group-hover:text-rose-600 transition-colors">
-        {{ stat.theme.name }}
-      </h3>
-      <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4">{{ stat.theme.description }}</p>
-      <div class="space-y-1">
-        <div class="flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-400">
-          <span>{{ stat.learned }} / {{ stat.total }} appris</span>
-          <span class="font-semibold">{{ stat.percent }}%</span>
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+  @for (s of stats(); track s.situation.id) {
+    @if (s.situation.available) {
+      <a [routerLink]="['/situation', s.situation.id]"
+         class="group relative overflow-hidden rounded-2xl border border-zinc-200/70 dark:border-zinc-800/70 bg-white dark:bg-zinc-900 p-6 transition-all hover:-translate-y-0.5 hover:shadow-xl shadow-sm">
+        <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r {{ s.situation.color }}"></div>
+        <div class="flex items-start justify-between gap-3 mb-3">
+          <span class="text-4xl">{{ s.situation.emoji }}</span>
+          <div class="flex flex-col gap-1 items-end">
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+              {{ s.wordsCount }} mots
+            </span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+              {{ s.phrasesCount }} phrases
+            </span>
+          </div>
         </div>
-        <div class="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-          <div class="h-full bg-gradient-to-r {{ stat.theme.color }} transition-all duration-500"
-               [style.width.%]="stat.percent"></div>
+        <h3 class="text-xl font-semibold mb-1 group-hover:text-rose-600 transition-colors">
+          {{ s.situation.name }}
+        </h3>
+        <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4">{{ s.situation.description }}</p>
+        <div class="space-y-1">
+          <div class="flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-400">
+            <span>{{ s.learned }} / {{ s.total }} maîtrisés</span>
+            <span class="font-semibold">{{ s.percent }}%</span>
+          </div>
+          <div class="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
+            <div class="h-full bg-gradient-to-r {{ s.situation.color }} transition-all duration-500"
+                 [style.width.%]="s.percent"></div>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    }
   }
+
+  <div class="rounded-2xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 p-6 flex flex-col items-center justify-center text-center min-h-48">
+    <span class="text-3xl mb-2">🚧</span>
+    <h3 class="font-semibold text-zinc-700 dark:text-zinc-300">D'autres situations bientôt</h3>
+    <p class="text-sm text-zinc-500 mt-1">Au restaurant, en voyage, au travail…</p>
+  </div>
 </section>

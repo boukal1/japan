@@ -12,19 +12,21 @@ export class HomeComponent {
   private readonly vocab = inject(VocabService);
   protected readonly progress = inject(ProgressService);
 
-  protected readonly themes = this.vocab.themes;
-  protected readonly totalWords = this.vocab.words.length;
+  protected readonly situations = this.vocab.situations;
 
-  protected readonly themeStats = computed(() => {
-    const known = this.progress.state().knownWordIds;
-    return this.themes.map((t) => {
-      const ids = this.vocab.getWordsByTheme(t.id).map((w) => w.id);
-      const learned = ids.filter((id) => (known[id] ?? 0) > 0).length;
+  protected readonly stats = computed(() => {
+    const known = this.progress.state().knownItemIds;
+    return this.situations.map((s) => {
+      const items = this.vocab.getItemsBySituation(s.id);
+      const total = items.length;
+      const learned = items.filter((it) => (known[it.id] ?? 0) > 0).length;
       return {
-        theme: t,
-        total: ids.length,
+        situation: s,
+        total,
         learned,
-        percent: Math.round((learned / ids.length) * 100),
+        percent: Math.round((learned / Math.max(1, total)) * 100),
+        wordsCount: this.vocab.getWordsBySituation(s.id).length,
+        phrasesCount: this.vocab.getPhrasesBySituation(s.id).length,
       };
     });
   });

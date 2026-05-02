@@ -1,15 +1,13 @@
 <div class="space-y-6 max-w-2xl mx-auto">
   <div class="flex items-center justify-between">
-    <a [routerLink]="themeInfo() ? ['/theme', themeInfo()!.id] : ['/']"
+    <a [routerLink]="situationInfo() ? ['/situation', situationInfo()!.id] : ['/']"
        class="text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-rose-600">
       ← Retour
     </a>
     <h1 class="text-lg sm:text-xl font-semibold">
       🎯 Quiz
-      @if (themeInfo(); as t) {
-        <span class="text-zinc-500">· {{ t.name }}</span>
-      } @else {
-        <span class="text-zinc-500">· Tous les thèmes</span>
+      @if (situationInfo(); as s) {
+        <span class="hidden sm:inline text-zinc-500">· {{ s.name }}</span>
       }
     </h1>
     <span class="text-sm font-mono text-zinc-500">{{ score() }} / {{ questions().length }}</span>
@@ -22,9 +20,17 @@
     </div>
 
     <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 sm:p-10 text-center shadow-sm">
-      <p class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Que signifie</p>
-      <p class="font-jp text-4xl sm:text-5xl font-bold text-rose-600 dark:text-rose-400 mb-2">{{ q.word.romaji }}</p>
-      <p class="text-sm text-zinc-500">Question {{ current() + 1 }} sur {{ questions().length }}</p>
+      <p class="text-xs uppercase tracking-widest text-zinc-500 mb-3">
+        @if (q.item.kind === 'word') { Que signifie ce mot } @else { Que signifie cette phrase }
+      </p>
+      <p class="font-jp font-bold text-rose-600 dark:text-rose-400 mb-2 break-words"
+         [class.text-4xl]="q.item.kind === 'word'"
+         [class.sm:text-5xl]="q.item.kind === 'word'"
+         [class.text-xl]="q.item.kind === 'phrase'"
+         [class.sm:text-2xl]="q.item.kind === 'phrase'">
+        {{ q.item.romaji }}
+      </p>
+      <p class="text-sm text-zinc-500 mt-3">Question {{ current() + 1 }} sur {{ questions().length }}</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -60,7 +66,7 @@
       </div>
       <h2 class="text-2xl font-bold">{{ score() }} / {{ questions().length }}</h2>
       <p class="text-zinc-600 dark:text-zinc-400">
-        @if (score() === questions().length) { Parfait ! Tu maîtrises ce thème. }
+        @if (score() === questions().length) { Parfait ! Tu maîtrises cette situation. }
         @else if (score() >= questions().length * 0.7) { Excellent travail ! }
         @else if (score() >= questions().length * 0.4) { Pas mal, continue ! }
         @else { Persévère, ça va venir ! }

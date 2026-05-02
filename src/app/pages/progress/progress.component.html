@@ -3,7 +3,7 @@
     <div>
       <h1 class="text-3xl font-bold tracking-tight">Ma progression</h1>
       <p class="text-zinc-600 dark:text-zinc-400 mt-1">
-        {{ progress.totalKnown() }} / {{ totalWords }} mots maîtrisés au total
+        {{ progress.totalKnown() }} / {{ totalItems() }} mots et phrases maîtrisés
       </p>
     </div>
     <button (click)="reset()"
@@ -13,21 +13,21 @@
   </header>
 
   <section>
-    <h2 class="text-xl font-semibold mb-4">Par thème</h2>
+    <h2 class="text-xl font-semibold mb-4">Par situation</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      @for (s of themeStats(); track s.theme.id) {
-        <a [routerLink]="['/theme', s.theme.id]"
+      @for (s of stats(); track s.situation.id) {
+        <a [routerLink]="['/situation', s.situation.id]"
            class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 hover:shadow-md transition-shadow">
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">{{ s.theme.emoji }}</span>
+            <span class="text-2xl">{{ s.situation.emoji }}</span>
             <div class="flex-1 min-w-0">
-              <p class="font-semibold truncate">{{ s.theme.name }}</p>
-              <p class="text-xs text-zinc-500">{{ s.learned }} / {{ s.total }} mots</p>
+              <p class="font-semibold truncate">{{ s.situation.name }}</p>
+              <p class="text-xs text-zinc-500">{{ s.learned }} / {{ s.total }} maîtrisés</p>
             </div>
             <span class="font-bold text-lg">{{ s.percent }}%</span>
           </div>
           <div class="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
-            <div class="h-full bg-gradient-to-r {{ s.theme.color }} transition-all duration-500"
+            <div class="h-full bg-gradient-to-r {{ s.situation.color }} transition-all duration-500"
                  [style.width.%]="s.percent"></div>
           </div>
         </a>
@@ -43,7 +43,7 @@
           @for (q of recentQuizzes(); track q.date) {
             <li class="flex items-center justify-between px-5 py-3">
               <div>
-                <p class="font-medium">{{ themeName(q.theme) }}</p>
+                <p class="font-medium">{{ situationName(q.situation) }}</p>
                 <p class="text-xs text-zinc-500">{{ formatDate(q.date) }}</p>
               </div>
               <span class="font-mono font-semibold"
@@ -63,11 +63,9 @@
     <section>
       <h2 class="text-xl font-semibold mb-4">Records Memory</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        @for (m of memoryRecords(); track m.themeKey) {
+        @for (m of memoryRecords(); track m.key) {
           <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 flex items-center justify-between">
-            <div>
-              <p class="font-medium">🏅 {{ m.themeName }}</p>
-            </div>
+            <p class="font-medium">🏅 {{ m.name }}</p>
             <div class="text-right text-sm">
               <p class="font-semibold">{{ m.moves }} coups</p>
               <p class="text-zinc-500 font-mono">{{ formatTime(m.seconds) }}</p>
@@ -82,7 +80,7 @@
     <section class="rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-700 p-10 text-center">
       <p class="text-zinc-500 mb-4">Tu n'as pas encore commencé !</p>
       <a routerLink="/" class="inline-flex items-center px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold">
-        Choisir un thème
+        Choisir une situation
       </a>
     </section>
   }

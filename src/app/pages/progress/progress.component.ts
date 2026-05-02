@@ -2,6 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { VocabService } from '../../services/vocab.service';
 import { ProgressService } from '../../services/progress.service';
+import { SituationId } from '../../models/word.model';
 
 @Component({
   selector: 'app-progress',
@@ -12,19 +13,25 @@ export class ProgressComponent {
   private readonly vocab = inject(VocabService);
   protected readonly progress = inject(ProgressService);
 
-  protected readonly themes = this.vocab.themes;
-  protected readonly totalWords = this.vocab.words.length;
+  protected readonly situations = this.vocab.situations;
 
-  protected readonly themeStats = computed(() => {
-    const known = this.progress.state().knownWordIds;
-    return this.themes.map((t) => {
-      const ids = this.vocab.getWordsByTheme(t.id).map((w) => w.id);
-      const learned = ids.filter((id) => (known[id] ?? 0) > 0).length;
+  protected readonly totalItems = computed(() =>
+    this.situations.reduce(
+      (n, s) => n + this.vocab.getItemsBySituation(s.id).length,
+      0,
+    ),
+  );
+
+  protected readonly stats = computed(() => {
+    const known = this.progress.state().knownItemIds;
+    return this.situations.map((s) => {
+      const items = this.vocab.getItemsBySituation(s.id);
+      const learned = items.filter((it) => (known[it.id] ?? 0) > 0).length;
       return {
-        theme: t,
-        total: ids.length,
+        situation: s,
+        total: items.length,
         learned,
-        percent: Math.round((learned / ids.length) * 100),
+        percent: Math.round((learned / Math.max(1, items.length)) * 100),
       };
     });
   });
@@ -33,17 +40,16 @@ export class ProgressComponent {
 
   protected readonly memoryRecords = computed(() => {
     const map = this.progress.state().memoryBest;
-    return Object.entries(map).map(([themeKey, rec]) => ({
-      themeKey,
-      themeName: themeKey === 'all' ? 'Tous les thèmes' : (this.vocab.getTheme(themeKey as never)?.name ?? themeKey),
+    return Object.entries(map).map(([key, rec]) => ({
+      key,
+      name: this.vocab.getSituation(key as SituationId)?.name ?? key,
       moves: rec!.moves,
       seconds: rec!.seconds,
     }));
   });
 
-  themeName(id: string): string {
-    if (id === 'all') return 'Tous les thèmes';
-    return this.vocab.getTheme(id as never)?.name ?? id;
+  situationName(id: SituationId): string {
+    return this.vocab.getSituation(id)?.name ?? id;
   }
 
   formatTime(s: number): string {

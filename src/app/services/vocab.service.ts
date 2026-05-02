@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
-import { THEMES, Theme, ThemeId, VocabWord, Phrase } from '../models/word.model';
+import {
+  SITUATIONS,
+  Situation,
+  SituationId,
+  VocabWord,
+  Phrase,
+  LearningItem,
+} from '../models/word.model';
 import { WORDS } from '../data/words';
 import { PHRASES } from '../data/phrases';
 
 @Injectable({ providedIn: 'root' })
 export class VocabService {
-  readonly themes: Theme[] = THEMES;
+  readonly situations: Situation[] = SITUATIONS;
   readonly words: VocabWord[] = WORDS;
   readonly phrases: Phrase[] = PHRASES;
 
-  getPhrasesByTheme(id: ThemeId | 'all'): Phrase[] {
-    if (id === 'all') return this.phrases;
-    return this.phrases.filter((p) => p.theme === id);
+  getSituation(id: SituationId): Situation | undefined {
+    return this.situations.find((s) => s.id === id);
   }
 
-  getTheme(id: ThemeId): Theme | undefined {
-    return this.themes.find((t) => t.id === id);
+  getWordsBySituation(id: SituationId): VocabWord[] {
+    return this.words.filter((w) => w.situation === id);
   }
 
-  getWordsByTheme(id: ThemeId | 'all'): VocabWord[] {
-    if (id === 'all') return this.words;
-    return this.words.filter((w) => w.theme === id);
+  getPhrasesBySituation(id: SituationId): Phrase[] {
+    return this.phrases.filter((p) => p.situation === id);
   }
 
-  getById(id: string): VocabWord | undefined {
-    return this.words.find((w) => w.id === id);
+  /** Mots + phrases unifiés pour les jeux. */
+  getItemsBySituation(id: SituationId): LearningItem[] {
+    const ws = this.getWordsBySituation(id).map((w) => ({ ...w, kind: 'word' as const }));
+    const ps = this.getPhrasesBySituation(id).map((p) => ({ ...p, kind: 'phrase' as const }));
+    return [...ws, ...ps];
   }
 
   /** Fisher-Yates shuffle (returns a new array). */
@@ -37,14 +45,11 @@ export class VocabService {
     return copy;
   }
 
-  /** Pick `n` distinct distractors from same theme (or any) excluding `exclude`. */
-  pickDistractors(exclude: VocabWord, count: number): VocabWord[] {
-    const sameTheme = this.words.filter(
-      (w) => w.theme === exclude.theme && w.id !== exclude.id,
-    );
-    const pool = sameTheme.length >= count
-      ? sameTheme
-      : this.words.filter((w) => w.id !== exclude.id);
+  /** Pick `n` distinct distractors from same situation, preferring same kind. */
+  pickDistractors(exclude: LearningItem, count: number): LearningItem[] {
+    const all = this.getItemsBySituation(exclude.situation);
+    const sameKind = all.filter((x) => x.kind === exclude.kind && x.id !== exclude.id);
+    const pool = sameKind.length >= count ? sameKind : all.filter((x) => x.id !== exclude.id);
     return this.shuffle(pool).slice(0, count);
   }
 }

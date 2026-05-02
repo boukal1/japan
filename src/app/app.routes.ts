@@ -7,24 +7,26 @@ export const routes: Routes = [
     title: 'Nihongo · Accueil',
   },
   {
-    path: 'theme/:id',
+    path: 'situation/:id',
     loadComponent: () =>
-      import('./pages/theme-detail/theme-detail.component').then((m) => m.ThemeDetailComponent),
-    title: 'Thème',
+      import('./pages/situation-detail/situation-detail.component').then(
+        (m) => m.SituationDetailComponent,
+      ),
+    title: 'Situation',
   },
   {
-    path: 'flashcards/:theme',
+    path: 'flashcards/:situation',
     loadComponent: () =>
       import('./pages/flashcards/flashcards.component').then((m) => m.FlashcardsComponent),
     title: 'Flashcards',
   },
   {
-    path: 'quiz/:theme',
+    path: 'quiz/:situation',
     loadComponent: () => import('./pages/quiz/quiz.component').then((m) => m.QuizComponent),
     title: 'Quiz',
   },
   {
-    path: 'memory/:theme',
+    path: 'memory/:situation',
     loadComponent: () =>
       import('./pages/memory/memory.component').then((m) => m.MemoryComponent),
     title: 'Memory',

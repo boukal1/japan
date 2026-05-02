@@ -1,10 +1,10 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { ThemeId } from '../models/word.model';
+import { SituationId } from '../models/word.model';
 
 const STORAGE_KEY = 'japan-app-progress';
 
 export interface QuizScore {
-  theme: ThemeId | 'all';
+  situation: SituationId;
   score: number;
   total: number;
   date: string;
@@ -16,13 +16,13 @@ export interface MemoryRecord {
 }
 
 export interface Progress {
-  knownWordIds: Record<string, number>;
+  knownItemIds: Record<string, number>;
   quizScores: QuizScore[];
-  memoryBest: Partial<Record<ThemeId | 'all', MemoryRecord>>;
+  memoryBest: Partial<Record<SituationId, MemoryRecord>>;
 }
 
 const EMPTY: Progress = {
-  knownWordIds: {},
+  knownItemIds: {},
   quizScores: [],
   memoryBest: {},
 };
@@ -32,7 +32,7 @@ export class ProgressService {
   private readonly _state = signal<Progress>(this.load());
   readonly state = this._state.asReadonly();
 
-  readonly totalKnown = computed(() => Object.keys(this._state().knownWordIds).length);
+  readonly totalKnown = computed(() => Object.keys(this._state().knownItemIds).length);
 
   private load(): Progress {
     if (typeof localStorage === 'undefined') return { ...EMPTY };
@@ -41,7 +41,7 @@ export class ProgressService {
       if (!raw) return { ...EMPTY };
       const parsed = JSON.parse(raw) as Partial<Progress>;
       return {
-        knownWordIds: parsed.knownWordIds ?? {},
+        knownItemIds: parsed.knownItemIds ?? {},
         quizScores: parsed.quizScores ?? [],
         memoryBest: parsed.memoryBest ?? {},
       };
@@ -57,31 +57,31 @@ export class ProgressService {
     }
   }
 
-  markKnown(wordId: string) {
+  markKnown(itemId: string) {
     const cur = this._state();
-    const count = (cur.knownWordIds[wordId] ?? 0) + 1;
+    const count = (cur.knownItemIds[itemId] ?? 0) + 1;
     this.persist({
       ...cur,
-      knownWordIds: { ...cur.knownWordIds, [wordId]: count },
+      knownItemIds: { ...cur.knownItemIds, [itemId]: count },
     });
   }
 
-  markUnknown(wordId: string) {
+  markUnknown(itemId: string) {
     const cur = this._state();
-    if (!(wordId in cur.knownWordIds)) return;
-    const next = { ...cur.knownWordIds };
-    delete next[wordId];
-    this.persist({ ...cur, knownWordIds: next });
+    if (!(itemId in cur.knownItemIds)) return;
+    const next = { ...cur.knownItemIds };
+    delete next[itemId];
+    this.persist({ ...cur, knownItemIds: next });
   }
 
-  isKnown(wordId: string): boolean {
-    return (this._state().knownWordIds[wordId] ?? 0) > 0;
+  isKnown(itemId: string): boolean {
+    return (this._state().knownItemIds[itemId] ?? 0) > 0;
   }
 
-  recordQuiz(theme: ThemeId | 'all', score: number, total: number) {
+  recordQuiz(situation: SituationId, score: number, total: number) {
     const cur = this._state();
     const next: QuizScore = {
-      theme,
+      situation,
       score,
       total,
       date: new Date().toISOString(),
@@ -92,21 +92,16 @@ export class ProgressService {
     });
   }
 
-  recordMemory(theme: ThemeId | 'all', moves: number, seconds: number) {
+  recordMemory(situation: SituationId, moves: number, seconds: number) {
     const cur = this._state();
-    const prev = cur.memoryBest[theme];
+    const prev = cur.memoryBest[situation];
     const better =
       !prev || moves < prev.moves || (moves === prev.moves && seconds < prev.seconds);
     if (!better) return;
     this.persist({
       ...cur,
-      memoryBest: { ...cur.memoryBest, [theme]: { moves, seconds } },
+      memoryBest: { ...cur.memoryBest, [situation]: { moves, seconds } },
     });
-  }
-
-  knownInTheme(themeId: ThemeId, themeWordIds: string[]): number {
-    const known = this._state().knownWordIds;
-    return themeWordIds.filter((id) => (known[id] ?? 0) > 0).length;
   }
 
   reset() {

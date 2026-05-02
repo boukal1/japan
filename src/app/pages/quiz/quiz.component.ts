@@ -2,11 +2,11 @@ import { Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { VocabService } from '../../services/vocab.service';
 import { ProgressService } from '../../services/progress.service';
-import { ThemeId, VocabWord } from '../../models/word.model';
+import { LearningItem, SituationId } from '../../models/word.model';
 
 interface QuizQuestion {
-  word: VocabWord;
-  options: VocabWord[];
+  item: LearningItem;
+  options: LearningItem[];
 }
 
 const QUESTION_COUNT = 10;
@@ -20,12 +20,11 @@ export class QuizComponent {
   private readonly vocab = inject(VocabService);
   private readonly progress = inject(ProgressService);
 
-  readonly theme = input.required<string>();
+  readonly situation = input.required<string>();
 
-  protected readonly themeInfo = computed(() => {
-    const id = this.theme();
-    return id === 'all' ? null : this.vocab.getTheme(id as ThemeId);
-  });
+  protected readonly situationInfo = computed(() =>
+    this.vocab.getSituation(this.situation() as SituationId),
+  );
 
   protected readonly questions = signal<QuizQuestion[]>([]);
   protected readonly current = signal(0);
@@ -40,12 +39,14 @@ export class QuizComponent {
   protected readonly currentQuestion = computed(() => this.questions()[this.current()]);
 
   start() {
-    const themeKey = this.theme() as ThemeId | 'all';
-    const pool = this.vocab.shuffle(this.vocab.getWordsByTheme(themeKey)).slice(0, QUESTION_COUNT);
-    const qs: QuizQuestion[] = pool.map((word) => {
-      const distractors = this.vocab.pickDistractors(word, 3);
-      const options = this.vocab.shuffle([word, ...distractors]);
-      return { word, options };
+    const id = this.situation() as SituationId;
+    const pool = this.vocab
+      .shuffle(this.vocab.getItemsBySituation(id))
+      .slice(0, QUESTION_COUNT);
+    const qs: QuizQuestion[] = pool.map((item) => {
+      const distractors = this.vocab.pickDistractors(item, 3);
+      const options = this.vocab.shuffle([item, ...distractors]);
+      return { item, options };
     });
     this.questions.set(qs);
     this.current.set(0);
@@ -54,10 +55,10 @@ export class QuizComponent {
     this.finished.set(false);
   }
 
-  pick(opt: VocabWord) {
+  pick(opt: LearningItem) {
     if (this.selected() !== null) return;
     this.selected.set(opt.id);
-    if (opt.id === this.currentQuestion().word.id) {
+    if (opt.id === this.currentQuestion().item.id) {
       this.score.update((s) => s + 1);
       this.progress.markKnown(opt.id);
     }
@@ -75,18 +76,18 @@ export class QuizComponent {
   finish() {
     this.finished.set(true);
     this.progress.recordQuiz(
-      this.theme() as ThemeId | 'all',
+      this.situation() as SituationId,
       this.score(),
       this.questions().length,
     );
   }
 
-  isCorrect(opt: VocabWord): boolean {
-    return this.selected() !== null && opt.id === this.currentQuestion().word.id;
+  isCorrect(opt: LearningItem): boolean {
+    return this.selected() !== null && opt.id === this.currentQuestion().item.id;
   }
-  isWrongPick(opt: VocabWord): boolean {
+  isWrongPick(opt: LearningItem): boolean {
     const sel = this.selected();
-    return sel === opt.id && opt.id !== this.currentQuestion().word.id;
+    return sel === opt.id && opt.id !== this.currentQuestion().item.id;
   }
 
   protected readonly progressPercent = computed(() =>
