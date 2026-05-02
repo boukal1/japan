@@ -10,8 +10,8 @@ interface QuizQuestion {
 }
 
 const QUESTION_COUNT = 10;
-const AUTO_ADVANCE_WORD_MS = 1400;
-const AUTO_ADVANCE_DIALOG_MS = 2600;
+const AUTO_ADVANCE_WORD_MS = 4200;
+const AUTO_ADVANCE_DIALOG_MS = 7800;
 
 @Component({
   selector: 'app-quiz',
