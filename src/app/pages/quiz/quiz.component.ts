@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, OnDestroy, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { VocabService } from '../../services/vocab.service';
 import { ProgressService } from '../../services/progress.service';
@@ -10,13 +10,15 @@ interface QuizQuestion {
 }
 
 const QUESTION_COUNT = 10;
+const AUTO_ADVANCE_WORD_MS = 1400;
+const AUTO_ADVANCE_DIALOG_MS = 2600;
 
 @Component({
   selector: 'app-quiz',
   imports: [RouterLink],
   templateUrl: './quiz.component.html',
 })
-export class QuizComponent {
+export class QuizComponent implements OnDestroy {
   private readonly vocab = inject(VocabService);
   private readonly progress = inject(ProgressService);
 
@@ -35,13 +37,26 @@ export class QuizComponent {
   promptRomaji = (item: LearningItem) => this.vocab.promptRomaji(item);
   promptFrench = (item: LearningItem) => this.vocab.promptFrench(item);
 
+  private advanceTimer: ReturnType<typeof setTimeout> | null = null;
+
   constructor() {
     queueMicrotask(() => this.start());
   }
 
+  ngOnDestroy() {
+    this.cancelAutoAdvance();
+  }
+
   protected readonly currentQuestion = computed(() => this.questions()[this.current()]);
 
+  protected readonly verdict = computed<'idle' | 'correct' | 'wrong'>(() => {
+    const sel = this.selected();
+    if (sel === null) return 'idle';
+    return sel === this.currentQuestion()?.item.id ? 'correct' : 'wrong';
+  });
+
   start() {
+    this.cancelAutoAdvance();
     const id = this.situation() as SituationId;
     const pool = this.vocab
       .shuffle(this.vocab.getItemsBySituation(id))
@@ -61,13 +76,17 @@ export class QuizComponent {
   pick(opt: LearningItem) {
     if (this.selected() !== null) return;
     this.selected.set(opt.id);
-    if (opt.id === this.currentQuestion().item.id) {
+    const item = this.currentQuestion().item;
+    if (opt.id === item.id) {
       this.score.update((s) => s + 1);
       this.progress.markKnown(opt.id);
     }
+    const delay = item.kind === 'dialog' ? AUTO_ADVANCE_DIALOG_MS : AUTO_ADVANCE_WORD_MS;
+    this.advanceTimer = setTimeout(() => this.nextQuestion(), delay);
   }
 
   nextQuestion() {
+    this.cancelAutoAdvance();
     if (this.current() + 1 >= this.questions().length) {
       this.finish();
       return;
@@ -76,7 +95,15 @@ export class QuizComponent {
     this.selected.set(null);
   }
 
+  private cancelAutoAdvance() {
+    if (this.advanceTimer) {
+      clearTimeout(this.advanceTimer);
+      this.advanceTimer = null;
+    }
+  }
+
   finish() {
+    this.cancelAutoAdvance();
     this.finished.set(true);
     this.progress.recordQuiz(
       this.situation() as SituationId,

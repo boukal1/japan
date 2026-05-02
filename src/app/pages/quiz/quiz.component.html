@@ -53,17 +53,44 @@
       }
     </div>
 
-    @if (selected() !== null && item.kind === 'dialog') {
-      <div class="rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/30 dark:to-pink-950/30 border border-rose-200/70 dark:border-rose-900/70 px-5 py-4 animate-fade-up">
-        <p class="text-[11px] uppercase tracking-[0.2em] text-rose-700 dark:text-rose-300 font-semibold mb-1">💬 Réponse possible</p>
-        <p class="font-jp font-bold text-rose-700 dark:text-rose-300">{{ item.reply.romaji }}</p>
-        <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5">{{ item.reply.french }}</p>
-      </div>
-    }
+    @if (verdict() !== 'idle') {
+      <div class="animate-fade-up rounded-2xl px-5 py-4 border"
+           [class.bg-gradient-to-br]="true"
+           [class.from-emerald-50]="verdict() === 'correct'"
+           [class.to-teal-50]="verdict() === 'correct'"
+           [class.dark:from-emerald-950/30]="verdict() === 'correct'"
+           [class.dark:to-teal-950/30]="verdict() === 'correct'"
+           [class.border-emerald-200]="verdict() === 'correct'"
+           [class.dark:border-emerald-900]="verdict() === 'correct'"
+           [class.from-rose-50]="verdict() === 'wrong'"
+           [class.to-pink-50]="verdict() === 'wrong'"
+           [class.dark:from-rose-950/30]="verdict() === 'wrong'"
+           [class.dark:to-pink-950/30]="verdict() === 'wrong'"
+           [class.border-rose-200]="verdict() === 'wrong'"
+           [class.dark:border-rose-900]="verdict() === 'wrong'">
+        @if (verdict() === 'correct') {
+          <p class="font-display text-lg text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
+            <span class="text-2xl">✓</span> Correct !
+          </p>
+        } @else {
+          <p class="font-display text-lg text-rose-700 dark:text-rose-300 flex items-center gap-2 mb-2">
+            <span class="text-2xl">✗</span> Faux
+          </p>
+          <p class="text-xs uppercase tracking-[0.2em] text-zinc-500 font-semibold">Bonne réponse</p>
+          <p class="font-semibold mt-0.5">{{ promptFrench(item) }}</p>
+        }
 
-    @if (selected() !== null) {
-      <button (click)="nextQuestion()" class="w-full btn-primary">
-        @if (current() + 1 < questions().length) { Question suivante → } @else { Voir le résultat }
+        @if (item.kind === 'dialog') {
+          <div class="mt-3 pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-rose-700 dark:text-rose-300 font-semibold mb-1">💬 Réponse possible</p>
+            <p class="font-jp font-bold text-rose-700 dark:text-rose-300">{{ item.reply.romaji }}</p>
+            <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5">{{ item.reply.french }}</p>
+          </div>
+        }
+      </div>
+
+      <button (click)="nextQuestion()" class="w-full btn-ghost text-sm">
+        @if (current() + 1 < questions().length) { Passer maintenant → } @else { Voir le résultat → }
       </button>
     }
   } @else if (finished()) {
