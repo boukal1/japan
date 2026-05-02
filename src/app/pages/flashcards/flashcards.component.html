@@ -13,31 +13,38 @@
     <span class="text-sm font-mono text-zinc-500">{{ index() + 1 }} / {{ deck().length }}</span>
   </div>
 
+  @let cur = current();
   <div class="flip-card aspect-[4/3] sm:aspect-[5/3] cursor-pointer select-none" (click)="flip()">
     <div class="flip-inner relative w-full h-full" [class.flipped]="flipped()">
       <div class="flip-face absolute inset-0 rounded-3xl shadow-xl bg-gradient-to-br from-rose-500 to-red-700 text-white flex flex-col items-center justify-center p-6">
         <div class="absolute top-4 left-4 text-xs uppercase tracking-widest text-white/70">
-          @if (current().kind === 'word') { Mot } @else { Phrase }
+          @if (cur.kind === 'word') {
+            Mot
+          } @else if (cur.direction === 'listen') {
+            👂 À comprendre
+          } @else {
+            💬 À dire
+          }
         </div>
         <p class="font-jp font-bold text-center break-words"
-           [class.text-4xl]="current().kind === 'word'"
-           [class.sm:text-6xl]="current().kind === 'word'"
-           [class.text-xl]="current().kind === 'phrase'"
-           [class.sm:text-3xl]="current().kind === 'phrase'">
-          {{ current().romaji }}
+           [class.text-4xl]="cur.kind === 'word'"
+           [class.sm:text-6xl]="cur.kind === 'word'"
+           [class.text-xl]="cur.kind === 'phrase'"
+           [class.sm:text-3xl]="cur.kind === 'phrase'">
+          {{ cur.romaji }}
         </p>
         <span class="absolute bottom-4 text-xs text-white/70">Clique pour retourner</span>
       </div>
       <div class="flip-face flip-back absolute inset-0 rounded-3xl shadow-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex flex-col items-center justify-center p-6">
         <span class="text-xs uppercase tracking-widest text-zinc-500 mb-3">Français</span>
         <p class="font-semibold text-center break-words"
-           [class.text-2xl]="current().kind === 'word'"
-           [class.sm:text-4xl]="current().kind === 'word'"
-           [class.text-lg]="current().kind === 'phrase'"
-           [class.sm:text-2xl]="current().kind === 'phrase'">
-          {{ current().french }}
+           [class.text-2xl]="cur.kind === 'word'"
+           [class.sm:text-4xl]="cur.kind === 'word'"
+           [class.text-lg]="cur.kind === 'phrase'"
+           [class.sm:text-2xl]="cur.kind === 'phrase'">
+          {{ cur.french }}
         </p>
-        <span class="absolute bottom-4 text-xs text-zinc-400 max-w-full px-6 truncate">{{ current().romaji }}</span>
+        <span class="absolute bottom-4 text-xs text-zinc-400 max-w-full px-6 truncate">{{ cur.romaji }}</span>
       </div>
     </div>
   </div>

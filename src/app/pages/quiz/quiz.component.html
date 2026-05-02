@@ -14,6 +14,7 @@
   </div>
 
   @if (!finished() && currentQuestion(); as q) {
+    @let item = q.item;
     <div class="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden">
       <div class="h-full bg-gradient-to-r from-rose-500 to-red-700 transition-all duration-300"
            [style.width.%]="progressPercent()"></div>
@@ -21,7 +22,13 @@
 
     <div class="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 sm:p-10 text-center shadow-sm">
       <p class="text-xs uppercase tracking-widest text-zinc-500 mb-3">
-        @if (q.item.kind === 'word') { Que signifie ce mot } @else { Que signifie cette phrase }
+        @if (item.kind === 'word') {
+          Que signifie ce mot
+        } @else if (item.direction === 'listen') {
+          👂 Que vous dit-on
+        } @else {
+          💬 Que signifie cette phrase
+        }
       </p>
       <p class="font-jp font-bold text-rose-600 dark:text-rose-400 mb-2 break-words"
          [class.text-4xl]="q.item.kind === 'word'"

@@ -16,11 +16,15 @@ export interface VocabWord {
   situation: SituationId;
 }
 
+export type PhraseDirection = 'speak' | 'listen';
+
 export interface Phrase {
   id: string;
   situation: SituationId;
   romaji: string;
   french: string;
+  /** 'speak' = phrase à dire (par défaut), 'listen' = phrase qu'on peut vous dire. */
+  direction?: PhraseDirection;
 }
 
 /** Unified type so games can mix words and phrases. */

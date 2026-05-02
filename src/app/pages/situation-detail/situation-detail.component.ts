@@ -24,6 +24,12 @@ export class SituationDetailComponent {
   protected readonly phrases = computed(() =>
     this.vocab.getPhrasesBySituation(this.id() as SituationId),
   );
+  protected readonly speakPhrases = computed(() =>
+    this.phrases().filter((p) => (p.direction ?? 'speak') === 'speak'),
+  );
+  protected readonly listenPhrases = computed(() =>
+    this.phrases().filter((p) => p.direction === 'listen'),
+  );
   protected readonly knownCount = computed(() => {
     const k = this.progress.state().knownItemIds;
     const ws = this.words().filter((w) => (k[w.id] ?? 0) > 0).length;

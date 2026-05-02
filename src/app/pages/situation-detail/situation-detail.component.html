@@ -59,28 +59,55 @@
       </ul>
     </div>
 
-    <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-      <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-        <h2 class="font-semibold">💬 Phrases utiles ({{ phrases().length }})</h2>
-        <span class="text-xs text-zinc-500">À utiliser au quotidien</span>
-      </div>
-      <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
-        @for (p of phrases(); track p.id; let i = $index) {
-          <li class="flex items-start gap-3 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
-            <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
-            <div class="flex-1 min-w-0 flex items-start gap-2">
-              @if (progress.isKnown(p.id)) {
-                <span class="text-emerald-500 text-sm pt-0.5">✓</span>
-              }
-              <div class="flex-1 min-w-0">
-                <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ p.romaji }}</p>
-                <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
+    @if (speakPhrases().length > 0) {
+      <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+        <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+          <h2 class="font-semibold">💬 Phrases à dire ({{ speakPhrases().length }})</h2>
+          <span class="text-xs text-zinc-500">Ce que vous direz</span>
+        </div>
+        <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
+          @for (p of speakPhrases(); track p.id; let i = $index) {
+            <li class="flex items-start gap-3 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+              <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
+              <div class="flex-1 min-w-0 flex items-start gap-2">
+                @if (progress.isKnown(p.id)) {
+                  <span class="text-emerald-500 text-sm pt-0.5">✓</span>
+                }
+                <div class="flex-1 min-w-0">
+                  <p class="font-jp font-medium text-rose-600 dark:text-rose-400 break-words">{{ p.romaji }}</p>
+                  <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
+                </div>
               </div>
-            </div>
-          </li>
-        }
-      </ul>
-    </div>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (listenPhrases().length > 0) {
+      <div class="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+        <div class="px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-amber-50/50 dark:bg-amber-950/20">
+          <h2 class="font-semibold">👂 Phrases à comprendre ({{ listenPhrases().length }})</h2>
+          <span class="text-xs text-zinc-500">Ce qu'on peut vous dire</span>
+        </div>
+        <ul class="divide-y divide-zinc-100 dark:divide-zinc-800">
+          @for (p of listenPhrases(); track p.id; let i = $index) {
+            <li class="flex items-start gap-3 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+              <span class="text-xs font-mono text-zinc-400 pt-0.5 w-6 shrink-0">{{ i + 1 }}.</span>
+              <div class="flex-1 min-w-0 flex items-start gap-2">
+                @if (progress.isKnown(p.id)) {
+                  <span class="text-emerald-500 text-sm pt-0.5">✓</span>
+                }
+                <div class="flex-1 min-w-0">
+                  <p class="font-jp font-medium text-amber-600 dark:text-amber-400 break-words">{{ p.romaji }}</p>
+                  <p class="text-sm text-zinc-700 dark:text-zinc-300 mt-0.5 break-words">{{ p.french }}</p>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+    }
   </div>
 } @else {
   <p class="text-zinc-500">Situation introuvable. <a routerLink="/" class="text-rose-600 underline">Retour</a></p>
