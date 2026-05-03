@@ -35,14 +35,14 @@ export class VocabService {
     return [...ws, ...ds];
   }
 
-  /** Texte affiché côté "question" pour un item (romaji). */
+  /** Texte affiché côté "question" pour un item (romaji). Pour un dialogue, c'est le premier tour. */
   promptRomaji(item: LearningItem): string {
-    return item.kind === 'word' ? item.romaji : item.heard.romaji;
+    return item.kind === 'word' ? item.romaji : item.turns[0].romaji;
   }
 
   /** Traduction française attendue côté "réponse". */
   promptFrench(item: LearningItem): string {
-    return item.kind === 'word' ? item.french : item.heard.french;
+    return item.kind === 'word' ? item.french : item.turns[0].french;
   }
 
   /** Fisher-Yates shuffle (returns a new array). */

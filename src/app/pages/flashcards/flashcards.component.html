@@ -27,28 +27,41 @@
         @if (cur.kind === 'word') {
           <p class="relative font-jp text-4xl sm:text-6xl font-bold text-center break-words">{{ cur.romaji }}</p>
         } @else {
-          <p class="relative font-jp text-xl sm:text-3xl font-bold text-center break-words leading-snug">{{ cur.heard.romaji }}</p>
+          <p class="relative font-jp text-xl sm:text-3xl font-bold text-center break-words leading-snug">{{ cur.turns[0].romaji }}</p>
+          @if (cur.turns.length > 2) {
+            <span class="absolute top-4 right-5 text-[10px] uppercase tracking-widest text-white/60 font-semibold">{{ cur.turns.length }} tours</span>
+          }
         }
         <span class="absolute bottom-4 text-xs text-white/70">Clique pour retourner</span>
       </div>
 
       <!-- Face arrière -->
-      <div class="flip-face flip-back absolute inset-0 rounded-[2rem] shadow-xl surface-solid flex flex-col items-center justify-center p-6 sm:p-8 overflow-y-auto">
+      <div class="flip-face flip-back absolute inset-0 rounded-[2rem] shadow-xl surface-solid flex flex-col items-center justify-center p-5 sm:p-7 overflow-y-auto">
         @if (cur.kind === 'word') {
           <span class="text-[11px] uppercase tracking-[0.2em] text-zinc-500 font-semibold mb-3">Français</span>
           <p class="text-2xl sm:text-4xl font-display text-center break-words">{{ cur.french }}</p>
           <span class="absolute bottom-4 text-xs text-zinc-400 px-6 truncate font-jp">{{ cur.romaji }}</span>
         } @else {
-          <div class="w-full space-y-5">
-            <div class="text-center">
-              <span class="text-[11px] uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400 font-semibold">👂 Signifie</span>
-              <p class="text-lg sm:text-2xl font-display mt-1.5 break-words leading-snug">{{ cur.heard.french }}</p>
-            </div>
-            <div class="border-t border-zinc-200/60 dark:border-zinc-800/60 pt-4 text-center">
-              <span class="text-[11px] uppercase tracking-[0.2em] text-rose-600 dark:text-rose-400 font-semibold">💬 Réponse possible</span>
-              <p class="font-jp font-bold text-rose-600 dark:text-rose-400 mt-1.5 break-words">{{ cur.reply.romaji }}</p>
-              <p class="text-sm text-zinc-600 dark:text-zinc-400 mt-1 break-words">{{ cur.reply.french }}</p>
-            </div>
+          <div class="w-full space-y-2 max-h-full">
+            @for (t of cur.turns; track $index) {
+              @if (t.speaker === 'them') {
+                <div class="flex items-start gap-2 max-w-[92%]">
+                  <span class="mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-950/50 text-amber-700 dark:text-amber-400 text-[11px] shrink-0">👂</span>
+                  <div class="flex-1 min-w-0 rounded-xl rounded-tl-sm px-3 py-2 bg-amber-50 dark:bg-amber-950/30 border border-amber-200/50 dark:border-amber-900/40">
+                    <p class="font-jp font-semibold text-amber-800 dark:text-amber-200 text-sm break-words leading-tight">{{ t.romaji }}</p>
+                    <p class="text-xs text-zinc-600 dark:text-zinc-400 break-words mt-0.5 leading-tight">{{ t.french }}</p>
+                  </div>
+                </div>
+              } @else {
+                <div class="flex items-start gap-2 max-w-[92%] ml-auto">
+                  <div class="flex-1 min-w-0 rounded-xl rounded-tr-sm px-3 py-2 bg-rose-50 dark:bg-rose-950/30 border border-rose-200/50 dark:border-rose-900/40 text-right">
+                    <p class="font-jp font-semibold text-rose-700 dark:text-rose-300 text-sm break-words leading-tight">{{ t.romaji }}</p>
+                    <p class="text-xs text-zinc-600 dark:text-zinc-400 break-words mt-0.5 leading-tight">{{ t.french }}</p>
+                  </div>
+                  <span class="mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-rose-100 dark:bg-rose-950/50 text-rose-700 dark:text-rose-400 text-[11px] shrink-0">💬</span>
+                </div>
+              }
+            }
           </div>
         }
       </div>

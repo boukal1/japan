@@ -24,17 +24,19 @@ export interface VocabWord {
   situation: SituationId;
 }
 
-export interface DialogPart {
+export type Speaker = 'them' | 'me';
+
+export interface DialogTurn {
+  speaker: Speaker;
   romaji: string;
   french: string;
 }
 
-/** Une interaction : ce qu'on entend (heard) + une réponse possible (reply). */
+/** Conversation à 2-4 tours, alternance them → me → them → me… (commence toujours par 'them'). */
 export interface Dialog {
   id: string;
   situation: SituationId;
-  heard: DialogPart;
-  reply: DialogPart;
+  turns: DialogTurn[];
 }
 
 /** Type unifié pour les jeux. */
