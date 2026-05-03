@@ -20,7 +20,7 @@
       <!-- Face avant -->
       <div class="flip-face absolute inset-0 rounded-[2rem] shadow-[0_30px_60px_-20px_rgba(190,18,60,0.5)] bg-gradient-to-br from-rose-500 via-rose-600 to-red-700 text-white flex flex-col items-center justify-center p-6 overflow-hidden">
         <div class="absolute top-4 left-5 text-[11px] uppercase tracking-[0.2em] text-white/75 font-semibold">
-          @if (cur.kind === 'word') { Mot } @else { 👂 On vous dit }
+          @if (cur.kind === 'word') { Mot } @else if (cur.turns[0].speaker === 'me') { 💬 Vous dites } @else { 👂 On vous dit }
         </div>
         <!-- Watermark décoratif -->
         <div class="absolute -bottom-8 -right-4 text-[10rem] font-display text-white/10 select-none leading-none">日</div>

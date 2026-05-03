@@ -1,13 +1,14 @@
 import { Dialog } from '../../models/word.model';
 
 export const RESTAURANT_DIALOGS: Dialog[] = [
-  // Réservation par téléphone
+  // me first — réservation par téléphone
   { id: 're-d-01', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'moshimoshi, ___ resutoran de gozaimasu.', french: 'Allô, ici le restaurant ___.' },
-    { speaker: 'me', romaji: 'konbanwa, yoyaku o onegaishitai n desu ga.', french: 'Bonsoir, je voudrais faire une réservation.' },
-    { speaker: 'them', romaji: 'kashikomarimashita, itsu no goryouri desu ka?', french: 'C\'est noté, pour quel jour ?' },
-    { speaker: 'me', romaji: 'asu no yoru, futari de onegaishimasu.', french: 'Demain soir, pour deux personnes svp.' },
+    { speaker: 'me', romaji: 'konbanwa, yoyaku o onegaishitai n desu ga, asu no yoru wa aite imasu ka?', french: 'Bonsoir, je voudrais réserver, demain soir vous avez de la place ?' },
+    { speaker: 'them', romaji: 'kashikomarimashita, nan-ji ni nasaimasu ka?', french: 'C\'est noté, à quelle heure ?' },
+    { speaker: 'me', romaji: 'shichi-ji-han ni futari de onegaishimasu.', french: 'À 19h30 pour deux personnes svp.' },
+    { speaker: 'them', romaji: 'kakunin shimashita, onamae o douzo.', french: 'Confirmé, votre nom svp.' },
   ] },
+  // them first
   { id: 're-d-02', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'nan-mei sama desu ka?', french: 'Vous êtes combien ?' },
     { speaker: 'me', romaji: 'otona san-nin desu, kodomo wa imasen.', french: 'Trois adultes, pas d\'enfants.' },
@@ -20,11 +21,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kakunin shimasu, shoushou omachi kudasai.', french: 'Je vérifie, un instant svp.' },
     { speaker: 'me', romaji: 'hai, omachi shite imasu.', french: 'Oui, j\'attends.' },
   ] },
+  // me first — arrivée
   { id: 're-d-04', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'onamae o douzo.', french: 'Votre nom svp.' },
-    { speaker: 'me', romaji: 'Pierre to moushimasu, supellingu wa P-i-e-r-r-e desu.', french: 'Je m\'appelle Pierre, P-i-e-r-r-e.' },
-    { speaker: 'them', romaji: 'arigatou gozaimasu, Pierre-sama de uketamawari masu.', french: 'Merci, j\'enregistre au nom de M. Pierre.' },
-    { speaker: 'me', romaji: 'sumimasen, hokano johou ga hitsuyou desu ka?', french: 'Pardon, vous avez besoin d\'autres infos ?' },
+    { speaker: 'me', romaji: 'sumimasen, yoyaku shite iru Pierre desu, shichi-ji-han no yoyaku desu.', french: 'Pardon, j\'ai réservé au nom de Pierre pour 19h30.' },
+    { speaker: 'them', romaji: 'Pierre-sama desu ne, gokakunin dekimashita.', french: 'M. Pierre, j\'ai votre réservation.' },
+    { speaker: 'me', romaji: 'mado-gawa no seki ni narimasu ka?', french: 'Ce sera bien côté fenêtre ?' },
+    { speaker: 'them', romaji: 'hai, mado-gawa ni go-annai shimasu, douzo.', french: 'Oui, je vous mène côté fenêtre.' },
   ] },
   { id: 're-d-05', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'odenwa-bangou wa?', french: 'Votre numéro de téléphone ?' },
@@ -32,7 +34,6 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'onegai itashimasu, mou ichido yukkuri.', french: 'Oui svp, encore une fois lentement.' },
     { speaker: 'me', romaji: 'wakari mashita, zero, kyuu, zero, ___.', french: 'D\'accord : 0, 9, 0, ___.' },
   ] },
-  // Arrivée
   { id: 're-d-06', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'irasshaimase!', french: 'Bienvenue !' },
     { speaker: 'me', romaji: 'konbanwa, Pierre de yoyaku shiteimasu.', french: 'Bonsoir, j\'ai réservé au nom de Pierre.' },
@@ -45,11 +46,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kakunin dekimashita, oseki ni go-annai shimasu.', french: 'Confirmé, je vous mène à votre place.' },
     { speaker: 'me', romaji: 'arigatou gozaimasu, doumo.', french: 'Merci, je vous suis.' },
   ] },
+  // me first — sans réservation
   { id: 're-d-08', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'nanmei-sama desu ka?', french: 'Vous êtes combien ?' },
-    { speaker: 'me', romaji: 'futari desu, yoyaku wa shite imasen, daijoubu desu ka?', french: 'Deux, pas de réservation, c\'est ok ?' },
+    { speaker: 'me', romaji: 'sumimasen, yoyaku wa shite inai no desu ga, futari seki wa arimasu ka?', french: 'Pardon, je n\'ai pas réservé, vous avez une table pour deux ?' },
     { speaker: 'them', romaji: 'sukoshi omachi itadakimasu ga, daijoubu desu yo.', french: 'Un peu d\'attente mais c\'est ok.' },
-    { speaker: 'me', romaji: 'wakarimashita, machimasu.', french: 'D\'accord, j\'attends.' },
+    { speaker: 'me', romaji: 'dono gurai machimasu ka?', french: 'Environ combien de temps ?' },
+    { speaker: 'them', romaji: 'juppun gurai de gozaimasu.', french: 'Environ 10 minutes.' },
   ] },
   { id: 're-d-09', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'kitsuen-seki to kinen-seki, dochira ga yoroshii desu ka?', french: 'Fumeur ou non-fumeur ?' },
@@ -57,11 +59,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'mado-gawa wa ainiku ippai desu.', french: 'La fenêtre est malheureusement complète.' },
     { speaker: 'me', romaji: 'sou desu ka, ja kinen-seki dake de daijoubu desu.', french: 'Ah, alors juste non-fumeur ça ira.' },
   ] },
+  // me first — comptoir
   { id: 're-d-10', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'teeburu to kauntaa, dochira ga yoroshii desu ka?', french: 'Table ou comptoir ?' },
-    { speaker: 'me', romaji: 'kauntaa de onegaishimasu, shefu o miteitai desu.', french: 'Au comptoir svp, j\'aimerais voir le chef.' },
-    { speaker: 'them', romaji: 'subarashii sentaku desu ne, kochira douzo.', french: 'Excellent choix, par ici.' },
-    { speaker: 'me', romaji: 'tanoshimi desu.', french: 'J\'ai hâte.' },
+    { speaker: 'me', romaji: 'sumimasen, kauntaa-seki wa aite imasu ka? shefu no mae de tabetai desu.', french: 'Pardon, y a-t-il de la place au comptoir ? J\'aimerais voir le chef.' },
+    { speaker: 'them', romaji: 'hai, kochira douzo, subarashii sentaku desu.', french: 'Oui, par ici, excellent choix.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, tanoshimi desu.', french: 'Merci, j\'ai hâte.' },
+    { speaker: 'them', romaji: 'menyuu o omochi shimasu, shoushou omachi kudasai.', french: 'Je vous apporte le menu, un instant.' },
   ] },
   { id: 're-d-11', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'kochira no oseki de yoroshii desu ka?', french: 'Cette place vous convient ?' },
@@ -75,12 +78,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'goyukkuri douzo.', french: 'Prenez votre temps.' },
     { speaker: 'me', romaji: 'arigatou, kimari mashitara koe o kakemasu.', french: 'Merci, je vous appelle quand j\'ai choisi.' },
   ] },
-  // Boissons
+  // me first — boissons
   { id: 're-d-13', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'onomimono wa ikaga desu ka?', french: 'Que désirez-vous boire ?' },
-    { speaker: 'me', romaji: 'biiru o ippai to ocha o ippai onegaishimasu.', french: 'Une bière et un thé vert svp.' },
+    { speaker: 'me', romaji: 'sumimasen, biiru o ippai to ocha o ippai onegaishimasu.', french: 'Pardon, une bière et un thé vert svp.' },
     { speaker: 'them', romaji: 'biiru wa nama de yoroshii desu ka?', french: 'Bière pression ?' },
-    { speaker: 'me', romaji: 'hai, nama biiru de.', french: 'Oui, en pression.' },
+    { speaker: 'me', romaji: 'hai, nama biiru de onegaishimasu.', french: 'Oui, en pression svp.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, sugu omochi shimasu.', french: 'Noté, j\'apporte ça tout de suite.' },
   ] },
   { id: 're-d-14', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'saisho ni nani o omeshiagari ni narimasu ka?', french: 'Que prenez-vous d\'abord ?' },
@@ -94,12 +97,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kashikomarimashita, dezaato no jikan desu ne.', french: 'Compris, c\'est l\'heure du dessert.' },
     { speaker: 'me', romaji: 'menyuu o misete itadakemasu ka?', french: 'Vous me montrez le menu svp ?' },
   ] },
-  // Conseil & spécialité
+  // me first — recommandation
   { id: 're-d-16', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'osusume wa kochira desu, kyou wa shinsen na sashimi ga arimasu.', french: 'Voici notre recommandation, on a du sashimi frais.' },
-    { speaker: 'me', romaji: 'sashimi wa daisuki desu, sore ni shimasu.', french: 'J\'adore le sashimi, je prends ça.' },
-    { speaker: 'them', romaji: 'omakase mo gozaimasu, ikaga desu ka?', french: 'On a aussi l\'omakase, ça vous tente ?' },
-    { speaker: 'me', romaji: 'omakase de onegaishimasu, tanoshimi desu.', french: 'Omakase svp, j\'ai hâte.' },
+    { speaker: 'me', romaji: 'sumimasen, kyou no osusume wa nan desu ka?', french: 'Pardon, qu\'est-ce que vous recommandez aujourd\'hui ?' },
+    { speaker: 'them', romaji: 'kyou wa shinsen na sashimi ga arimasu, toro to amaebi ga osusume desu.', french: 'Aujourd\'hui on a du sashimi frais, le toro et l\'amaebi sont à la carte.' },
+    { speaker: 'me', romaji: 'omakase setto wa arimasu ka?', french: 'Vous avez un menu omakase ?' },
+    { speaker: 'them', romaji: 'hai, omakase mo gozaimasu, ikaga desu ka?', french: 'Oui, on a l\'omakase, ça vous tente ?' },
   ] },
   { id: 're-d-17', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'kono mise no meibutsu wa sushi desu.', french: 'Notre spécialité, c\'est le sushi.' },
@@ -113,18 +116,19 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kashikomari mashita, ryouhou de gozaimasu ne.', french: 'Bien noté, les deux.' },
     { speaker: 'me', romaji: 'arigatou, tanoshimi ni shite imasu.', french: 'Merci, j\'ai hâte.' },
   ] },
+  // me first — produits de saison
   { id: 're-d-19', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'kisetsu no shokuzai mo arimasu yo.', french: 'On a aussi des produits de saison.' },
-    { speaker: 'me', romaji: 'kisetsu no nani ga osusume desu ka?', french: 'Qu\'est-ce que vous recommandez en ce moment ?' },
-    { speaker: 'them', romaji: 'matsutake to sanma ga ima ichiban yoi desu.', french: 'Le matsutake et le sanma sont au top.' },
+    { speaker: 'me', romaji: 'sumimasen, kisetsu no osusume ryouri wa arimasu ka?', french: 'Pardon, vous avez des plats de saison à recommander ?' },
+    { speaker: 'them', romaji: 'matsutake to sanma ga ima ichiban yoi desu.', french: 'Le matsutake et le sanma sont au top en ce moment.' },
     { speaker: 'me', romaji: 'sanma wa hatsumete desu, tabete mitai desu.', french: 'Je n\'ai jamais goûté le sanma, je veux essayer.' },
+    { speaker: 'them', romaji: 'oishii desu yo, zehi douzo.', french: 'C\'est délicieux, profitez-en.' },
   ] },
-  // Commande
+  // me first — commande
   { id: 're-d-20', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'gochuumon wa okimari desu ka?', french: 'Avez-vous choisi ?' },
-    { speaker: 'me', romaji: 'hai, kore to kore o futatsu zutsu onegaishimasu.', french: 'Oui, deux de chaque svp.' },
-    { speaker: 'them', romaji: 'gosenkou de gozaimasu, hoka ni gochuumon wa?', french: 'Excellent choix, autre chose ?' },
-    { speaker: 'me', romaji: 'mizu o ippon onegai dekimasu ka?', french: 'Je peux avoir une bouteille d\'eau ?' },
+    { speaker: 'me', romaji: 'sumimasen, chuumon shite mo ii desu ka?', french: 'Pardon, je peux commander ?' },
+    { speaker: 'them', romaji: 'hai, douzo, gochuumon wa okimari desu ka?', french: 'Oui, vous avez choisi ?' },
+    { speaker: 'me', romaji: 'kore to kore o futatsu zutsu, ato mizu mo onegaishimasu.', french: 'Deux de chaque ceci, et une eau aussi svp.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, sugu omochi shimasu.', french: 'Noté, j\'apporte ça tout de suite.' },
   ] },
   { id: 're-d-21', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'kochira mo go-issho ni ikaga desu ka?', french: 'Et ceci aussi avec ?' },
@@ -132,25 +136,28 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kashikomarimashita, hokani wa daijoubu desu ka?', french: 'C\'est noté, autre chose ?' },
     { speaker: 'me', romaji: 'mada wakaranai node, ato de tanomimasu.', french: 'Je ne sais pas encore, je commanderai plus tard.' },
   ] },
+  // me first — niveau piquant
   { id: 're-d-22', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'karasa wa dou shimasu ka?', french: 'Quel niveau de piquant ?' },
-    { speaker: 'me', romaji: 'karai mono ga nigate na node, amakuchi de onegaishimasu.', french: 'Je n\'aime pas le piquant, alors doux svp.' },
-    { speaker: 'them', romaji: 'kashikomari mashita, amakuchi ni shimasu.', french: 'C\'est noté, je le mets doux.' },
-    { speaker: 'me', romaji: 'sumimasen, doumo arigatou gozaimasu.', french: 'Pardon, et merci beaucoup.' },
+    { speaker: 'me', romaji: 'sumimasen, kono ryouri wa karai desu ka? karai mono ga nigate de...', french: 'Pardon, ce plat est piquant ? Je supporte mal le piquant.' },
+    { speaker: 'them', romaji: 'amakuchi ni dekimasu yo, ikaga itashimashou ka?', french: 'On peut le faire doux, vous le souhaitez ?' },
+    { speaker: 'me', romaji: 'amakuchi de onegaishimasu.', french: 'Doux svp.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, amakuchi ni shimasu.', french: 'C\'est noté, je le mets doux.' },
   ] },
+  // me first — cuisson viande
   { id: 're-d-23', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'oniku no yakikata wa?', french: 'Pour la cuisson de la viande ?' },
-    { speaker: 'me', romaji: 'midiamu de onegaishimasu, jyuushi-saito.', french: 'Saignant svp, juteux.' },
-    { speaker: 'them', romaji: 'kashikomari mashita, midiamu reer ni mo dekimasu.', french: 'C\'est noté, on peut faire saignant intense aussi.' },
-    { speaker: 'me', romaji: 'iie, futsuu no midiamu de daijoubu desu.', french: 'Non, saignant standard ça ira.' },
+    { speaker: 'me', romaji: 'sumimasen, oniku no yakikata wa midiamu de onegaishimasu.', french: 'Pardon, la viande saignante svp.' },
+    { speaker: 'them', romaji: 'midiamu reer ni mo dekimasu ga, ikaga desu ka?', french: 'On peut faire très saignant aussi, ça vous tente ?' },
+    { speaker: 'me', romaji: 'iie, futsuu no midiamu de kekkou desu.', french: 'Non, saignant standard ça ira.' },
+    { speaker: 'them', romaji: 'kashikomarimashita.', french: 'C\'est noté.' },
   ] },
+  // me first — allergie
   { id: 're-d-24', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'kono ryouri wa ebi to nattou ga haitte imasu.', french: 'Ce plat contient des crevettes et du nattō.' },
-    { speaker: 'me', romaji: 'ebi ni arerugii ga aru node, kawari ga arimasu ka?', french: 'Je suis allergique aux crevettes, vous avez une alternative ?' },
-    { speaker: 'them', romaji: 'tori no ban mo gozaimasu, sore wa ikaga desu ka?', french: 'On a aussi une version au poulet.' },
-    { speaker: 'me', romaji: 'sore de onegaishimasu, oshiete kurete arigatou.', french: 'Celui-là svp, merci de m\'avoir prévenu.' },
+    { speaker: 'me', romaji: 'sumimasen, ebi ni arerugii ga aru n desu ga, kono ryouri ni haitte imasu ka?', french: 'Pardon, je suis allergique aux crevettes, ce plat en contient ?' },
+    { speaker: 'them', romaji: 'haitte imasu, ebi-nuki no ban mo gozaimasu.', french: 'Oui, mais on a une version sans crevettes.' },
+    { speaker: 'me', romaji: 'ebi-nuki de onegaishimasu, oshiete kurete arigatou gozaimasu.', french: 'Sans crevettes svp, merci de m\'avoir prévenu.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, ki o tsukete tsukuri shimasu.', french: 'Noté, on fait attention.' },
   ] },
-  // Service
+  // them first — service
   { id: 're-d-25', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'omachidousama deshita, dozo.', french: 'Désolé de l\'attente, voilà.' },
     { speaker: 'me', romaji: 'iie, daijoubu desu, oishi-sou desu ne!', french: 'C\'est rien, ça a l\'air délicieux !' },
@@ -165,29 +172,30 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
   ] },
   { id: 're-d-27', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'atsui desu kara, ki o tsukete kudasai.', french: 'C\'est chaud, attention.' },
-    { speaker: 'me', romaji: 'hai, sukoshi sami-sama-shite tabe-masu.', french: 'Oui, je vais le laisser refroidir un peu.' },
+    { speaker: 'me', romaji: 'hai, sukoshi samashi-nagara tabe-masu.', french: 'Oui, je vais le laisser refroidir un peu.' },
     { speaker: 'them', romaji: 'douzo, oishiku omeshiagari kudasai.', french: 'Profitez bien.' },
     { speaker: 'me', romaji: 'iroiro arigatou gozaimasu.', french: 'Merci pour tout.' },
   ] },
-  // Vérifications
+  // me first — compliment
   { id: 're-d-28', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'oaji wa ikaga desu ka?', french: 'Comment trouvez-vous le goût ?' },
-    { speaker: 'me', romaji: 'totemo oishii desu, tokuni ano sauce ga subarashii desu.', french: 'Très bon, surtout cette sauce, formidable.' },
-    { speaker: 'them', romaji: 'shefu ga yorokobimasu, otsutae shimasu.', french: 'Le chef sera content, je lui dirai.' },
-    { speaker: 'me', romaji: 'onegaishimasu, kanshashite imasu.', french: 'Oui svp, je suis reconnaissant.' },
+    { speaker: 'me', romaji: 'sumimasen, totemo oishii desu, tokuni ano sauce ga subarashii desu.', french: 'Pardon, c\'est vraiment délicieux, surtout cette sauce.' },
+    { speaker: 'them', romaji: 'arigatou gozaimasu, shefu ga yorokobimasu.', french: 'Merci, le chef sera content.' },
+    { speaker: 'me', romaji: 'shefu ni tsutaete itadakemasu ka?', french: 'Vous pouvez lui dire de ma part ?' },
+    { speaker: 'them', romaji: 'mochiron desu, otsutae shimasu.', french: 'Bien sûr, je le lui dirai.' },
   ] },
+  // me first — commander encore
   { id: 're-d-29', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'ato nani ka chuumon shimasu ka?', french: 'Voulez-vous commander autre chose ?' },
-    { speaker: 'me', romaji: 'mou hitotsu nama biiru o onegaishimasu.', french: 'Encore une bière pression svp.' },
-    { speaker: 'them', romaji: 'sugu omochi shimasu, hokani wa?', french: 'Tout de suite, autre chose ?' },
-    { speaker: 'me', romaji: 'iie, sore de daijoubu desu, arigatou.', french: 'Non, c\'est bon, merci.' },
+    { speaker: 'me', romaji: 'sumimasen, nama biiru o mou ippai onegaishimasu.', french: 'Pardon, encore une bière pression svp.' },
+    { speaker: 'them', romaji: 'sugu omochi shimasu, hokani wa nanika gozaimasu ka?', french: 'Tout de suite, autre chose ?' },
+    { speaker: 'me', romaji: 'iie, sore dake de kekkou desu.', french: 'Non, c\'est bon, merci.' },
+    { speaker: 'them', romaji: 'kashikomarimashita.', french: 'Noté.' },
   ] },
-  // Demander plus
+  // me first — eau
   { id: 're-d-30', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'nani ka tarinai mono wa arimasu ka?', french: 'Manque-t-il quelque chose ?' },
-    { speaker: 'me', romaji: 'mizu o mou sukoshi onegaishimasu, kara ni narimashita.', french: 'Encore un peu d\'eau svp, c\'est vide.' },
-    { speaker: 'them', romaji: 'kashikomari mashita, sugu omochi shimasu.', french: 'C\'est noté, j\'apporte tout de suite.' },
-    { speaker: 'me', romaji: 'arigatou, iroiro sumimasen.', french: 'Merci, désolé pour tout.' },
+    { speaker: 'me', romaji: 'sumimasen, mizu o mou sukoshi itadakemasu ka?', french: 'Pardon, je peux avoir encore un peu d\'eau ?' },
+    { speaker: 'them', romaji: 'kashikomarimashita, sugu omochi shimasu.', french: 'C\'est noté, j\'apporte ça tout de suite.' },
+    { speaker: 'me', romaji: 'sumimasen, iroiro onegaishite.', french: 'Pardon, je vous dérange souvent.' },
+    { speaker: 'them', romaji: 'tonde mo gozaimasen, goyukkuri douzo.', french: 'Pas de souci du tout, prenez votre temps.' },
   ] },
   { id: 're-d-31', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'okawari ikaga desu ka?', french: 'On vous ressert ?' },
@@ -195,7 +203,6 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kashikomari mashita, jiro-jiro o-tsugi shimasu.', french: 'C\'est noté, je vous en sers à la louche.' },
     { speaker: 'me', romaji: 'arigatou gozaimasu.', french: 'Merci.' },
   ] },
-  // Coutumes
   { id: 're-d-32', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'okutsu o nuide oagari kudasai.', french: 'Enlevez vos chaussures avant d\'entrer svp.' },
     { speaker: 'me', romaji: 'hai, koko de yoroshii desu ka?', french: 'D\'accord, ici c\'est ok ?' },
@@ -208,12 +215,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kochira koso, mata go-issho shimashou.', french: 'Pareil, on remet ça !' },
     { speaker: 'me', romaji: 'zehi, mata onegaishimasu.', french: 'Avec plaisir, à la prochaine.' },
   ] },
-  // Fin du repas
+  // me first — dessert
   { id: 're-d-34', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'osara o osage shimasu.', french: 'Je débarrasse vos assiettes.' },
-    { speaker: 'me', romaji: 'onegaishimasu, totemo oishikatta desu.', french: 'Oui svp, c\'était très bon.' },
-    { speaker: 'them', romaji: 'arigatou gozaimasu, dezaato no menyuu desu.', french: 'Merci, voici le menu des desserts.' },
-    { speaker: 'me', romaji: 'mite mimasu, kekkou tanoshimi desu.', french: 'Je regarde, ça me tente bien.' },
+    { speaker: 'me', romaji: 'gochisousama deshita, dezaato no menyuu wa arimasu ka?', french: 'Merci pour le repas, vous avez un menu dessert ?' },
+    { speaker: 'them', romaji: 'hai, kochira desu, macha-aisu ga osusume desu.', french: 'Oui, le voici, la glace au matcha est recommandée.' },
+    { speaker: 'me', romaji: 'futatsu onegaishimasu, macha-aisu de.', french: 'Deux glaces matcha svp.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, sugu omochi shimasu.', french: 'Noté, j\'apporte ça tout de suite.' },
   ] },
   { id: 're-d-35', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'dezaato wa ikaga desu ka?', french: 'Un dessert ?' },
@@ -221,18 +228,19 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kashikomarimashita, koohii mo ikaga desu ka?', french: 'C\'est noté, et un café aussi ?' },
     { speaker: 'me', romaji: 'koohii wa ato ni shimasu, arigatou.', french: 'Le café, plus tard, merci.' },
   ] },
+  // me first — addition
   { id: 're-d-36', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'koohii wa ikaga desu ka?', french: 'Un café ?' },
-    { speaker: 'me', romaji: 'iie, kekkou desu, ato de okaikei o onegaishimasu.', french: 'Non merci, mais l\'addition svp ensuite.' },
-    { speaker: 'them', romaji: 'kashikomarimashita, sugu omochi shimasu.', french: 'C\'est noté, j\'apporte ça tout de suite.' },
-    { speaker: 'me', romaji: 'arigatou gozaimasu.', french: 'Merci.' },
+    { speaker: 'me', romaji: 'sumimasen, okaikei o onegaishimasu.', french: 'Pardon, l\'addition svp.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, sugu omochi shimasu.', french: 'Noté, j\'apporte ça tout de suite.' },
+    { speaker: 'me', romaji: 'betsubetsu de onegaishimasu, futari bun desu.', french: 'Séparément svp, on est deux.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, hitori-zutsu de keisan shimasu.', french: 'C\'est noté, je calcule par personne.' },
   ] },
-  // Paiement
+  // me first — addition séparée
   { id: 're-d-37', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'okaikei wa kochira ni narimasu.', french: 'Voici l\'addition.' },
-    { speaker: 'me', romaji: 'arigatou, betsubetsu de oshiharai dekimasu ka?', french: 'Merci, on peut payer séparément ?' },
-    { speaker: 'them', romaji: 'mochiron desu, hitori-bun zutsu kakari masu.', french: 'Bien sûr, on calcule par personne.' },
-    { speaker: 'me', romaji: 'sou shimashou, onegaishimasu.', french: 'Faisons ça svp.' },
+    { speaker: 'me', romaji: 'sumimasen, okaikei wa betsubetsu ni dekimasu ka?', french: 'Pardon, on peut payer séparément ?' },
+    { speaker: 'them', romaji: 'mochiron desu, hitori-bun zutsu keisan shimasu.', french: 'Bien sûr, je calcule par personne.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, kaado de haraemasuka?', french: 'Merci, on peut payer par carte ?' },
+    { speaker: 'them', romaji: 'hai, douzo kochira ni.', french: 'Oui, par ici svp.' },
   ] },
   { id: 're-d-38', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'betsubetsu desu ka, isshou desu ka?', french: 'Séparément ou ensemble ?' },
@@ -240,11 +248,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'mochiron desu, junbi shimasu.', french: 'Bien sûr, je prépare ça.' },
     { speaker: 'me', romaji: 'sumimasen, taisetsuni shimasu.', french: 'Pardon, et merci.' },
   ] },
+  // me first — paiement carte
   { id: 're-d-39', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'okaado de yoroshii desu ka?', french: 'Vous payez par carte ?' },
-    { speaker: 'me', romaji: 'hai, kontakuto-resu wa tsukaemasu ka?', french: 'Oui, le sans contact ça marche ?' },
-    { speaker: 'them', romaji: 'hai, kazashite kudasai.', french: 'Oui, posez-la.' },
-    { speaker: 'me', romaji: 'kazashi mashita, owari desu ne.', french: 'Posée, c\'est fait.' },
+    { speaker: 'me', romaji: 'sumimasen, kaado wa tsukaemasu ka? kontakuto-resu de haraitai desu.', french: 'Pardon, la carte marche ? Je voudrais payer en sans contact.' },
+    { speaker: 'them', romaji: 'hai, douzo kazashite kudasai.', french: 'Oui, posez-la.' },
+    { speaker: 'me', romaji: 'kazashi mashita, owari desu ka?', french: 'Posée, c\'est fait ?' },
+    { speaker: 'them', romaji: 'hai, doumo arigatou gozaimashita.', french: 'Oui, merci beaucoup.' },
   ] },
   { id: 're-d-40', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'anshou-bangou o nyuuryoku kudasai.', french: 'Tapez votre code PIN svp.' },
@@ -252,17 +261,19 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'sain wa fuyou de gozaimasu.', french: 'Pas de signature.' },
     { speaker: 'me', romaji: 'wakari mashita, doumo arigatou.', french: 'D\'accord, merci.' },
   ] },
+  // me first — reçu
   { id: 're-d-41', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'reshiito wa goriyou desu ka?', french: 'Un reçu ?' },
-    { speaker: 'me', romaji: 'onegaishimasu, kaisha-mei o ___ to kaite kudasai.', french: 'Oui svp, mettez le nom de société : ___.' },
+    { speaker: 'me', romaji: 'sumimasen, reshiito o onegaishimasu, kaisha-mei o ___ to kaite kudasai.', french: 'Pardon, un reçu svp, mettez le nom de société : ___.' },
     { speaker: 'them', romaji: 'kashikomarimashita, kaite mairimasu.', french: 'C\'est noté, je le rédige.' },
-    { speaker: 'me', romaji: 'sumimasen, gomendou kake-masu.', french: 'Pardon de l\'embarras.' },
+    { speaker: 'me', romaji: 'sumimasen, gomendou kakemasu.', french: 'Pardon de l\'embarras.' },
+    { speaker: 'them', romaji: 'tonde mo gozaimasen, shoushou omachi kudasai.', french: 'Pas de souci, un instant.' },
   ] },
+  // me first — facture
   { id: 're-d-42', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'ryoushuusho wa irimasu ka?', french: 'Avez-vous besoin d\'une facture ?' },
-    { speaker: 'me', romaji: 'hai, onegaishimasu, ate-saki wa ___ de.', french: 'Oui svp, au nom de ___.' },
+    { speaker: 'me', romaji: 'sumimasen, ryoushuusho ga hitsuyou na no desu ga, ate-saki wa ___ de.', french: 'Pardon, j\'ai besoin d\'une facture, au nom de ___.' },
     { speaker: 'them', romaji: 'kashikomari mashita, kakitsuke mairimasu.', french: 'C\'est noté, je m\'en occupe.' },
-    { speaker: 'me', romaji: 'arigatou gozaimasu, jikan kakari masu ka?', french: 'Merci, ça prend longtemps ?' },
+    { speaker: 'me', romaji: 'jikan wa kakarimasu ka?', french: 'Ça prend longtemps ?' },
+    { speaker: 'them', romaji: 'goofun gurai de dekimasu.', french: 'Environ 5 minutes.' },
   ] },
   { id: 're-d-43', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'onamae wa nan to kaki-mashou ka?', french: 'À quel nom inscris-je ?' },
@@ -276,12 +287,12 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'arigatou gozaimasu, mata oide kudasai.', french: 'Merci, revenez nous voir.' },
     { speaker: 'me', romaji: 'kanarazu mata kimasu.', french: 'Sans faute je reviendrai.' },
   ] },
-  // À emporter
+  // me first — à emporter
   { id: 're-d-45', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'omochikaeri ni narimasu ka?', french: 'Vous emportez ?' },
-    { speaker: 'me', romaji: 'hai, futatsu mochikaeri de onegaishimasu.', french: 'Oui, deux à emporter svp.' },
-    { speaker: 'them', romaji: 'shoushou omachi kudasai, junbi shimasu.', french: 'Un instant svp, je prépare.' },
-    { speaker: 'me', romaji: 'wakari-mashita, soto de matte imasu.', french: 'D\'accord, j\'attends dehors.' },
+    { speaker: 'me', romaji: 'sumimasen, kore wa mochikaeri dekimasu ka?', french: 'Pardon, je peux emporter ça ?' },
+    { speaker: 'them', romaji: 'mochiron desu, ikutsu ni nasaimasu ka?', french: 'Bien sûr, combien ?' },
+    { speaker: 'me', romaji: 'futatsu onegaishimasu, atatamete kudasai.', french: 'Deux svp, et réchauffé svp.' },
+    { speaker: 'them', romaji: 'shucchou-fukuro ni iremasu ka?', french: 'Je le mets dans un sac isotherme ?' },
   ] },
   { id: 're-d-46', situation: 'restaurant', turns: [
     { speaker: 'them', romaji: 'kochira wa atsui mama de yoroshii desu ka?', french: 'On vous le donne chaud ?' },
@@ -289,29 +300,29 @@ export const RESTAURANT_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'shucchou-fukuro ni iremasu ka?', french: 'Je le mets dans un sac isotherme ?' },
     { speaker: 'me', romaji: 'mochiron, onegaishimasu.', french: 'Bien sûr, svp.' },
   ] },
-  // Au revoir
+  // me first — au revoir
   { id: 're-d-47', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'doumo arigatou gozaimashita.', french: 'Merci beaucoup à vous.' },
-    { speaker: 'me', romaji: 'gochisousama deshita, oishikatta desu, totemo ki ni iri-mashita.', french: 'Merci pour le repas, c\'était bon, j\'ai adoré.' },
+    { speaker: 'me', romaji: 'gochisousama deshita, totemo oishikatta desu.', french: 'Merci pour le repas, c\'était vraiment délicieux.' },
     { speaker: 'them', romaji: 'ureshii kotoba arigatou gozaimasu.', french: 'Heureux de l\'entendre, merci.' },
-    { speaker: 'me', romaji: 'kanarazu mata mainichi wa kima-su.', french: 'Sans faute, je reviendrai.' },
+    { speaker: 'me', romaji: 'kyou wa hontou ni tanoshikatta desu, kanarazu mata kimasu.', french: 'C\'était vraiment sympa, je reviendrai sans faute.' },
+    { speaker: 'them', romaji: 'omachi shite imasu, mata oide kudasai.', french: 'On vous attend, à bientôt.' },
   ] },
   { id: 're-d-48', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'mata okoshi kudasaimase.', french: 'Revenez nous voir.' },
-    { speaker: 'me', romaji: 'kanarazu mata kimasu, tomodachi ni mo oshie-masu.', french: 'Je reviendrai sans faute, je dirai à mes amis.' },
-    { speaker: 'them', romaji: 'arigatou gozaimasu, tomodachi to mo zehi.', french: 'Merci, oui amenez-les avec plaisir.' },
-    { speaker: 'me', romaji: 'sayounara, ki o tsukete.', french: 'Au revoir, prenez soin de vous.' },
+    { speaker: 'me', romaji: 'hontou ni yokatta desu, tomodachi ni mo oshiemasu.', french: 'C\'était vraiment bien, je vais le dire à mes amis.' },
+    { speaker: 'them', romaji: 'ureshii desu, tomodachi to mo zehi.', french: 'Ça nous fait plaisir, amenez-les avec vous.' },
+    { speaker: 'me', romaji: 'kanarazu mata kimasu, sayounara.', french: 'Je reviendrai sans faute, au revoir.' },
+    { speaker: 'them', romaji: 'sayounara, ki o tsukete o-kaeri kudasai.', french: 'Au revoir, rentrez bien.' },
   ] },
   { id: 're-d-49', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'ki o tsukete o-kaeri kudasai.', french: 'Rentrez bien.' },
-    { speaker: 'me', romaji: 'arigatou gozaimashita, hontou ni tanoshikatta desu.', french: 'Merci, c\'était vraiment sympa.' },
-    { speaker: 'them', romaji: 'kochira koso, kondo wa go-issho ni.', french: 'Tout le plaisir était pour nous, à la prochaine.' },
-    { speaker: 'me', romaji: 'mata kimasu, sayounara.', french: 'Je reviendrai, au revoir.' },
+    { speaker: 'me', romaji: 'hontou ni tanoshikatta desu, iroiro arigatou gozaimashita.', french: 'C\'était vraiment sympa, merci pour tout.' },
+    { speaker: 'them', romaji: 'kochira koso, mata oide kudasai.', french: 'Tout le plaisir était pour nous, à bientôt.' },
+    { speaker: 'me', romaji: 'kanarazu mata kimasu, ki o tsukete.', french: 'Je reviendrai, prenez soin de vous.' },
+    { speaker: 'them', romaji: 'arigatou gozaimashita, sayounara.', french: 'Merci, au revoir.' },
   ] },
   { id: 're-d-50', situation: 'restaurant', turns: [
-    { speaker: 'them', romaji: 'ikaga deshita ka?', french: 'Comment cela vous a-t-il plu ?' },
-    { speaker: 'me', romaji: 'totemo yokatta desu, tokuni omakase ga kandou-teki deshita.', french: 'C\'était super, surtout l\'omakase, vraiment touchant.' },
+    { speaker: 'me', romaji: 'totemo yokatta desu, omakase ga tokuni kandou-teki deshita.', french: 'C\'était super, l\'omakase était particulièrement touchant.' },
     { speaker: 'them', romaji: 'sou itte itadakete shiawase desu.', french: 'Heureux que ça vous ait plu.' },
     { speaker: 'me', romaji: 'shefu ni mo yoroshiku otsutae kudasai.', french: 'Saluez le chef de ma part svp.' },
+    { speaker: 'them', romaji: 'mochiron desu, kanarazu otsutae shimasu.', french: 'Bien sûr, je le lui dirai.' },
   ] },
 ];

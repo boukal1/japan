@@ -24,7 +24,7 @@
 
     <div class="surface rounded-3xl p-7 sm:p-12 text-center">
       <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-500 font-semibold mb-4">
-        @if (item.kind === 'word') { Que signifie ce mot } @else { 👂 Que vous dit-on }
+        @if (item.kind === 'word') { Que signifie ce mot } @else if (item.turns[0].speaker === 'me') { 💬 Que dites-vous ? } @else { 👂 Que vous dit-on }
       </p>
       <p class="font-jp font-bold text-rose-600 dark:text-rose-400 mb-3 break-words leading-tight"
          [class.text-4xl]="item.kind === 'word'"

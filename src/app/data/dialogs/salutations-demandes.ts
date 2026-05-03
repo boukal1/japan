@@ -1,7 +1,7 @@
 import { Dialog } from '../../models/word.model';
 
 export const SALUTATIONS_DIALOGS: Dialog[] = [
-  // Salutations basiques (4 ID 01-05 avec sd-d-04 manquant)
+  // Salutations basiques — them first
   { id: 'sd-d-01', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'konnichiwa, kyou wa atsui desu ne.', french: 'Bonjour, il fait chaud aujourd\'hui hein.' },
     { speaker: 'me', romaji: 'konnichiwa, hontou ni atsui desu ne.', french: 'Bonjour, il fait vraiment chaud oui.' },
@@ -44,25 +44,26 @@ export const SALUTATIONS_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'asoko no kafe de yasumimasu ka?', french: 'On va se reposer au café là-bas ?' },
     { speaker: 'me', romaji: 'ii desu ne, sou shimashou.', french: 'Bonne idée, faisons ça.' },
   ] },
+  // me first — présentations
   { id: 'sd-d-09', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'hajimemashite, Yamada to moushimasu.', french: 'Enchanté, je m\'appelle Yamada.' },
-    { speaker: 'me', romaji: 'hajimemashite, Pierre desu, yoroshiku onegaishimasu.', french: 'Enchanté, Pierre, je compte sur vous.' },
-    { speaker: 'them', romaji: 'kochira koso yoroshiku onegaishimasu.', french: 'Moi de même.' },
-    { speaker: 'me', romaji: 'oai dekite ureshii desu.', french: 'Ravi de vous rencontrer.' },
+    { speaker: 'me', romaji: 'hajimemashite, Pierre to moushimasu, douzo yoroshiku.', french: 'Enchanté, je m\'appelle Pierre.' },
+    { speaker: 'them', romaji: 'hajimemashite, Yamada to moushimasu, kochira koso.', french: 'Enchanté, moi c\'est Yamada, pareil.' },
+    { speaker: 'me', romaji: 'Yamada-san desu ne, oai dekite kouei desu.', french: 'M. Yamada donc, ravi de vous rencontrer.' },
+    { speaker: 'them', romaji: 'Nihon wa hatsumete desu ka?', french: 'C\'est votre premier voyage au Japon ?' },
   ] },
   { id: 'sd-d-10', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'onamae wa nan desu ka?', french: 'Comment vous appelez-vous ?' },
-    { speaker: 'me', romaji: 'Pierre to moushimasu, doumo yoroshiku.', french: 'Je m\'appelle Pierre, ravi de vous rencontrer.' },
-    { speaker: 'them', romaji: 'Pierre-san desu ne, oboe-mashita.', french: 'M. Pierre donc, c\'est noté.' },
-    { speaker: 'me', romaji: 'arigatou gozaimasu, anata no onamae wa?', french: 'Merci, et vous comment vous appelez-vous ?' },
+    { speaker: 'me', romaji: 'sumimasen, watashi no namae wa Pierre desu, Furansu kara kimashita.', french: 'Excusez-moi, je m\'appelle Pierre, je viens de France.' },
+    { speaker: 'them', romaji: 'aa, Furansu desu ka! youkoso, hajimemashite.', french: 'Ah France ! Bienvenue, enchanté.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, Nihon wa hatsumete de totemo tanoshii desu.', french: 'Merci, c\'est mon premier Japon et c\'est vraiment bien.' },
+    { speaker: 'them', romaji: 'yokattara renraku-saki o oshiete kudasai.', french: 'Si vous voulez, donnez-moi votre contact.' },
   ] },
   { id: 'sd-d-11', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'doko kara kimashita ka?', french: 'D\'où venez-vous ?' },
-    { speaker: 'me', romaji: 'furansu, Pari kara kimashita.', french: 'Je viens de France, de Paris.' },
-    { speaker: 'them', romaji: 'Pari desu ka, ii desu ne, hatsumete no Nihon desu ka?', french: 'Paris, sympa ! C\'est votre premier voyage au Japon ?' },
-    { speaker: 'me', romaji: 'hai, hatsumete desu, totemo tanoshinde imasu.', french: 'Oui, c\'est mon premier, je profite beaucoup.' },
+    { speaker: 'me', romaji: 'sumimasen, Furansu no Pari kara kimashita, Nihon wa daisuki desu.', french: 'Pardon, je viens de Paris en France, j\'adore le Japon.' },
+    { speaker: 'them', romaji: 'sou desu ka, youkoso! Nihon wa ikaga desu ka?', french: 'Vraiment, bienvenue ! Vous trouvez le Japon comment ?' },
+    { speaker: 'me', romaji: 'subarashii desu, shokuji mo kankou mo totemo ii desu.', french: 'Super, la cuisine et les visites sont excellentes.' },
+    { speaker: 'them', romaji: 'ureshii desu ne, osusume no basho o oshiete agemasu yo.', french: 'Ça fait plaisir, je peux vous recommander des endroits.' },
   ] },
-  // Compliments / remerciements
+  // them first — compliments / remerciements
   { id: 'sd-d-14', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'nihongo ga jouzu desu ne.', french: 'Vous parlez bien japonais.' },
     { speaker: 'me', romaji: 'iie, mada mada benkyouchuu desu.', french: 'Non, je suis encore en train d\'apprendre.' },
@@ -75,19 +76,20 @@ export const SALUTATIONS_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'mata komari mashitara, oyobi shite kudasai.', french: 'Si vous avez encore un souci, appelez-moi.' },
     { speaker: 'me', romaji: 'arigatou, kokoro-zuyoi desu.', french: 'Merci, ça me rassure.' },
   ] },
+  // me first — remerciements
   { id: 'sd-d-16', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'doumo arigatou, oishikatta desu.', french: 'Merci beaucoup, c\'était bon.' },
-    { speaker: 'me', romaji: 'iie, daijoubu desu, kochira koso doumo.', french: 'Pas de souci, c\'est moi qui vous remercie.' },
-    { speaker: 'them', romaji: 'mata oishii mise o oshie-masu yo.', french: 'Je vous indiquerai d\'autres bonnes adresses.' },
-    { speaker: 'me', romaji: 'tanoshimi ni shite imasu.', french: 'J\'ai hâte.' },
+    { speaker: 'me', romaji: 'kyou wa iroiro tasukatte itadaite, hontou ni kansha shimasu.', french: 'Aujourd\'hui vous m\'avez vraiment aidé, je suis reconnaissant.' },
+    { speaker: 'them', romaji: 'doitashimashite, otagai-sama desu.', french: 'De rien, c\'est réciproque.' },
+    { speaker: 'me', romaji: 'iie, jibun de wa muzukashikatta to omoimasu.', french: 'Sans vous ça aurait été dur.' },
+    { speaker: 'them', romaji: 'mata nanika attara itsudemo douzo.', french: 'Si quelque chose se passe, n\'hésitez pas.' },
   ] },
+  // them first — excuses
   { id: 'sd-d-17', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'tasukatte arigatou.', french: 'Merci pour l\'aide.' },
     { speaker: 'me', romaji: 'tonde mo arimasen, tsuide deshita kara.', french: 'Pas du tout, c\'était sur mon chemin.' },
     { speaker: 'them', romaji: 'hontou ni iroiro arigatou gozaimasu.', french: 'Vraiment merci pour tout.' },
     { speaker: 'me', romaji: 'iie, ki ni shinaide kudasai.', french: 'Non, ne vous inquiétez pas.' },
   ] },
-  // Excuses
   { id: 'sd-d-18', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'sumimasen, chotto ii desu ka?', french: 'Excusez-moi, vous avez un instant ?' },
     { speaker: 'me', romaji: 'hai, nan desu ka, douzo.', french: 'Oui, qu\'y a-t-il, je vous écoute.' },
@@ -106,7 +108,7 @@ export const SALUTATIONS_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'densha ga okure-mashita.', french: 'Le train a eu du retard.' },
     { speaker: 'me', romaji: 'aa, sou desu ka, ki ni shinaide.', french: 'Ah ok, ne vous en faites pas.' },
   ] },
-  // Aide
+  // them first — aide
   { id: 'sd-d-21', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'tetsudai-mashou ka?', french: 'Voulez-vous que je vous aide ?' },
     { speaker: 'me', romaji: 'onegai dekimasu ka? kono nimotsu ga omoi n desu.', french: 'Je peux vous demander svp ? Ces bagages sont lourds.' },
@@ -125,57 +127,60 @@ export const SALUTATIONS_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'asoko no benchi ga aite imasu yo.', french: 'Le banc là-bas est libre.' },
     { speaker: 'me', romaji: 'arigatou, soko de yasumimasu.', french: 'Merci, je vais m\'y reposer.' },
   ] },
+  // me first — demande de direction
   { id: 'sd-d-24', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'nani o sagashite imasu ka?', french: 'Que cherchez-vous ?' },
-    { speaker: 'me', romaji: 'eki o sagashite imasu, koko kara aruite ikemasu ka?', french: 'Je cherche la gare, on peut y aller à pied ?' },
-    { speaker: 'them', romaji: 'hai, juppun gurai desu yo.', french: 'Oui, environ 10 minutes.' },
-    { speaker: 'me', romaji: 'soko made michi-jun o oshiete kudasai.', french: 'Pouvez-vous m\'indiquer le chemin ?' },
+    { speaker: 'me', romaji: 'sumimasen, kono chikaku ni eki wa arimasu ka?', french: 'Pardon, y a-t-il une gare près d\'ici ?' },
+    { speaker: 'them', romaji: 'hai, massugu itte futatsume no shingou de migi desu.', french: 'Oui, tout droit et au 2e feu à droite.' },
+    { speaker: 'me', romaji: 'aruite nan-pun gurai kakarimasu ka?', french: 'C\'est à combien de minutes à pied ?' },
+    { speaker: 'them', romaji: 'juppun gurai desu yo.', french: 'Environ 10 minutes.' },
   ] },
-  // Téléphone
+  // me first — téléphone
   { id: 'sd-d-25', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'moshimoshi?', french: 'Allô ?' },
-    { speaker: 'me', romaji: 'moshimoshi, Pierre desu, ima yoroshii deshou ka?', french: 'Allô, c\'est Pierre, c\'est un bon moment ?' },
-    { speaker: 'them', romaji: 'hai, daijoubu desu, dou shimashita ka?', french: 'Oui c\'est ok, qu\'y a-t-il ?' },
-    { speaker: 'me', romaji: 'machiawase no jikan o henkou shitai n desu.', french: 'Je voudrais changer notre rendez-vous.' },
+    { speaker: 'me', romaji: 'moshimoshi, Pierre desu, ima yoroshii desu ka?', french: 'Allô, c\'est Pierre, c\'est un bon moment ?' },
+    { speaker: 'them', romaji: 'aa Pierre-san, mochiron, dou shimashita ka?', french: 'Ah M. Pierre, bien sûr, que se passe-t-il ?' },
+    { speaker: 'me', romaji: 'kyou no machiawase, sukoshi okureru kamoshiremasen.', french: 'Pour notre rendez-vous, je risque d\'être un peu en retard.' },
+    { speaker: 'them', romaji: 'daijoubu desu yo, nan-ji goro ni narimasu ka?', french: 'Pas de souci, vous arrivez vers quelle heure ?' },
   ] },
-  // Compréhension
+  // me first — compréhension
   { id: 'sd-d-26', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'wakarimashita ka?', french: 'Avez-vous compris ?' },
-    { speaker: 'me', romaji: 'sumimasen, sukoshi muzukashii desu, mou ichido onegai dekimasu ka?', french: 'Pardon, c\'est un peu dur, vous pouvez répéter ?' },
-    { speaker: 'them', romaji: 'mochiron, yukkuri ii-masu ne.', french: 'Bien sûr, je redis lentement.' },
-    { speaker: 'me', romaji: 'arigatou gozaimasu, jouzu ni nattara ureshii desu.', french: 'Merci, j\'aimerais m\'améliorer.' },
+    { speaker: 'me', romaji: 'sumimasen, mou ichido itte itadakemasu ka? yoku kikoe-masen deshita.', french: 'Pardon, vous pouvez répéter ? Je n\'ai pas bien entendu.' },
+    { speaker: 'them', romaji: 'mochiron desu, yukkuri ii-masu ne.', french: 'Bien sûr, je le redis lentement.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, nihongo ga mada muzukashii desu.', french: 'Merci, le japonais reste difficile pour moi.' },
+    { speaker: 'them', romaji: 'daijobu desu, kantan na kotoba de hanashimasu.', french: 'Pas de souci, je parle avec des mots simples.' },
   ] },
   { id: 'sd-d-27', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'eigo ga hanasemasu ka?', french: 'Parlez-vous anglais ?' },
-    { speaker: 'me', romaji: 'hai, eigo wa daijoubu desu, demo nihongo mo benkyou-chuu desu.', french: 'Oui, l\'anglais ça va, mais j\'apprends aussi le japonais.' },
-    { speaker: 'them', romaji: 'aa, sou desu ka, dochira de mo daijoubu desu.', french: 'Ah ok, l\'un ou l\'autre ça marche.' },
-    { speaker: 'me', romaji: 'nihongo de hanashite kudasai, renshuu ni narimasu.', french: 'Parlez-moi en japonais, ça me fait pratiquer.' },
+    { speaker: 'me', romaji: 'sumimasen, eigo wa sukoshi hanasemasu ka? nihongo ga mada heta de.', french: 'Pardon, vous parlez un peu anglais ? Mon japonais est encore maladroit.' },
+    { speaker: 'them', romaji: 'sukoshi dake desu ga, nihongo no hou ga ii desu yo, renshuu ni naru kara.', french: 'Un peu, mais le japonais c\'est mieux pour vous, pour l\'entraînement.' },
+    { speaker: 'me', romaji: 'sou desu ne, ja nihongo de onegaishimasu.', french: 'C\'est vrai, alors en japonais svp.' },
+    { speaker: 'them', romaji: 'wakaranakattara nan demo kiite kudasai.', french: 'Si vous ne comprenez pas, demandez.' },
   ] },
   { id: 'sd-d-28', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'yukkuri hanashimashou ka?', french: 'Voulez-vous que je parle plus lentement ?' },
-    { speaker: 'me', romaji: 'hai, onegaishimasu, kantan na nihongo de.', french: 'Oui svp, en japonais simple.' },
-    { speaker: 'them', romaji: 'wakari mashita, yukkuri to kantan ni hanashimasu.', french: 'D\'accord, je parle lentement et simplement.' },
-    { speaker: 'me', romaji: 'tasukari masu, doumo arigatou gozaimasu.', french: 'Ça aide bien, merci beaucoup.' },
+    { speaker: 'me', romaji: 'sumimasen, motto yukkuri hanashite itadakemasu ka?', french: 'Pardon, vous pouvez parler plus lentement ?' },
+    { speaker: 'them', romaji: 'mochiron desu, dono atari ga wakaranakatta desu ka?', french: 'Bien sûr, qu\'est-ce que vous n\'avez pas compris ?' },
+    { speaker: 'me', romaji: 'kono bun desu, mou ichido yukkuri onegaishimasu.', french: 'Cette phrase, encore une fois lentement svp.' },
+    { speaker: 'them', romaji: 'wakarimashita, yukkuri kurikaeshimasu.', french: 'D\'accord, je la répète lentement.' },
   ] },
+  // me first — souvenir de France
   { id: 'sd-d-29', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'kore wa nan desu ka?', french: 'Qu\'est-ce que c\'est ?' },
-    { speaker: 'me', romaji: 'kore wa furansu kara no omiyage desu.', french: 'C\'est un souvenir de France.' },
-    { speaker: 'them', romaji: 'aa, sugoi, douzo ne!', french: 'Oh super, merci !' },
-    { speaker: 'me', romaji: 'sukoshi dake desu ga, oishii desu yo.', french: 'C\'est juste un petit truc, mais c\'est bon.' },
+    { speaker: 'me', romaji: 'kore, Furansu kara motte kita omiyage desu, douzo.', french: 'Voici un souvenir que j\'ai ramené de France.' },
+    { speaker: 'them', romaji: 'ara, kawaii desu ne, nani desu ka?', french: 'Oh, c\'est mignon, c\'est quoi ?' },
+    { speaker: 'me', romaji: 'Furansu no chokoreto desu, oishi to ii no desu ga.', french: 'Du chocolat français, j\'espère que c\'est bon.' },
+    { speaker: 'them', romaji: 'arigatou gozaimasu, tanoshimi ni itadakimasu.', french: 'Merci beaucoup, j\'ai hâte d\'y goûter.' },
   ] },
-  // Politesse
+  // me first — politesse / entrée
   { id: 'sd-d-30', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'youkoso!', french: 'Bienvenue !' },
-    { speaker: 'me', romaji: 'ojama shimasu, oseiwa ni narimasu.', french: 'Pardon de vous déranger, merci de m\'accueillir.' },
-    { speaker: 'them', romaji: 'mainichi ki o tsukete kudasai.', french: 'Faites attention chaque jour.' },
-    { speaker: 'me', romaji: 'hai, kanarazu ki o tsukemasu.', french: 'Oui, je fais bien attention.' },
+    { speaker: 'me', romaji: 'sumimasen, chotto ojama shite mo ii desu ka?', french: 'Pardon, je peux vous déranger un instant ?' },
+    { speaker: 'them', romaji: 'hai, douzo ohairi kudasai.', french: 'Oui, je vous en prie, entrez.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, sukoshi yasumitakute.', french: 'Merci, je voulais me reposer un peu.' },
+    { speaker: 'them', romaji: 'goyukkuri douzo, nani ka irimasuka?', french: 'Prenez votre temps, vous avez besoin de quelque chose ?' },
   ] },
   { id: 'sd-d-31', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'douzo, ohairi kudasai.', french: 'Je vous en prie, entrez.' },
-    { speaker: 'me', romaji: 'shitsurei shimasu, ojama shimasu.', french: 'Pardon, je vous dérange.' },
-    { speaker: 'them', romaji: 'iie, douzo goyukkuri.', french: 'Non, prenez votre temps.' },
-    { speaker: 'me', romaji: 'arigatou gozaimasu, sumimasen.', french: 'Merci, pardon.' },
+    { speaker: 'me', romaji: 'shitsurei shimasu, koko wa haitte mo ii desu ka?', french: 'Pardon, je peux entrer ici ?' },
+    { speaker: 'them', romaji: 'hai, mochiron desu, douzo ohairi kudasai.', french: 'Oui, bien sûr, je vous en prie.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, ojama shimasu.', french: 'Merci, pardon de vous déranger.' },
+    { speaker: 'them', romaji: 'goyukkuri douzo, nanika osagashi desu ka?', french: 'Prenez votre temps, vous cherchez quelque chose ?' },
   ] },
+  // them first — politesse
   { id: 'sd-d-32', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'ki o tsukete kudasai, michi ga subetai desu.', french: 'Faites attention, la rue est glissante.' },
     { speaker: 'me', romaji: 'arigatou gozaimasu, kio tsukete arukimasu.', french: 'Merci, je vais marcher prudemment.' },
@@ -194,68 +199,68 @@ export const SALUTATIONS_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'gohan no jikan desu, douzo.', french: 'C\'est l\'heure du repas.' },
     { speaker: 'me', romaji: 'arigatou, sugu te o arai-masu.', french: 'Merci, je me lave les mains tout de suite.' },
   ] },
-  // Souhaits
+  // me first — au revoir
   { id: 'sd-d-37', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'ogenki de.', french: 'Portez-vous bien.' },
-    { speaker: 'me', romaji: 'arigatou gozaimasu, anata mo karada ni ki o tsukete.', french: 'Merci, vous aussi, prenez soin de vous.' },
-    { speaker: 'them', romaji: 'mata aeru hi o tanoshimi ni shite imasu.', french: 'J\'attends de vous revoir avec impatience.' },
-    { speaker: 'me', romaji: 'kanarazu mata aimashou.', french: 'On se reverra sans faute.' },
+    { speaker: 'me', romaji: 'sorosoro shitsurei shimasu, kyou wa hontou ni arigatou gozaimashita.', french: 'Je vais y aller, merci vraiment pour aujourd\'hui.' },
+    { speaker: 'them', romaji: 'mata aimashou, tanoshii tabi o.', french: 'À la prochaine, bon voyage.' },
+    { speaker: 'me', romaji: 'hai, kanarazu mata kimasu, ogenki de.', french: 'Oui, je reviendrai sans faute, portez-vous bien.' },
+    { speaker: 'them', romaji: 'kochira koso, ki o tsukete.', french: 'Moi de même, faites attention.' },
   ] },
-  // Au revoir
   { id: 'sd-d-38', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'mata ashita.', french: 'À demain.' },
-    { speaker: 'me', romaji: 'mata ashita, asagohan no jikan ni aimashou.', french: 'À demain, on se voit pour le petit-déj.' },
-    { speaker: 'them', romaji: 'hai, hachi-ji ni roubii de ne.', french: 'Oui, à 8h dans le lobby.' },
-    { speaker: 'me', romaji: 'wakari-mashita, oyasumi nasai.', french: 'C\'est noté, bonne nuit.' },
+    { speaker: 'me', romaji: 'oyasumi nasai, asu wa hachi-ji ni roubii de aimashou.', french: 'Bonne nuit, demain rendez-vous à 8h dans le lobby.' },
+    { speaker: 'them', romaji: 'hai, mata ashita, ii yume o.', french: 'Oui, à demain, faites de beaux rêves.' },
+    { speaker: 'me', romaji: 'arigatou, anata mo, oyasumi nasai.', french: 'Merci, vous aussi, bonne nuit.' },
+    { speaker: 'them', romaji: 'oyasumi nasai.', french: 'Bonne nuit.' },
   ] },
   { id: 'sd-d-39', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'matane!', french: 'À plus !' },
-    { speaker: 'me', romaji: 'matane, raishuu mata renraku shimasu.', french: 'À plus, je te recontacte la semaine prochaine.' },
-    { speaker: 'them', romaji: 'hai, tanoshimi ni shite-iru.', french: 'Oui, j\'ai hâte.' },
-    { speaker: 'me', romaji: 'kochira mo, ki o tsukete.', french: 'Pareil pour moi, prends soin de toi.' },
+    { speaker: 'me', romaji: 'ja, matane, kyou wa tanoshikatta!', french: 'Allez, à plus, c\'était super aujourd\'hui !' },
+    { speaker: 'them', romaji: 'sou, matane, ii tabi o tsuzukete.', french: 'Oui, à plus, continue ton beau voyage.' },
+    { speaker: 'me', romaji: 'arigatou, renraku shimasu ne.', french: 'Merci, je te recontacte.' },
+    { speaker: 'them', romaji: 'mattemasu, ki o tsukete.', french: 'J\'attends, fais attention à toi.' },
   ] },
   { id: 'sd-d-40', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'ki o tsukete kaette ne.', french: 'Rentre bien.' },
-    { speaker: 'me', romaji: 'arigatou, takushii o yobimashou ka?', french: 'Merci, on appelle un taxi ?' },
-    { speaker: 'them', romaji: 'iya, basu de daijoubu desu.', french: 'Non, le bus suffit.' },
-    { speaker: 'me', romaji: 'wakari-mashita, mata renraku suru ne.', french: 'D\'accord, je te recontacte.' },
+    { speaker: 'me', romaji: 'kaeri wa takushii ga ii desu ka, basu ga ii desu ka?', french: 'Pour rentrer, taxi ou bus ?' },
+    { speaker: 'them', romaji: 'basu ga benri desu yo, eki made sugu desu.', french: 'Le bus c\'est pratique, c\'est vite à la gare.' },
+    { speaker: 'me', romaji: 'basu-noriba wa koko kara doko desu ka?', french: 'L\'arrêt de bus, c\'est où depuis ici ?' },
+    { speaker: 'them', romaji: 'kono michi o massugu, migi-gawa ni arimasu.', french: 'Tout droit dans cette rue, sur la droite.' },
   ] },
-  // Quotidien
+  // me first — quotidien
   { id: 'sd-d-41', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'nan ka goyou desu ka?', french: 'Vous avez besoin de quelque chose ?' },
-    { speaker: 'me', romaji: 'hai, kono atari ni atemu ga arimasu ka?', french: 'Oui, y a-t-il un distributeur dans le coin ?' },
+    { speaker: 'me', romaji: 'sumimasen, kono atari ni ATM wa arimasu ka?', french: 'Pardon, y a-t-il un distributeur dans le coin ?' },
     { speaker: 'them', romaji: 'hai, konbini no naka ni arimasu yo.', french: 'Oui, dans la supérette.' },
-    { speaker: 'me', romaji: 'sou desu ka, soko ni ikimasu, arigatou.', french: 'Ah ok, j\'y vais, merci.' },
+    { speaker: 'me', romaji: 'gaikoku no kaado de mo tsukaemasu ka?', french: 'Ça marche avec les cartes étrangères ?' },
+    { speaker: 'them', romaji: 'hai, daijoubu desu yo, eigo no menyu mo arimasu.', french: 'Oui, et il y a un menu en anglais.' },
   ] },
+  // me first — café
   { id: 'sd-d-43', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'koohii wa ikaga desu ka? mokutekibi de.', french: 'Voulez-vous un café ? J\'en commande un aussi.' },
-    { speaker: 'me', romaji: 'onegai shimasu, miruku iri de onegai dekimasu ka?', french: 'Oui svp, avec du lait svp.' },
-    { speaker: 'them', romaji: 'satou wa ikaga desu ka?', french: 'Du sucre ?' },
-    { speaker: 'me', romaji: 'satou wa irimasen, miruku dake de.', french: 'Pas de sucre, juste le lait.' },
+    { speaker: 'me', romaji: 'sumimasen, koohii o onegaishimasu, miruku iri de.', french: 'Pardon, un café avec du lait svp.' },
+    { speaker: 'them', romaji: 'hotto to aisu, dochira ga yoroshii desu ka?', french: 'Chaud ou glacé ?' },
+    { speaker: 'me', romaji: 'hotto de onegaishimasu, satou wa irimasen.', french: 'Chaud svp, sans sucre.' },
+    { speaker: 'them', romaji: 'kashikomarimashita, sugu motte mairimasu.', french: 'Noté, j\'apporte ça tout de suite.' },
   ] },
-  // Direction & temps
+  // me first — heure / direction
   { id: 'sd-d-46', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'nan-ji ni kimasu ka?', french: 'À quelle heure venez-vous ?' },
-    { speaker: 'me', romaji: 'san-ji goro ni ikitai n desu ga, daijoubu desu ka?', french: 'Je voulais venir vers 15h, ça vous va ?' },
-    { speaker: 'them', romaji: 'mondai arimasen, omachi shite imasu.', french: 'Pas de souci, je vous attends.' },
-    { speaker: 'me', romaji: 'arigatou, jikan dori ni ikimasu.', french: 'Merci, j\'arrive à l\'heure.' },
+    { speaker: 'me', romaji: 'itsu ukageba yoroshii desu ka? gogo san-ji goro wa ikaga desu ka?', french: 'Quand puis-je venir vous voir ? Vers 15h ça vous va ?' },
+    { speaker: 'them', romaji: 'gogo san-ji wa mondai nai desu, douzo.', french: 'Pas de souci pour 15h, venez.' },
+    { speaker: 'me', romaji: 'arigatou gozaimasu, jikan dori ni mairimasu.', french: 'Merci, j\'arriverai à l\'heure.' },
+    { speaker: 'them', romaji: 'omachi shite imasu.', french: 'Je vous attends.' },
   ] },
   { id: 'sd-d-47', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'doko ni ikimasu ka?', french: 'Où allez-vous ?' },
-    { speaker: 'me', romaji: 'eki ni ikimasu, isshou ni ikimashou ka?', french: 'Je vais à la gare, on y va ensemble ?' },
-    { speaker: 'them', romaji: 'ii desu yo, watashi mo onaji houkou desu.', french: 'D\'accord, je vais dans la même direction.' },
-    { speaker: 'me', romaji: 'yokatta desu, ja issho ni ikimashou.', french: 'Tant mieux, allons-y ensemble.' },
+    { speaker: 'me', romaji: 'eki ni ikimasu ga, onaji houkou nara isshou ni ikimasu ka?', french: 'Je vais à la gare, si c\'est la même direction on y va ensemble ?' },
+    { speaker: 'them', romaji: 'ii desu ne, watashi mo eki no chikaku desu.', french: 'Avec plaisir, moi aussi je vais près de la gare.' },
+    { speaker: 'me', romaji: 'yokatta, houkou ga wakaru ka shinpai deshita.', french: 'Super, je ne savais pas trop quelle direction prendre.' },
+    { speaker: 'them', romaji: 'daijoubu desu, isshou ni ikimashou.', french: 'Pas de souci, allons-y.' },
   ] },
   { id: 'sd-d-48', situation: 'salutations-demandes', turns: [
-    { speaker: 'them', romaji: 'itsu kaerimasu ka?', french: 'Quand rentrez-vous ?' },
-    { speaker: 'me', romaji: 'raishuu no kayoubi ni kaerimasu, sore made tanoshimimasu.', french: 'Je rentre mardi prochain, je profite jusque-là.' },
-    { speaker: 'them', romaji: 'mada jikan ga arimasu ne, ii koto desu ne.', french: 'Vous avez encore du temps, c\'est cool.' },
-    { speaker: 'me', romaji: 'hai, mada hoka no toshi ni mo iku yotei desu.', french: 'Oui, je prévois encore d\'autres villes.' },
+    { speaker: 'me', romaji: 'raishuu no kayoubi ni Nihon wo tachimasu, ato go-nichi desu.', french: 'Je repars mardi prochain, il me reste cinq jours.' },
+    { speaker: 'them', romaji: 'mada jikan ga arimasu ne, nani o miru yotei desu ka?', french: 'Vous avez encore du temps, que prévoyez-vous de voir ?' },
+    { speaker: 'me', romaji: 'Kyoto to Nara ni mo iku yotei desu.', french: 'Je prévois d\'aller à Kyoto et Nara aussi.' },
+    { speaker: 'them', romaji: 'subarashii, tanoshinde kudasai.', french: 'Super, profitez bien.' },
   ] },
-  // Petite conversation
+  // them first — petite conversation
   { id: 'sd-d-49', situation: 'salutations-demandes', turns: [
     { speaker: 'them', romaji: 'ii tenki desu ne.', french: 'Il fait beau hein.' },
-    { speaker: 'me', romaji: 'hai, hontou ni, kankou ni piittari desu.', french: 'Oui, vraiment, parfait pour visiter.' },
+    { speaker: 'me', romaji: 'hai, hontou ni, kankou ni pittari desu.', french: 'Oui, vraiment, parfait pour visiter.' },
     { speaker: 'them', romaji: 'kyou wa doko ni ikimasu ka?', french: 'Vous allez où aujourd\'hui ?' },
     { speaker: 'me', romaji: 'Asakusa no Senso-ji ni ikimasu.', french: 'Au Sensō-ji à Asakusa.' },
   ] },

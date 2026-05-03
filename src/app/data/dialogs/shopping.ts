@@ -1,48 +1,56 @@
 import { Dialog } from '../../models/word.model';
 
 export const SHOPPING_DIALOGS: Dialog[] = [
+  // them first — entrée en magasin
   { id: 'sh-d-01', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'irasshaimase!', french: 'Bienvenue !' },
     { speaker: 'me', romaji: 'konnichiwa, chotto miteimasu, arigatou.', french: 'Bonjour, je regarde un peu, merci.' },
     { speaker: 'them', romaji: 'goyukkuri goran kudasai.', french: 'Prenez votre temps.' },
     { speaker: 'me', romaji: 'nani ka attara koe o kakemasu, arigatou gozaimasu.', french: 'Si je vois quelque chose, je vous appellerai, merci.' },
   ] },
+  // me first — chercher souvenir
   { id: 'sh-d-02', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'nani ka osagashi desu ka?', french: 'Vous cherchez quelque chose ?' },
-    { speaker: 'me', romaji: 'omiyage o sagashite imasu, kazoku ni agetai n desu.', french: 'Je cherche un souvenir pour ma famille.' },
+    { speaker: 'me', romaji: 'sumimasen, kazoku no omiyage o sagashite imasu, osusume wa arimasu ka?', french: 'Pardon, je cherche un souvenir pour ma famille, vous recommandez quoi ?' },
     { speaker: 'them', romaji: 'donna mono ga oki ni mesasu deshou ka?', french: 'Quel genre de chose vous plairait ?' },
-    { speaker: 'me', romaji: 'wagashi ka, chiisai komono ga ii desu.', french: 'Des pâtisseries japonaises ou un petit bibelot.' },
+    { speaker: 'me', romaji: 'wagashi ka komono ga ii desu, ichi-man-en gurai de.', french: 'Des pâtisseries japonaises ou un petit bibelot, autour de 10 000 yens.' },
+    { speaker: 'them', romaji: 'kochira no wagashi wa ninki desu yo.', french: 'Ces pâtisseries japonaises sont très populaires.' },
   ] },
+  // me first — cabine d'essayage
   { id: 'sh-d-03', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'shichaku shitemo daijoubu desu yo.', french: 'Vous pouvez essayer.' },
-    { speaker: 'me', romaji: 'onegaishimasu, mou hitotsu ookii saizu wa arimasu ka?', french: 'Oui svp, vous l\'avez en taille au-dessus ?' },
-    { speaker: 'them', romaji: 'hai, eru-saizu mo gozaimasu.', french: 'Oui, en L aussi.' },
-    { speaker: 'me', romaji: 'futatsu shichaku shitemo ii desu ka?', french: 'Je peux essayer les deux ?' },
+    { speaker: 'me', romaji: 'sumimasen, kore o shichaku shite mo ii desu ka?', french: 'Pardon, je peux essayer ceci ?' },
+    { speaker: 'them', romaji: 'douzo, shichaku-shitsu wa kochira desu.', french: 'Oui, la cabine est par ici.' },
+    { speaker: 'me', romaji: 'mou hitotsu ookii saizu mo shichaku shite ii desu ka?', french: 'Je peux aussi essayer la taille au-dessus ?' },
+    { speaker: 'them', romaji: 'hai, eru-saizu mo motte mairimasu.', french: 'Oui, je vous apporte la L.' },
   ] },
+  // them first — taille
   { id: 'sh-d-04', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'saizu wa nan desu ka?', french: 'Quelle taille ?' },
     { speaker: 'me', romaji: 'futsuu wa emu-saizu desu ga, kochira no buranndo wa shiremasen.', french: 'Je suis en M habituellement, mais cette marque je sais pas.' },
     { speaker: 'them', romaji: 'kochira wa sukoshi chiisai me desu, eru o osusume shimasu.', french: 'Cette marque taille petit, je vous conseille L.' },
     { speaker: 'me', romaji: 'sou desu ka, ja eru-saizu de shichaku shimasu.', french: 'Ah ok, j\'essaie en L alors.' },
   ] },
+  // me first — autres couleurs
   { id: 'sh-d-05', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'kono shiroi shatsu wa ikaga desu ka?', french: 'Cette chemise blanche ?' },
-    { speaker: 'me', romaji: 'kawaii desu ne, hoka no iro mo arimasu ka?', french: 'Elle est jolie, vous l\'avez dans d\'autres couleurs ?' },
+    { speaker: 'me', romaji: 'sumimasen, kono shatsu wa hoka no iro mo arimasu ka?', french: 'Pardon, cette chemise, vous l\'avez dans d\'autres couleurs ?' },
     { speaker: 'them', romaji: 'aoi to kuroi mo gozaimasu yo.', french: 'On l\'a aussi en bleu et noir.' },
-    { speaker: 'me', romaji: 'aoi mo mitai desu, misete itadakemasu ka?', french: 'Je veux voir la bleue aussi, vous me la montrez ?' },
+    { speaker: 'me', romaji: 'aoi no o misete itadakemasu ka? eru-saizu de.', french: 'Vous me montrez la bleue en L svp ?' },
+    { speaker: 'them', romaji: 'hai, sugu motte mairimasu.', french: 'Oui, j\'arrive tout de suite.' },
   ] },
+  // them first — cabine
   { id: 'sh-d-06', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'shichaku-shitsu wa kochira de gozaimasu.', french: 'La cabine d\'essayage est par ici.' },
     { speaker: 'me', romaji: 'arigatou gozaimasu, futatsu motte itte mo ii desu ka?', french: 'Merci, je peux en prendre deux à la fois ?' },
     { speaker: 'them', romaji: 'mittsu made daijoubu desu yo.', french: 'Jusqu\'à trois c\'est ok.' },
     { speaker: 'me', romaji: 'wakarimashita, ja kochira to kochira o.', french: 'D\'accord, alors celle-ci et celle-ci.' },
   ] },
+  // me first — taille supérieure
   { id: 'sh-d-07', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'ikaga deshita ka?', french: 'Cela vous a plu ?' },
-    { speaker: 'me', romaji: 'chotto chiisai desu, mou hitotsu ookii no wa arimasu ka?', french: 'Un peu petit, vous avez plus grand ?' },
-    { speaker: 'them', romaji: 'eru-saizu o omochi shimasu, shoushou omachi kudasai.', french: 'Je vous apporte la L, un instant svp.' },
-    { speaker: 'me', romaji: 'arigatou, omachi shite imasu.', french: 'Merci, j\'attends.' },
+    { speaker: 'me', romaji: 'sumimasen, kore no mou hitotsu ookii saizu wa arimasu ka?', french: 'Pardon, vous avez ce modèle en taille au-dessus ?' },
+    { speaker: 'them', romaji: 'eru-saizu o omochi shimasu, shoushou omachi kudasai.', french: 'Je vous apporte la L, un instant.' },
+    { speaker: 'me', romaji: 'arigatou, shichaku shite mo ii desu ka?', french: 'Merci, je peux l\'essayer ?' },
+    { speaker: 'them', romaji: 'mochiron desu, kochira douzo.', french: 'Bien sûr, par ici.' },
   ] },
+  // them first
   { id: 'sh-d-08', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'ookii saizu mo gozaimasu yo.', french: 'On l\'a aussi en plus grand.' },
     { speaker: 'me', romaji: 'ja eru-saizu de mou ichido shichaku shimasu, onegaishimasu.', french: 'Alors je ré-essaie en L svp.' },
@@ -55,11 +63,12 @@ export const SHOPPING_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'kashikomarimashita, motte mairimasu.', french: 'C\'est noté, je vous l\'apporte.' },
     { speaker: 'me', romaji: 'iroiro arigatou gozaimasu.', french: 'Merci pour tout.' },
   ] },
+  // me first — hors-taxe
   { id: 'sh-d-10', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'menzei de yoroshii desu ka?', french: 'En hors-taxe ?' },
-    { speaker: 'me', romaji: 'hai, gaikokujin desu, pasupooto wa kochira desu.', french: 'Oui je suis étranger, voici mon passeport.' },
-    { speaker: 'them', romaji: 'arigatou gozaimasu, tetsuzuki itashimasu.', french: 'Merci, je m\'occupe des formalités.' },
-    { speaker: 'me', romaji: 'jikan kakari masu ka?', french: 'Ça prend combien de temps ?' },
+    { speaker: 'me', romaji: 'sumimasen, menzei wa dekimasu ka? gaikokujin desu.', french: 'Pardon, je peux avoir la détaxe ? Je suis étranger.' },
+    { speaker: 'them', romaji: 'hai, pasupooto o haiken shimasu.', french: 'Oui, votre passeport svp.' },
+    { speaker: 'me', romaji: 'douzo, kopii wa torimasu ka?', french: 'Voici, vous en faites une copie ?' },
+    { speaker: 'them', romaji: 'iie, kakunin dake de gozaimasu.', french: 'Non, juste vérification.' },
   ] },
   { id: 'sh-d-11', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'pasupooto o haiken shimasu.', french: 'Votre passeport svp.' },
@@ -67,42 +76,49 @@ export const SHOPPING_DIALOGS: Dialog[] = [
     { speaker: 'them', romaji: 'iie, kakunin dake de gozaimasu.', french: 'Non, juste vérification.' },
     { speaker: 'me', romaji: 'wakarimashita, owattara kaeshite kudasai.', french: 'D\'accord, rendez-le moi après svp.' },
   ] },
+  // me first — emballage cadeau
   { id: 'sh-d-12', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'omiyage de gozaimasu ka?', french: 'C\'est un souvenir ?' },
-    { speaker: 'me', romaji: 'hai, betsu-betsu ni tsutsunde itadakemasu ka?', french: 'Oui, vous pouvez les emballer séparément ?' },
-    { speaker: 'them', romaji: 'mochiron desu, dareyou ni shimashou ka?', french: 'Bien sûr, je sépare comment ?' },
-    { speaker: 'me', romaji: 'mittsu ni wakete kudasai, sorezore.', french: 'En trois paquets svp, chacun.' },
+    { speaker: 'me', romaji: 'sumimasen, purezento-you ni tsutsunde itadakemasu ka?', french: 'Pardon, vous pouvez l\'emballer en cadeau svp ?' },
+    { speaker: 'them', romaji: 'mochiron desu, ribon no iro wa ikaga itashimasu ka?', french: 'Bien sûr, quelle couleur de ruban ?' },
+    { speaker: 'me', romaji: 'akai ribon wa arimasu ka?', french: 'Vous avez du ruban rouge ?' },
+    { speaker: 'them', romaji: 'aka mo gozaimasu, kashikomarimashita.', french: 'On a du rouge, noté.' },
   ] },
+  // me first — pointure
   { id: 'sh-d-13', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'okutsu wa nan-saizu desu ka?', french: 'Quelle pointure ?' },
-    { speaker: 'me', romaji: 'nijuu-roku-tenfun-no, futsuu no haba desu.', french: '26.5, largeur normale.' },
+    { speaker: 'me', romaji: 'sumimasen, nijuu-roku-tenfun no kutsu wa arimasu ka?', french: 'Pardon, vous avez des chaussures en 26,5 ?' },
     { speaker: 'them', romaji: 'shoushou omachi kudasai, motte mairimasu.', french: 'Un instant svp, je vous les cherche.' },
-    { speaker: 'me', romaji: 'sumimasen, onegaishimasu.', french: 'Pardon, je vous remercie.' },
+    { speaker: 'me', romaji: 'futsuu no haba desu, sukoshi haba-hiroi no ga ii desu.', french: 'Largeur normale, légèrement plus large si possible.' },
+    { speaker: 'them', romaji: 'wakarimashita, ryouhou motte mairimasu.', french: 'D\'accord, je vous apporte les deux.' },
   ] },
+  // me first — sac en cuir
   { id: 'sh-d-14', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'kochira wa hyaku-paasento honkawa de gozaimasu.', french: 'Ce sac est 100% cuir.' },
-    { speaker: 'me', romaji: 'ki ni iri-mashita, omoi desu ka?', french: 'Ça me plaît, c\'est lourd ?' },
-    { speaker: 'them', romaji: 'sukoshi omoi desu ga, jouubu desu yo.', french: 'Un peu lourd mais résistant.' },
-    { speaker: 'me', romaji: 'kore ni shimasu, oshiete kurete arigatou.', french: 'Je le prends, merci de m\'avoir conseillé.' },
+    { speaker: 'me', romaji: 'sumimasen, kono baggu wa honkawa desu ka?', french: 'Pardon, ce sac est en vrai cuir ?' },
+    { speaker: 'them', romaji: 'hai, hyaku-paasento honkawa de gozaimasu.', french: 'Oui, 100% cuir.' },
+    { speaker: 'me', romaji: 'omoi desu ka? ryokou-you ni tsukaetai desu.', french: 'C\'est lourd ? Je voudrais l\'utiliser en voyage.' },
+    { speaker: 'them', romaji: 'sukoshi omoi desu ga, jouubu desu yo.', french: 'Un peu lourd mais très résistant.' },
   ] },
+  // me first — paiement + menzei
   { id: 'sh-d-15', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'gokei san-man-en de gozaimasu.', french: 'Cela fait 30 000 yens.' },
-    { speaker: 'me', romaji: 'kaado de oshiharai dekimasu ka, ato menzei mo onegaishimasu.', french: 'Carte ok, et le hors-taxe svp.' },
-    { speaker: 'them', romaji: 'hai, kakunin no tame pasupooto o douzo.', french: 'Oui, votre passeport pour vérification.' },
-    { speaker: 'me', romaji: 'kochira ni gozaimasu.', french: 'Le voici.' },
+    { speaker: 'me', romaji: 'sumimasen, okaikei onegaishimasu, menzei mo onegaishimasu.', french: 'Pardon, l\'addition svp, et la détaxe aussi.' },
+    { speaker: 'them', romaji: 'kaado de yoroshii desu ka?', french: 'Carte ok ?' },
+    { speaker: 'me', romaji: 'hai, pasupooto mo desu ne, douzo.', french: 'Oui, et voici mon passeport.' },
+    { speaker: 'them', romaji: 'arigatou gozaimasu, tetsuzuki itashimasu.', french: 'Merci, je m\'occupe des formalités.' },
   ] },
+  // them first
   { id: 'sh-d-16', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'yoroshii desu ka?', french: 'Ça vous va ?' },
     { speaker: 'me', romaji: 'hai, sore ni shimasu, fukuro wa irimasen.', french: 'Oui je le prends, pas besoin de sac.' },
     { speaker: 'them', romaji: 'kashikomarimashita, denshi-reshiito demo ii desu ka?', french: 'C\'est noté, reçu électronique ok ?' },
     { speaker: 'me', romaji: 'hai, kanyou wa arimasen.', french: 'Oui, pas de souci.' },
   ] },
+  // me first — politique de retour
   { id: 'sh-d-17', situation: 'shopping', turns: [
-    { speaker: 'them', romaji: 'henpin wa nanoka inai de gozaimasu.', french: 'Retour sous 7 jours.' },
-    { speaker: 'me', romaji: 'wakarimashita, reshiito wa hitsuyou desu ka?', french: 'D\'accord, le reçu est nécessaire ?' },
-    { speaker: 'them', romaji: 'hai, hitsuyou de gozaimasu, taisetsu ni hokan kudasai.', french: 'Oui, gardez-le précieusement.' },
-    { speaker: 'me', romaji: 'wakarimashita, ki o tsuke-masu.', french: 'Compris, je ferai attention.' },
+    { speaker: 'me', romaji: 'sumimasen, kono mise no henpin-poriishii o oshiete itadakemasu ka?', french: 'Pardon, vous pouvez m\'expliquer la politique de retour ?' },
+    { speaker: 'them', romaji: 'nanoka inai de gozaimasu, reshiito ga hitsuyou desu.', french: 'Sous 7 jours avec le reçu.' },
+    { speaker: 'me', romaji: 'wakarimashita, reshiito o taisetsu ni hokan shimasu.', french: 'D\'accord, je vais garder le reçu précieusement.' },
+    { speaker: 'them', romaji: 'hai, taisetsu ni hokan kudasai.', french: 'Oui, gardez-le bien.' },
   ] },
+  // them first
   { id: 'sh-d-18', situation: 'shopping', turns: [
     { speaker: 'them', romaji: 'purezento you ni shimasu ka?', french: 'Je l\'emballe pour cadeau ?' },
     { speaker: 'me', romaji: 'onegaishimasu, ribon wa aka ga aru nara akai no o.', french: 'Oui svp, en rouge si vous avez.' },
